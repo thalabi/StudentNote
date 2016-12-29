@@ -1,0 +1,7 @@
+<table class="hoverTable">
+  <tr *ngFor="let student of studentArray" (click)="rowOnClick(student)">
+    <td>{{student.firstName}}</td>
+    <td>{{student.lastName}}</td>
+    <td>{{student.grade}}</td>
+  </tr>
+</table>

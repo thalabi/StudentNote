@@ -1,0 +1,12 @@
+table {
+    border-collapse: collapse;
+}
+.hoverTable table, tr, td {
+    border: 0.1rem solid lightgray;
+}
+.hoverTable tr {
+    background-color: #f2f2f2;
+}
+.hoverTable tr:hover {
+    background-color: #ffff99;
+}
