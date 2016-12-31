@@ -1,7 +1,12 @@
 <table class="hoverTable">
-  <tr *ngFor="let student of studentArray" (click)="rowOnClick(student)">
+  <tr *ngFor="let student of studentArray; let i = index" (click)="rowOnClick(i)" [class.selected]="i == selectedRowIndex">
     <td>{{student.firstName}}</td>
     <td>{{student.lastName}}</td>
     <td>{{student.grade}}</td>
   </tr>
 </table>
+<div style="margin-top: 0.5rem;">
+<button (click)="onAddStudent()">Add Student</button>
+<button (click)="onModifyStudent()" [disabled]="modifyAndDeleteButtonsDisable">Modify Student</button>
+<button (click)="onDeleteStudent()" [disabled]="modifyAndDeleteButtonsDisable">Delete Student</button>
+</div>

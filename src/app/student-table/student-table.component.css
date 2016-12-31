@@ -10,3 +10,6 @@ table {
 .hoverTable tr:hover {
     background-color: #ffff99;
 }
+.hoverTable tr.selected {
+    background-color: lightblue;
+}

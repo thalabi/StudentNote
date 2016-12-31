@@ -1,3 +1,16 @@
-<p>
-  student-details works!
-</p>
+<h4>{{crudMode}} User</h4>
+<table>
+  <tr><td>First name: </td><td><input #firstName [(ngModel)]="student.firstName" [readonly]="crudMode == 'Delete'"/></td></tr>
+  <tr><td>Last name: </td><td><input #lastName [(ngModel)]="student.lastName" [readonly]="crudMode == 'Delete'"/></td></tr>
+  <tr><td>Grade: </td>
+                  <td>
+                    <select [(ngModel)]="student.grade" [disabled]="crudMode == 'Delete'">
+                      <option *ngFor="let grade of gradeOptionArray">{{grade}}</option>
+                    </select>
+                  </td>
+  </tr>
+</table>
+<div style="margin-top: 0.5rem;">
+<button (click)="onSubmit()" [disabled]="!firstName.value && !lastName.value">Submit</button>
+<button (click)="onCancel()">Cancel</button>
+</div>

@@ -12,23 +12,40 @@ export class StudentTableComponent implements OnInit {
 
   studentArray: Student[];
 
+  title = 'app works!';
+  selectedRowIndex : number;
+  modifyAndDeleteButtonsDisable : boolean = true;
+
   constructor (
     private studentService: StudentService,
-    private router: Router) {}
+    private router: Router) {
 
-  ngOnInit () {
-    console.log('begin ...');
-    this.studentArray = this.studentService.getStudents()
-    console.log('length: ' + this.studentArray.length);
-    console.log('end ...');
+    console.log('StudentTableComponent constructor ...');
   }
 
-  title = 'app works!';
+  ngOnInit () {
+    console.log('StudentTableComponent ngOnInit() begin ...');
+    this.studentArray = this.studentService.getStudents()
+    console.log('length: ' + this.studentArray.length);
+    console.log('StudentTableComponent ngOnInit() end ...');
+  }
 
-  rowOnClick (student: Student) {
-    console.log('StudentTableComponent begin ...');
-    console.log('student.id: '+student.id);
-    this.router.navigate(['/studentDetails', student.id]);
-    console.log('StudentTableComponent end ...');
+  rowOnClick (selectedRowIndex: number) {
+    //console.log('StudentTableComponent begin ...');
+    //console.log('this.studentArray[selectedRowIndex].firstName: '+this.studentArray[selectedRowIndex].firstName);
+    //this.router.navigate(['/studentDetails', student.id]);
+    this.selectedRowIndex = selectedRowIndex;
+    this.modifyAndDeleteButtonsDisable = false;
+    //console.log('StudentTableComponent end ...');
+  }
+
+  onAddStudent() {
+    this.router.navigate(['/studentDetails', '', 'Add']);
+  }
+  onModifyStudent() {
+    this.router.navigate(['/studentDetails', this.studentArray[this.selectedRowIndex].id, 'Modify']);
+  }
+  onDeleteStudent() {
+    this.router.navigate(['/studentDetails', this.studentArray[this.selectedRowIndex].id, 'Delete']);
   }
 }

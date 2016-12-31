@@ -10,7 +10,7 @@ const routes: Routes = [
     {path: 'component1',    component: Component1Component},
     {path: 'component2',    component: Component2Component},
     {path: 'studentTable',  component: StudentTableComponent},
-    {path: 'studentDetails/:id',  component: StudentDetailsComponent},
+    {path: 'studentDetails/:id/:crudMode',  component: StudentDetailsComponent},
     {path: '**',            component: _404Component}
 ]
 
