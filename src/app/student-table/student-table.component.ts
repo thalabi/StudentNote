@@ -34,8 +34,14 @@ export class StudentTableComponent implements OnInit {
     //console.log('StudentTableComponent begin ...');
     //console.log('this.studentArray[selectedRowIndex].firstName: '+this.studentArray[selectedRowIndex].firstName);
     //this.router.navigate(['/studentDetails', student.id]);
-    this.selectedRowIndex = selectedRowIndex;
-    this.modifyAndDeleteButtonsDisable = false;
+    if (selectedRowIndex != this.selectedRowIndex) {
+      this.selectedRowIndex = selectedRowIndex;
+      this.modifyAndDeleteButtonsDisable = false;
+    } else {
+      this.selectedRowIndex = -1;
+      this.modifyAndDeleteButtonsDisable = true;
+    }
+    
     //console.log('StudentTableComponent end ...');
   }
 
