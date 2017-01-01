@@ -23,12 +23,18 @@ export class NoteDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.crudMode = this.activatedRoute.snapshot.params['crudMode'];
+      this.student = this.studentService.getStudentById(this.activatedRoute.snapshot.params['studentId']);
     if (this.crudMode == 'Add') {
       this.note = new Note();
     } else {
-      this.student = this.studentService.getStudentById(this.activatedRoute.snapshot.params['studentId']);
       this.note = this.studentService.getNoteById(this.student.id, this.activatedRoute.snapshot.params['noteId'])
     }
+  }
+  onSubmit() {
+  }
+  
+  onCancel() {
+      this.router.navigate(['noteTable', this.student.id]);
   }
 
 }
