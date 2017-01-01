@@ -1,0 +1,11 @@
+<table class="hoverTable">
+  <tr *ngFor="let note of student.noteSet; let i = index" (click)="rowOnClick(i)" [class.selected]="i == selectedRowIndex">
+    <td>{{note.timestamp | date: 'MMM dd, yyyy hh:mm a'}}</td>
+    <td>{{note.text}}</td>
+  </tr>
+</table>
+<div style="margin-top: 0.5rem;">
+<button (click)="onAddNote()">Add Note</button>
+<button (click)="onModifyNote()" [disabled]="modifyAndDeleteButtonsDisable">Modify Note</button>
+<button (click)="onDeleteNote()" [disabled]="modifyAndDeleteButtonsDisable">Delete Note</button>
+</div>

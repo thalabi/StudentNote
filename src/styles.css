@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+h4 {
+    margin-bottom: 0.5rem;
+}
+table {
+    border-collapse: collapse;
+}
+.hoverTable table, tr, td {
+    border: 0.1rem solid lightgray;
+}
+.hoverTable tr {
+    background-color: #f2f2f2;
+}
+.hoverTable tr:hover {
+    background-color: #ffff99;
+  cursor: pointer;
+  cursor: hand;
+}
+.hoverTable tr.selected {
+    background-color: lightblue;
+}
+
+button {
+  /*font-family: Arial;*/
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+button:hover {
+  background-color: #cfd8dc;
+}

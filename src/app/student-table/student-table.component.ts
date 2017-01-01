@@ -12,7 +12,6 @@ export class StudentTableComponent implements OnInit {
 
   studentArray: Student[];
 
-  title = 'app works!';
   selectedRowIndex : number;
   modifyAndDeleteButtonsDisable : boolean = true;
 
@@ -53,5 +52,8 @@ export class StudentTableComponent implements OnInit {
   }
   onDeleteStudent() {
     this.router.navigate(['/studentDetails', this.studentArray[this.selectedRowIndex].id, 'Delete']);
+  }
+  onManageNotes() {
+    this.router.navigate(['/noteTable', this.studentArray[this.selectedRowIndex].id]);    
   }
 }

@@ -1,0 +1,12 @@
+<p>
+  note-details works!
+</p>
+<h4>{{crudMode}} Note</h4>
+<table>
+  <tr><td>Date and Time: </td><td><input #timestamp [(ngModel)]="note.timestamp" [readonly]="crudMode == 'Delete'"/></td></tr>
+  <tr><td>Note: </td><td><input #text [(ngModel)]="note.text" [readonly]="crudMode == 'Delete'"/></td></tr>
+</table>
+<div style="margin-top: 0.5rem;">
+<button (click)="onSubmit()" [disabled]="!timestamp.value || !text.value">OK</button>
+<button (click)="onCancel()">Cancel</button>
+</div>
