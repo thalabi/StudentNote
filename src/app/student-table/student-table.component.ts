@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../Student';
 import { StudentService } from '../student.service';
+import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,6 +18,7 @@ export class StudentTableComponent implements OnInit {
 
   constructor (
     private studentService: StudentService,
+    private sessionDataService: SessionDataService,
     private router: Router) {
 
     console.log('StudentTableComponent constructor ...');
@@ -45,15 +47,22 @@ export class StudentTableComponent implements OnInit {
   }
 
   onAddStudent() {
-    this.router.navigate(['/studentDetails', '', 'Add']);
+    this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
+    this.sessionDataService.crudMode = 'Add';
+    this.router.navigate(['/studentDetails']);
   }
   onModifyStudent() {
-    this.router.navigate(['/studentDetails', this.studentArray[this.selectedRowIndex].id, 'Modify']);
+    this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
+    this.sessionDataService.crudMode = 'Modify';
+    this.router.navigate(['/studentDetails']);
   }
   onDeleteStudent() {
-    this.router.navigate(['/studentDetails', this.studentArray[this.selectedRowIndex].id, 'Delete']);
+    this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
+    this.sessionDataService.crudMode = 'Delete';
+    this.router.navigate(['/studentDetails']);
   }
   onManageNotes() {
-    this.router.navigate(['/noteTable', this.studentArray[this.selectedRowIndex].id]);    
+    this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
+    this.router.navigate(['/noteTable']);    
   }
 }

@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { StudentService } from './student.service';
+import { SessionDataService } from './session-data.service';
 import { Component1Component } from './component1/component1.component';
 import { Component2Component } from './component2/component2.component';
 import { AppRouting } from './app.routing';
@@ -31,7 +32,7 @@ import { NoteDetailsComponent } from './note-details/note-details.component'
     HttpModule,
     AppRouting
   ],
-  providers: [StudentService],
+  providers: [StudentService, SessionDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

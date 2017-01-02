@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../Student';
 import { StudentService } from '../student.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { SessionDataService } from '../session-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-note-table',
@@ -16,7 +17,7 @@ export class NoteTableComponent implements OnInit {
 
   constructor(
     private studentService: StudentService,
-    private activatedRoute: ActivatedRoute,
+    private sessionDataService: SessionDataService,    
     private router: Router) {
 
     console.log('NoteTableComponent constructor ...');
@@ -24,7 +25,7 @@ export class NoteTableComponent implements OnInit {
 
   ngOnInit() {
     console.log('NoteTableComponent ngOnInit() begin ...');
-    this.student = this.studentService.getStudentById(this.activatedRoute.snapshot.params['id']);
+    this.student = this.sessionDataService.student;
     console.log('NoteTableComponent ngOnInit() end ...');
   }
 
@@ -39,11 +40,14 @@ export class NoteTableComponent implements OnInit {
   }
 
   onAddNote () {
-    this.router.navigate(['/noteDetails', '', '', 'Add']);
+    this.sessionDataService.crudMode = 'Add';
+    this.router.navigate(['/noteDetails']);
   }
 
   onModifyNote () {
-    this.router.navigate(['/noteDetails', this.student.id, this.student.noteSet[this.selectedRowIndex].id, 'Modify']);    
+    this.sessionDataService.crudMode = 'Modify';
+    this.sessionDataService.noteSetIndex = this.selectedRowIndex;
+    this.router.navigate(['/noteDetails']);    
   }
 
   onDeleteNote () {

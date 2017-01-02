@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../Student';
 import { StudentService } from '../student.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { SessionDataService } from '../session-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-details',
@@ -17,22 +18,16 @@ export class StudentDetailsComponent implements OnInit {
 
   constructor (
     private studentService: StudentService,
-    private activatedRoute: ActivatedRoute,
+    private sessionDataService: SessionDataService,    
     private router: Router) {}
 
   ngOnInit() {
-    //console.log('StudentDetailsComponent begin ...');
-    //console.log('id: ' + this.activatedRoute.snapshot.params['id']);
-    this.crudMode = this.activatedRoute.snapshot.params['crudMode'];
-    //console.log('crudMode: ' + this.crudMode);
+    this.crudMode = this.sessionDataService.crudMode;
     if (this.crudMode == 'Add') {
-      //this.student = {id: null, firstName: '', lastName: '', grade: ''};
       this.student = new Student();
     } else {
-      this.student = this.studentService.getStudentById(this.activatedRoute.snapshot.params['id']);
+      this.student = this.sessionDataService.student;
     }
-    //console.log('this.student.firstName: ' + this.student.firstName);
-    //console.log('StudentDetailsComponent end ...');
   }
 
   onSubmit() {

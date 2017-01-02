@@ -8,9 +8,9 @@ import { _404Component } from './404.component';
 const routes: Routes = [
     {path: '',              component: StudentTableComponent},
     {path: 'studentTable',  component: StudentTableComponent},
-    {path: 'studentDetails/:id/:crudMode',  component: StudentDetailsComponent},
-    {path: 'noteTable/:id', component: NoteTableComponent},
-    {path: 'noteDetails/:studentId/:noteId/:crudMode',  component: NoteDetailsComponent},
+    {path: 'studentDetails',  component: StudentDetailsComponent},
+    {path: 'noteTable', component: NoteTableComponent},
+    {path: 'noteDetails',  component: NoteDetailsComponent},
     {path: '**',            component: _404Component}
 ]
 
