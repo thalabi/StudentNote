@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -13,7 +13,8 @@ import { StudentTableComponent } from './student-table/student-table.component'
 import { _404Component } from './404.component';
 import { StudentDetailsComponent } from './student-details/student-details.component';
 import { NoteTableComponent } from './note-table/note-table.component';
-import { NoteDetailsComponent } from './note-details/note-details.component'
+import { NoteDetailsComponent } from './note-details/note-details.component';
+import { StudentDetailsFormComponent } from './student-details-form/student-details-form.component'
 
 @NgModule({
   declarations: [
@@ -24,11 +25,13 @@ import { NoteDetailsComponent } from './note-details/note-details.component'
     _404Component,
     StudentDetailsComponent,
     NoteTableComponent,
-    NoteDetailsComponent
+    NoteDetailsComponent,
+    StudentDetailsFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AppRouting
   ],

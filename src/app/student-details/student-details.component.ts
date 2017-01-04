@@ -26,7 +26,9 @@ export class StudentDetailsComponent implements OnInit {
     if (this.crudMode == 'Add') {
       this.student = new Student();
     } else {
-      this.student = this.sessionDataService.student;
+      this.student = Object.assign({}, this.sessionDataService.student);
+      console.log(JSON.stringify(this.student));
+
     }
   }
 

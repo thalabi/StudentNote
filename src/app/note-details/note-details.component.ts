@@ -28,13 +28,28 @@ export class NoteDetailsComponent implements OnInit {
     this.student = this.sessionDataService.student;
     if (this.crudMode == 'Add') {
       this.note = new Note();
+      this.note.timestamp = new Date();
     } else {
       let noteSetIndex: number = this.sessionDataService.noteSetIndex;
-      this.note = this.student.noteSet[noteSetIndex];
+      this.note = Object.assign({}, this.student.noteSet[noteSetIndex]);
     }
   }
 
   onSubmit() {
+    switch (this.crudMode) {
+      case 'Add':
+        this.studentService.saveNote(this.student, this.note);
+        break;
+      case 'Modify':
+        this.studentService.saveNote(this.student, this.note);
+        break;
+      case 'Delete':
+        this.studentService.deleteNote(this.student, this.note);
+        break;
+      default:
+        console.error('this.crudMode is invalid. this.crudMode: ' + this.crudMode);
+    }
+    this.router.navigate(['noteTable']);
   }
   
   onCancel() {

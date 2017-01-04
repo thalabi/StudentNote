@@ -1,0 +1,30 @@
+<form [formGroup]="complexForm" (ngSubmit)="onSubmit()">
+
+<table>
+  <tr>
+    <td>First name: </td>
+    <td><input type="text" formControlName="firstName" required></td>
+    <td><div *ngIf="formErrors.firstName">{{formErrors.firstName}}</div></td>
+  </tr>
+  <tr>
+    <td>Last name: </td>
+    <td><input type="text" formControlName="lastName" required></td>
+    <td><div *ngIf="formErrors.lastName">{{formErrors.lastName}}</div></td>
+  </tr>
+
+  <tr>
+    <td>Grade: </td>
+    <td>
+                    <select formControlName="grade">
+                      <option *ngFor="let gradeOption of gradeOptionArray">{{gradeOption}}</option>
+                    </select>
+    </td>
+  </tr>
+
+</table>
+
+<div style="margin-top: 0.5rem;">
+<button type="submit" [disabled]="!complexForm.valid">Submit</button>
+</div>
+
+</form>

@@ -1,6 +1,9 @@
+<div style="margin-top: 0.5rem;">{{student.firstName}} {{student.lastName}}, {{student.grade}}</div>
 <h4>{{crudMode}} Note</h4>
 <table>
-  <tr><td>Date and Time: </td><td><input #timestamp [(ngModel)]="note.timestamp" [readonly]="crudMode == 'Delete'"/></td></tr>
+  <tr><td>Date and Time: </td>
+    <td><input #timestamp [ngModel]="note.timestamp | date: 'MMM dd, yyyy hh:mm a'" 
+          (ngModelChange)="note.timestamp = $event" type="datetime" [readonly]="crudMode == 'Delete'"/></td></tr>
   <tr><td>Note: </td><td><input #text [(ngModel)]="note.text" [readonly]="crudMode == 'Delete'"/></td></tr>
 </table>
 <div style="margin-top: 0.5rem;">

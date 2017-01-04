@@ -25,7 +25,8 @@ export class StudentService {
         {id: 10, timestamp: new Date(2016, 11, 31, 17, 10), text: "Note 10"}
       ]}
     ];
-  private sequence: number = 4;
+  private studentIdSequence: number = 4;
+  private noteIdSequence: number = 10;
 
   constructor() { }
 
@@ -50,7 +51,7 @@ export class StudentService {
       }
     }
     // add the student to the array
-    student.id = ++this.sequence;
+    student.id = ++this.studentIdSequence;
     console.log("StudentService saveStudent(), student.id: " + student.id);
     this.studentArray[this.studentArray.length] = student;
   }
@@ -67,7 +68,7 @@ export class StudentService {
     }
     console.error("element not found");
   }
-
+/*
   getNoteById(studentId: number, noteId: number ): Note {
 
     let student: Student;
@@ -87,5 +88,31 @@ export class StudentService {
 
     return note;
   }
+*/
+  saveNote (student: Student, note: Note) {
 
+    for (let i=0; i<student.noteSet.length; i++){
+      if (student.noteSet[i].id == note.id) {
+        student.noteSet[i] = note;
+        return;
+      }
+    }
+    // add the student to the array
+    note.id = ++this.noteIdSequence;
+    console.log("StudentService saveNote(), note.id: " + note.id);
+    student.noteSet[student.noteSet.length] = note;
+  }
+
+  deleteNote(student: Student, note: Note) {
+
+    for (let i=0; i<student.noteSet.length; i++){
+      if (student.noteSet[i].id == note.id) {
+        console.log("deleteStudent(), i: " + i + ", this.studentArray.length: " + student.noteSet.length);
+        student.noteSet.splice(i, 1);
+        console.log("deleteStudent(), after splice, this.studentArray.length: " + student.noteSet.length);
+        return;
+      }
+    }
+    console.error("element not found");
+  }
 }

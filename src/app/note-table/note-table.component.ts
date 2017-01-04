@@ -51,6 +51,8 @@ export class NoteTableComponent implements OnInit {
   }
 
   onDeleteNote () {
-    
+    this.sessionDataService.crudMode = 'Delete';
+    this.sessionDataService.noteSetIndex = this.selectedRowIndex;
+    this.router.navigate(['/noteDetails']);    
   }
 }
