@@ -20,8 +20,10 @@ export class StudentDetailsFormComponent implements OnInit {
 
   ngOnInit() {
     this.complexForm = this.fb.group({
-      'firstName' : [{value: '', disabled: this.crudMode == 'Delete'}, Validators.required],
-      'lastName': [{value: '', disabled: this.crudMode == 'Delete'},  Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(10)])],
+      'nameGroup' : this.fb.group({
+        'firstName' : [{value: '', disabled: this.crudMode == 'Delete'}, Validators.required],
+        'lastName': [{value: '', disabled: this.crudMode == 'Delete'},  Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(10)])]
+      }),
       'grade' : [{value: '', disabled: this.crudMode == 'Delete'}]
     })
 
@@ -38,34 +40,52 @@ export class StudentDetailsFormComponent implements OnInit {
   }
 
   onValueChanged(data?: any) {
+    console.log('onValueChanged');
     if (!this.complexForm) { return; }
     const form = this.complexForm;
-    for (const field in this.formErrors) {
+    console.log(form);
+    console.log('grade: ', form.get('grade'));
+    console.log('nameGroup: ', form.get('nameGroup'));
+    const nameGroup = form.get('nameGroup');
+    console.log('firstName', nameGroup.get('firstName'));
+    for (const field in this.formErrors.nameGroup) {
+      console.log(field);
       // clear previous error message (if any)
-      this.formErrors[field] = '';
-      const control = form.get(field);
+      this.formErrors.nameGroup[field] = '';
+      const control = nameGroup.get(field);
       if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
+        const messages = this.validationMessages.nameGroup[field];
         for (const key in control.errors) {
-          this.formErrors[field] += messages[key] + ' ';
+          this.formErrors.nameGroup[field] += messages[key] + ' ';
         }
       }
     }
   }
 
   formErrors = {
-    'firstName': '',
-    'lastName': ''
+    'nameGroup': {
+      'firstName': '',
+      'lastName': ''
+    }
   };
 
   validationMessages = {
-    'firstName': {
-      'required':      'Fisr name is required.'
-    },
-    'lastName': {
-      'required': 'Last name is required.',
-      'minlength': 'Last name must be at least 5 characters long.',
-      'maxlength': 'Last name cannot be more than 10 characters long.'
+    'nameGroup': {
+      'firstName': {
+        'required':      'Fisr name is required.'
+      },
+      'lastName': {
+        'required': 'Last name is required.',
+        'minlength': 'Last name must be at least 5 characters long.',
+        'maxlength': 'Last name cannot be more than 10 characters long.'
+      }
     }
   };
+
+  equalValidator({value}: FormGroup): {[key: string]: any} {
+    const [first, ...rest] = Object.keys(value || {});
+    const valid = rest.every(v => value[v] === value[first]);
+    return valid ? null : {equal: true};
+  }
+
 }
