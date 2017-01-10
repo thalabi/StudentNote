@@ -33,3 +33,7 @@ button {
 button:hover {
   background-color: #cfd8dc;
 }
+
+.table {display: table; }
+.row { display: table-row;}
+.cell {display: table-cell; padding: 0.1rem;}

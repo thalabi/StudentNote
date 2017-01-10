@@ -1,24 +1,40 @@
-<form [formGroup]="complexForm" (ngSubmit)="onSubmit()" novalidate>
-<div formGroupName="nameGroup">
-  <div>First name:</div>
-  <div>
-    <input type="text" formControlName="firstName" required>
-    <div *ngIf="formErrors.nameGroup.firstName">{{formErrors.nameGroup.firstName}}</div>
-  </div>
-  <div>Last name:</div>
-  <div>
-    <input type="text" formControlName="lastName" required>
-    <div *ngIf="formErrors.nameGroup.lastName">{{formErrors.nameGroup.lastName}}</div>
+<h4>{{crudMode}} User</h4>
+
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()" novalidate>
+
+<div class="table">
+
+  <div formGroupName="nameGroup" style="border-spacing: 0px;">  
+    <div class="row">
+      <div class="cell">First name:</div>
+      <div class="cell"><input type="text" formControlName="firstName"></div>
+      <div class="cell" *ngIf="!nameGroupValid">{{nameGroupMessage}}</div>
+    </div>
+
+    <div class="row">
+      <div class="cell">Last name:</div>
+      <div class="cell"><input type="text" formControlName="lastName"></div>
+      <div class="cell" *ngIf="!nameGroupValid">{{nameGroupMessage}}</div>
+    </div>
   </div>
 </div>
-<div>Grade:</div>
-  <div>
-                    <select formControlName="grade">
-                      <option *ngFor="let gradeOption of gradeOptionArray">{{gradeOption}}</option>
-                    </select>
+
+<div class="table">
+  <div class="row">
+    <div class="cell" style="width: 4.6rem;">Grade:</div>
+    <div class="cell">
+      <select formControlName="grade">
+        <option *ngFor="let gradeOption of gradeOptionArray" [value]="gradeOption">{{gradeOption}}</option>
+      </select>
+    </div>
+  </div>
+
+
 </div>
+
 <div style="margin-top: 0.5rem;">
-<button type="submit" [disabled]="!complexForm.valid">Submit</button>
+<button type="submit" [disabled]="!studentForm.valid && crudMode != 'Delete'">Submit</button>
+<button (click)="onCancel()">Cancel</button>
 </div>
 
 </form>

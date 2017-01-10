@@ -28,7 +28,6 @@ export class StudentDetailsComponent implements OnInit {
     } else {
       this.student = Object.assign({}, this.sessionDataService.student);
       console.log(JSON.stringify(this.student));
-
     }
   }
 

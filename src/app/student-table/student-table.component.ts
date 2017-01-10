@@ -49,17 +49,17 @@ export class StudentTableComponent implements OnInit {
   onAddStudent() {
     this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
     this.sessionDataService.crudMode = 'Add';
-    this.router.navigate(['/studentDetails']);
+    this.router.navigate(['/studentDetailsForm']);
   }
   onModifyStudent() {
     this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
     this.sessionDataService.crudMode = 'Modify';
-    this.router.navigate(['/studentDetails']);
+    this.router.navigate(['/studentDetailsForm']);
   }
   onDeleteStudent() {
     this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
     this.sessionDataService.crudMode = 'Delete';
-    this.router.navigate(['/studentDetails']);
+    this.router.navigate(['/studentDetailsForm']);
   }
   onManageNotes() {
     this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
