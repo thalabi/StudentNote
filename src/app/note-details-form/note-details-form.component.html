@@ -1,0 +1,25 @@
+<div style="margin-top: 0.5rem;">{{student.firstName}} {{student.lastName}}, {{student.grade}}</div>
+<h4>{{crudMode}} Note</h4>
+
+<form [formGroup]="noteForm" (ngSubmit)="onSubmit()" novalidate>
+
+<div class="table">
+  <div class="row">
+    <div class="cell">Date and Time:</div>
+    <div class="cell"><input type="text" formControlName="timestamp"></div>
+    <div class="cell" *ngIf="!timestampControlValid">{{timestampControlMessage}}</div>
+  </div>
+  <div class="row">
+    <div class="cell">Note:</div>
+    <div class="cell"><input type="text" formControlName="text"></div>
+  </div>
+</div>
+
+<div style="margin-top: 0.5rem;">
+<button type="submit" [disabled]="!noteForm.valid && crudMode != 'Delete'">Submit</button>
+<button type="button" (click)="onCancel()">Cancel</button>
+</div>
+
+</form>
+
+

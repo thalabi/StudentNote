@@ -41,18 +41,18 @@ export class NoteTableComponent implements OnInit {
 
   onAddNote () {
     this.sessionDataService.crudMode = 'Add';
-    this.router.navigate(['/noteDetails']);
+    this.router.navigate(['/noteDetailsForm']);
   }
 
   onModifyNote () {
     this.sessionDataService.crudMode = 'Modify';
     this.sessionDataService.noteSetIndex = this.selectedRowIndex;
-    this.router.navigate(['/noteDetails']);    
+    this.router.navigate(['/noteDetailsForm']);    
   }
 
   onDeleteNote () {
     this.sessionDataService.crudMode = 'Delete';
     this.sessionDataService.noteSetIndex = this.selectedRowIndex;
-    this.router.navigate(['/noteDetails']);    
+    this.router.navigate(['/noteDetailsForm']);    
   }
 }

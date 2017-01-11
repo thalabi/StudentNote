@@ -4,6 +4,7 @@ import { StudentDetailsComponent } from './student-details/student-details.compo
 import { StudentDetailsFormComponent } from './student-details-form/student-details-form.component';
 import { NoteTableComponent } from './note-table/note-table.component';
 import { NoteDetailsComponent } from './note-details/note-details.component';
+import { NoteDetailsFormComponent } from './note-details-form/note-details-form.component';
 import { _404Component } from './404.component';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
     {path: 'studentDetailsForm',  component: StudentDetailsFormComponent},
     {path: 'noteTable', component: NoteTableComponent},
     {path: 'noteDetails',  component: NoteDetailsComponent},
+    {path: 'noteDetailsForm',  component: NoteDetailsFormComponent},
     {path: '**',            component: _404Component}
 ]
 

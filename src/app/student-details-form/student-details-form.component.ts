@@ -104,7 +104,7 @@ export class StudentDetailsFormComponent implements OnInit {
 */    }
   }
   nameGroupValid: boolean = true;
-  nameGroupMessage: string = 'First name or last name must not be blank';
+  nameGroupMessage: string = 'First name and last name must not be blank';
 
   formErrors = {
     'nameGroup': {
