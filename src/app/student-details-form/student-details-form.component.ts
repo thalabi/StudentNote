@@ -71,7 +71,7 @@ export class StudentDetailsFormComponent implements OnInit {
   }
 
   onCancel() {
-      this.router.navigate(['studentTable']);
+      this.router.navigate(['/studentTable']);
   }
 
   onValueChanged(data?: any) {
