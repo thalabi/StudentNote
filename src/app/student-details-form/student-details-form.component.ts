@@ -85,10 +85,6 @@ export class StudentDetailsFormComponent implements OnInit {
     console.log('nameGroup.valid: ', nameGroup.valid);
     console.log('form.touched: ', form.touched);
     console.log('nameGroup.touched: ', nameGroup.touched);
-    this.nameGroupValid = nameGroup.valid;// && form.touched;
-    console.log('nameGroupValid', this.nameGroupValid);
-    console.log(true && true);
-    console.log(false && false);
 /*    console.log('firstName', nameGroup.get('firstName'));
 */    for (const field in this.formErrors.nameGroup) {
 /*      console.log(field);
@@ -103,8 +99,6 @@ export class StudentDetailsFormComponent implements OnInit {
       }
 */    }
   }
-  nameGroupValid: boolean = true;
-  nameGroupMessage: string = 'First name and last name must not be blank';
 
   formErrors = {
     'nameGroup': {

@@ -8,13 +8,13 @@
     <div class="row">
       <div class="cell">First name:</div>
       <div class="cell"><input type="text" formControlName="firstName"></div>
-      <div class="cell" *ngIf="!nameGroupValid">{{nameGroupMessage}}</div>
+      <div class="cell" *ngIf="studentForm.controls.nameGroup.invalid && studentForm.controls.nameGroup.dirty">First name and last name must not be blank</div>
     </div>
 
     <div class="row">
       <div class="cell">Last name:</div>
       <div class="cell"><input type="text" formControlName="lastName"></div>
-      <div class="cell" *ngIf="!nameGroupValid">{{nameGroupMessage}}</div>
+      <div class="cell" *ngIf="studentForm.controls.nameGroup.invalid && studentForm.controls.nameGroup.dirty">First name and last name must not be blank</div>
     </div>
   </div>
 </div>
