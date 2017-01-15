@@ -36,4 +36,6 @@ button:hover {
 
 .table {display: table; }
 .row { display: table-row;}
-.cell {display: table-cell; padding: 0.1rem;}
+.cell {display: table-cell; padding: 0.1rem; vertical-align: middle;}
+
+textarea { font-family: inherit; font-size: inherit; }
