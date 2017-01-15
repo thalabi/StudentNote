@@ -45,7 +45,6 @@ export class NoteDetailsFormComponent implements OnInit {
       'text' : [{value: this.note.text, disabled: this.crudMode == 'Delete'}]
     })
 
-
     this.noteForm.valueChanges
       .subscribe(data => this.onValueChanged(data));  
   }
