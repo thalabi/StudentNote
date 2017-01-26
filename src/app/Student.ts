@@ -5,6 +5,7 @@ export class Student {
     firstName: string;
     lastName: string;
     grade: string;
+    version: number;
 
-    noteSet: Note[];
+    noteList: Note[];
 }

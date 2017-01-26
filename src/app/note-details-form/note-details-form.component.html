@@ -6,8 +6,10 @@
 <div class="table">
   <div class="row">
     <div class="cell">Date and Time:</div>
-    <div class="cell"><input type="text" formControlName="timestamp" (blur)="timestampBlur = true" (focus)="timestampBlur = false"></div>
-    <div class="cell" *ngIf="noteForm.controls.timestamp.invalid && noteForm.controls.timestamp.dirty && timestampBlur">Invalid date and time</div>
+    <div class="cell">
+      <input type="text" formControlName="timestamp" (blur)="timestampBlur = true" (focus)="timestampBlur = false">
+      <span *ngIf="noteForm.controls.timestamp.invalid && noteForm.controls.timestamp.dirty && timestampBlur">Invalid date and time</span>
+    </div>
   </div>
   <div class="row">
     <div class="cell">Note:</div>

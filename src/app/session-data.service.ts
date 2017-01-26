@@ -6,7 +6,7 @@ export class SessionDataService {
   //public storage: any;
   public student: Student;
   public crudMode: string;
-  public noteSetIndex: number;
+  public noteListIndex: number;
 
   constructor() { }
 

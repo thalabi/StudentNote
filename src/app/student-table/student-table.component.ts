@@ -26,8 +26,15 @@ export class StudentTableComponent implements OnInit {
 
   ngOnInit () {
     console.log('StudentTableComponent ngOnInit() begin ...');
-    this.studentArray = this.studentService.getStudents()
-    console.log('length: ' + this.studentArray.length);
+    // let millisecondsToWait = 2000;
+    // setTimeout(function() {
+    //   console.log('Waiting 2000 milli seconds ...');
+    // }, millisecondsToWait);
+    this.studentService.getStudents().subscribe(
+      students => {
+        this.studentArray = students;
+        console.log('studentArray[] length: ', this.studentArray.length);
+      });
     console.log('StudentTableComponent ngOnInit() end ...');
   }
 

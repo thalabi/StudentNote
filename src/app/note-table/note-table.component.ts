@@ -26,6 +26,7 @@ export class NoteTableComponent implements OnInit {
   ngOnInit() {
     console.log('NoteTableComponent ngOnInit() begin ...');
     this.student = this.sessionDataService.student;
+    console.log('this.student: ', this.student);
     console.log('NoteTableComponent ngOnInit() end ...');
   }
 
@@ -46,13 +47,13 @@ export class NoteTableComponent implements OnInit {
 
   onModifyNote () {
     this.sessionDataService.crudMode = 'Modify';
-    this.sessionDataService.noteSetIndex = this.selectedRowIndex;
+    this.sessionDataService.noteListIndex = this.selectedRowIndex;
     this.router.navigate(['/noteDetailsForm']);    
   }
 
   onDeleteNote () {
     this.sessionDataService.crudMode = 'Delete';
-    this.sessionDataService.noteSetIndex = this.selectedRowIndex;
+    this.sessionDataService.noteListIndex = this.selectedRowIndex;
     this.router.navigate(['/noteDetailsForm']);    
   }
 }

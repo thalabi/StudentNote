@@ -35,8 +35,8 @@ export class NoteDetailsFormComponent implements OnInit {
       this.note = new Note();
       this.note.timestamp = new Date();
     } else {
-      let noteSetIndex: number = this.sessionDataService.noteSetIndex;
-      this.note = Object.assign({}, this.student.noteSet[noteSetIndex]);
+      let noteListIndex: number = this.sessionDataService.noteListIndex;
+      this.note = Object.assign({}, this.student.noteList[noteListIndex]);
     }
 
     this.noteForm = this.formBuilder.group({

@@ -1,6 +1,6 @@
 <div style="margin-top: 0.5rem;">{{student.firstName}} {{student.lastName}}, {{student.grade}}</div>
 <table class="hoverTable">
-  <tr *ngFor="let note of student.noteSet; let i = index" (click)="rowOnClick(i)" [class.selected]="i == selectedRowIndex">
+  <tr *ngFor="let note of student.noteList; let i = index" (click)="rowOnClick(i)" [class.selected]="i == selectedRowIndex">
     <td>{{note.timestamp | date: 'MMM dd, yyyy hh:mm a'}}</td>
     <td>{{note.text}}</td>
   </tr>

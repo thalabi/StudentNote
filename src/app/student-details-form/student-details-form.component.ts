@@ -56,18 +56,31 @@ export class StudentDetailsFormComponent implements OnInit {
     this.student.grade = this.studentForm.get('grade').value;
     switch (this.crudMode) {
       case 'Add':
-        this.studentService.saveStudent(this.student);
+        this.studentService.saveStudent(this.student)
+          .subscribe(student => {
+                  //console.log('student: ', student);
+                  this.router.navigate(['studentTable']);
+                });
         break;
       case 'Modify':
-        this.studentService.saveStudent(this.student);
+        console.log('before call to studentService');
+        this.studentService.saveStudent(this.student)
+          .subscribe(student => {
+                  //console.log('student: ', student);
+                  this.router.navigate(['studentTable']);
+                });
         break;
       case 'Delete':
-        this.studentService.deleteStudent(this.student);
+        this.studentService.deleteStudent(this.student)
+          .subscribe(student => {
+                  //console.log('student: ', student);
+                  this.router.navigate(['studentTable']);
+                });
         break;
       default:
         console.error('this.crudMode is invalid. this.crudMode: ' + this.crudMode);
     }
-    this.router.navigate(['studentTable']);
+    //this.router.navigate(['studentTable']);
   }
 
   onCancel() {
