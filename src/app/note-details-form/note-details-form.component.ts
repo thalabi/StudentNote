@@ -66,22 +66,49 @@ export class NoteDetailsFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.note.timestamp = this.noteForm.get('timestamp').value;
+    this.note.timestamp = new Date(this.noteForm.get('timestamp').value);
     this.note.text = this.noteForm.get('text').value;
     switch (this.crudMode) {
       case 'Add':
-        this.studentService.saveNote(this.student, this.note);
+        this.student.noteList[this.student.noteList.length] = this.note;
         break;
       case 'Modify':
-        this.studentService.saveNote(this.student, this.note);
+        for (let i=0; i<this.student.noteList.length; i++){
+          if (this.student.noteList[i].id == this.note.id) {
+            this.student.noteList[i] = this.note;
+            break;
+          }
+        }
         break;
       case 'Delete':
-        this.studentService.deleteNote(this.student, this.note);
+        for (let i=0; i<this.student.noteList.length; i++){
+          if (this.student.noteList[i].id == this.note.id) {
+            console.log("deleteStudent(), i: " + i + ", this.studentArray.length: " + this.student.noteList.length);
+            this.student.noteList.splice(i, 1);
+            console.log("deleteStudent(), after splice, this.studentArray.length: " + this.student.noteList.length);
+          }
+        }
         break;
       default:
         console.error('this.crudMode is invalid. this.crudMode: ' + this.crudMode);
     }
-    this.router.navigate(['noteTable']);
+
+    this.studentService.saveNote(this.student)
+      .subscribe(
+          student => {
+            this.sessionDataService.student = student;
+            console.log('from subscribe 1 student: ', student);
+            //this.router.navigate(['noteTable']);
+          },
+          error => {
+            console.log('error');
+          },
+          () => {
+            this.router.navigate(['noteTable']);
+          }
+          );
+    console.log('after saveNote()');
+    //this.router.navigate(['noteTable']);
   }
   
   onCancel() {
@@ -98,7 +125,7 @@ function dateValidator(control: FormControl): {[key: string]: any} {
   let timestampValid = true;
   if (matches) {
     let [year, monthIndex, day, hour, minute] = [matches[3], Constants.MONTHS.indexOf(matches[1].toLowerCase()), matches[2], +matches[4] + (matches[6].toLowerCase() == 'pm' ? 12 : 0), matches[5]];
-    // console.log('dateValidator(), time components: ', year, monthIndex, day, hour, minute);
+    console.log('dateValidator(), time components: ', year, monthIndex, day, hour, minute);
     if (monthIndex == -1 || day > 31 || hour > 23 || minute > 60) {
       timestampValid = false;
     } else if ([1,3,5,7,8,10,12].indexOf(monthIndex+1) == -1 && day == 31) {

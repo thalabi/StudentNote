@@ -33,7 +33,7 @@ export class StudentTableComponent implements OnInit {
     this.studentService.getStudents().subscribe(
       students => {
         this.studentArray = students;
-        console.log('studentArray[] length: ', this.studentArray.length);
+        console.log('studentArray[]: ', this.studentArray);
       });
     console.log('StudentTableComponent ngOnInit() end ...');
   }

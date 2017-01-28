@@ -38,10 +38,10 @@ export class NoteDetailsComponent implements OnInit {
   onSubmit() {
     switch (this.crudMode) {
       case 'Add':
-        this.studentService.saveNote(this.student, this.note);
+        //this.studentService.saveNote(this.student, this.note);
         break;
       case 'Modify':
-        this.studentService.saveNote(this.student, this.note);
+        //this.studentService.saveNote(this.student, this.note);
         break;
       case 'Delete':
         this.studentService.deleteNote(this.student, this.note);
