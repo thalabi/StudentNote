@@ -16,12 +16,13 @@ table {
 .hoverTable tr {
     background-color: #f2f2f2;
 }
-.hoverTable tbody>tr:hover {
+.hoverTable tbody>tr:hover:not(.selected) {
     background-color: #ffff99;
   cursor: pointer;
   cursor: hand;
 }
 .hoverTable tr.selected {
+    color: white;
     background-color: lightblue;
 }
 
@@ -35,7 +36,7 @@ button {
   cursor: hand;
 }
 button:hover {
-  background-color: #cfd8dc;
+  background-color: #ffff99;
 }
 
 .table {display: table; }
