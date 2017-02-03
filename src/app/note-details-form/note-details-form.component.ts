@@ -124,18 +124,22 @@ function dateValidator(control: FormControl): {[key: string]: any} {
   // console.log('dateValidator(), matches: ', matches);
   let timestampValid = true;
   if (matches) {
-    let [year, monthIndex, day, hour, minute] = [matches[3], Constants.MONTHS.indexOf(matches[1].toLowerCase()), matches[2], +matches[4] + (matches[6].toLowerCase() == 'pm' ? 12 : 0), matches[5]];
+    let [year, monthIndex, day, hour, minute] = [matches[3], Constants.MONTHS.indexOf(matches[1].toLowerCase()), matches[2], matches[4], matches[5]];
+    //let [year, monthIndex, day, hour, minute] = [matches[3], Constants.MONTHS.indexOf(matches[1].toLowerCase()), matches[2], +matches[4] + (matches[6].toLowerCase() == 'pm' ? 12 : 0), matches[5]];
     console.log('dateValidator(), time components: ', year, monthIndex, day, hour, minute);
-    if (monthIndex == -1 || day > 31 || hour > 23 || minute > 60) {
+    if (monthIndex == -1 || day > 31 || hour > 12 || minute > 60) {
       timestampValid = false;
-    } else if ([1,3,5,7,8,10,12].indexOf(monthIndex+1) == -1 && day == 31) {
-      timestampValid = false;
-    } else if (monthIndex+1 == 2) {
-        if (((year % 4 == 0 && year % 100) || year % 400 == 0) && day == 29) {
-            timestampValid = true;
-        } else if (day > 28) {
-            timestampValid = false;
-        }
+    } else {
+      hour = +hour + (matches[6].toLowerCase() == 'pm' ? 12 : 0);
+      if ([1,3,5,7,8,10,12].indexOf(monthIndex+1) == -1 && day == 31) {
+        timestampValid = false;
+      } else if (monthIndex+1 == 2) {
+          if (((year % 4 == 0 && year % 100) || year % 400 == 0) && day == 29) {
+              timestampValid = true;
+          } else if (day > 28) {
+              timestampValid = false;
+          }
+      }
     }
     console.log('dateValidator(), timestampValid: ', timestampValid);
   }

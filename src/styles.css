@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+p {
+    text-indent: 1rem;
+}
 h4 {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    color: darkslategray;
 }
 table {
     border-collapse: collapse;
@@ -12,7 +16,7 @@ table {
 .hoverTable tr {
     background-color: #f2f2f2;
 }
-.hoverTable tr:hover {
+.hoverTable tbody>tr:hover {
     background-color: #ffff99;
   cursor: pointer;
   cursor: hand;

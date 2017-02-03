@@ -15,7 +15,7 @@ export class StudentDetailsFormComponent implements OnInit {
   studentForm : FormGroup;
   student: Student;
   crudMode: string;
-  gradeOptionArray: string[] = ['JK', 'SK', '1', '2', '3', '4', '5'];
+  gradeOptionArray: string[] = ['JK', 'SK', '1', '2', '3', '4', '5', 'Other'];
 
   constructor(
     private formBuilder: FormBuilder,
