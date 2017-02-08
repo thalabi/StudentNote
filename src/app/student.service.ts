@@ -75,6 +75,14 @@ export class StudentService {
     console.error("element not found");
   }
 
+  getLatestActiveStudents(): Observable<Student[]> {
+
+    console.log('in getLatestActiveStudents()');
+    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getLatestActiveStudents/5")
+              .map(response => response.json() as Student[])
+              .catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);

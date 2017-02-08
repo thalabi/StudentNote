@@ -15,7 +15,8 @@ import { NoteTableComponent } from './note-table/note-table.component';
 import { StudentDetailsFormComponent } from './student-details-form/student-details-form.component';
 import { NoteDetailsFormComponent } from './note-details-form/note-details-form.component';
 import { AboutComponent } from './about/about.component';
-import { ContactUsComponent } from './contact-us/contact-us.component'
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component'
     StudentDetailsFormComponent,
     NoteDetailsFormComponent,
     AboutComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    StudentDashboardComponent
   ],
   imports: [
     BrowserModule,
