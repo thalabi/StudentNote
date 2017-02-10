@@ -1,5 +1,5 @@
   <a *ngFor="let student of studentArray; let i = index" (click)="tileOnClick(i)">
     <div class="tile">
-      <h4>{{student.firstName}}</h4>
+      <h4>{{student.firstName}} {{student.lastName}}</h4>
     </div>
   </a>
