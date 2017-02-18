@@ -1,11 +1,5 @@
 <h4>Student Notes Application</h4>
-<ul>
-  <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-  <!--<li><a [routerLink]="['/pdf']">PDF</a></li>-->
-  <li><a href="http://localhost:8080/StudentNotesService/pdfAll" target="_blank" >Print</a></li>
-  <li><a routerLink="/about" routerLinkActive="active">About</a></li>
-  <li><a routerLink="/contact-us"routerLinkActive="active">Contact Us</a></li>
-</ul>
+<app-menu></app-menu>
 <div style="margin-top: 0.5rem;">
 <router-outlet></router-outlet>
 </div>

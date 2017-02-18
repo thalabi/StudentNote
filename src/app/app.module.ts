@@ -18,6 +18,11 @@ import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component'
 
+import { AuthGuard } from './security/auth.guard';
+import { LoginComponent } from './security/login/login.component'
+import { AuthenticationService } from './security/authentication.service';
+import { MenuComponent } from './menu/menu.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +35,9 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
     NoteDetailsFormComponent,
     AboutComponent,
     ContactUsComponent,
-    StudentDashboardComponent
+    StudentDashboardComponent,
+    LoginComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,12 @@ import { StudentDashboardComponent } from './student-dashboard/student-dashboard
     HttpModule,
     AppRouting
   ],
-  providers: [StudentService, SessionDataService],
+  providers: [
+    StudentService,
+    SessionDataService,
+    AuthGuard,
+    AuthenticationService
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
