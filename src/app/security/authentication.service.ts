@@ -5,8 +5,9 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map'
 
-import { Constants } from './../constants';
+import { Constants } from '../constants';
 import { User } from './user';
+import { SessionDataService } from '../session-data.service';
  
 @Injectable()
 export class AuthenticationService {
@@ -18,7 +19,8 @@ export class AuthenticationService {
     private jsonHeaders = new Headers({'Content-Type': 'application/json'});
 
     constructor(
-      private http: Http) {
+      private http: Http,
+      private sessionDataService: SessionDataService) {
         this.userSubject = new Subject<User>();
         this.userSubject.next(new User())
        }
@@ -34,9 +36,11 @@ export class AuthenticationService {
                     //localStorage.setItem('currentUser', JSON.stringify(this.user));
                     this.isAuthenticated = true;
                     this.userSubject.next(this.user);
+                    this.sessionDataService.user = this.user;
                 } else {
                     //this.userObservable = Observable.from([null]);
                     this.isAuthenticated = false;
+                    this.sessionDataService.user = null;
                     throw ('Login invalid');
                 }
             });
@@ -47,6 +51,7 @@ export class AuthenticationService {
         //localStorage.removeItem('currentUser');
         this.isAuthenticated = false;
         this.userSubject.next(null);
+        this.sessionDataService.user = null;
     }
 
 }

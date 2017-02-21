@@ -13,19 +13,23 @@ import 'rxjs/add/operator/map';
 
 import { Constants } from './constants';
 
+import { SessionDataService } from './session-data.service';
+
 @Injectable()
 export class StudentService {
 
-  private jsonHeaders = new Headers({'Content-Type': 'application/json'});
-
+  private httpHeaders = new Headers({
+    'X-AUTH-TOKEN': this.sessionDataService.user.token,
+    'Content-Type': 'application/json'});
 
   constructor(
-    private http: Http) { }
+    private http: Http,
+    private sessionDataService: SessionDataService) { }
 
   getStudents(): Observable<Student[]> {
 
     console.log('in getStudents()');
-    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getAllStudents")
+    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getAllStudents", {headers: this.httpHeaders})
               .map(response => response.json() as Student[])
               .catch(this.handleError);
   }
@@ -35,7 +39,7 @@ export class StudentService {
 
     console.log('in saveStudent, student: ', student);
     return this.http
-      .post(Constants.STUDENT_NOTES_SERVICE_URL+"/saveStudent", JSON.stringify(student), {headers: this.jsonHeaders})
+      .post(Constants.STUDENT_NOTES_SERVICE_URL+"/saveStudent", JSON.stringify(student), {headers: this.httpHeaders})
       .map(response => response.json() as Student)
       .catch(this.handleError);
   }
@@ -43,19 +47,19 @@ export class StudentService {
   deleteStudent(student: Student) {
 
     return this.http
-      .delete(Constants.STUDENT_NOTES_SERVICE_URL+"/deleteStudentById/"+student.id, {headers: this.jsonHeaders})
+      .delete(Constants.STUDENT_NOTES_SERVICE_URL+"/deleteStudentById/"+student.id, {headers: this.httpHeaders})
       .catch(this.handleError);
   }
 
   saveNote (student: Student): Observable<Student> {
 
     let saveStudentObservable$: Observable<Student> =
-      this.http.post(Constants.STUDENT_NOTES_SERVICE_URL+"/saveStudent", JSON.stringify(student), {headers: this.jsonHeaders})
+      this.http.post(Constants.STUDENT_NOTES_SERVICE_URL+"/saveStudent", JSON.stringify(student), {headers: this.httpHeaders})
       //.map(response => response.json() as Student)
       .catch(this.handleError);
 
     let getStudentByIdObservable$: Observable<Student> =
-      this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getStudentById/"+student.id)
+      this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getStudentById/"+student.id, {headers: this.httpHeaders})
       .map(response => response.json() as Student)
       .catch(this.handleError);
 
@@ -78,7 +82,7 @@ export class StudentService {
   getLatestActiveStudents(): Observable<Student[]> {
 
     console.log('in getLatestActiveStudents()');
-    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getLatestActiveStudents/5")
+    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getLatestActiveStudents/5", {headers: this.httpHeaders})
               .map(response => response.json() as Student[])
               .catch(this.handleError);
   }

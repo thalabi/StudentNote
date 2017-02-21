@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Student } from './Student';
+import { User } from './security/user';
 @Injectable()
 export class SessionDataService {
 
@@ -7,6 +8,8 @@ export class SessionDataService {
   public student: Student;
   public crudMode: string;
   public noteListIndex: number;
+
+  public user: User;
 
   constructor() { }
 
