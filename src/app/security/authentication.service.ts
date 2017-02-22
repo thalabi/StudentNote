@@ -30,8 +30,7 @@ export class AuthenticationService {
             .map((response: Response) => {
                 // login successful if there's a jwt token in the response
                 this.user = response.json();
-                if (this.user && this.user.token
-                && this.user.username == 'x') {
+                if (this.user && this.user.token) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     //localStorage.setItem('currentUser', JSON.stringify(this.user));
                     this.isAuthenticated = true;
