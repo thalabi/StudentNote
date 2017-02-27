@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Student } from './Student';
 import { Note } from './Note';
 
-import { Http, Headers, ResponseContentType } from '@angular/http';
+import { Http, Headers, Response, ResponseContentType } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 // Observable class extensions
@@ -98,7 +98,7 @@ export class StudentService {
   downloadAllPdf(): any {
     return this.http.get('http://localhost:8080/StudentNotesService/pdfAll', {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
-        (response) => {
+        (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
         }
     );
