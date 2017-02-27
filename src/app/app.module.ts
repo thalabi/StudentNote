@@ -22,12 +22,11 @@ import { AuthGuard } from './security/auth.guard';
 import { LoginComponent } from './security/login/login.component'
 import { AuthenticationService } from './security/authentication.service';
 import { MenuComponent } from './menu/menu.component';
+import { PrintComponent } from './print/print.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    Component1Component,
-    Component2Component,
     StudentTableComponent,
     _404Component,
     NoteTableComponent,
@@ -37,7 +36,8 @@ import { MenuComponent } from './menu/menu.component';
     ContactUsComponent,
     StudentDashboardComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    PrintComponent
   ],
   imports: [
     BrowserModule,

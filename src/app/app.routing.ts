@@ -1,5 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { StudentTableComponent } from './student-table/student-table.component';
+import { PrintComponent } from './print/print.component';
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { StudentDetailsFormComponent } from './student-details-form/student-details-form.component';
@@ -14,6 +15,7 @@ import { _404Component } from './404.component';
 const routes: Routes = [
     {path: '',              component: StudentTableComponent, canActivate: [AuthGuard]},
     {path: 'studentTable',  component: StudentTableComponent, canActivate: [AuthGuard]},
+    {path: 'print',  component: PrintComponent, canActivate: [AuthGuard]},
     {path: 'about',  component: AboutComponent},
     {path: 'contact-us',  component: ContactUsComponent},
     {path: 'studentDetailsForm',  component: StudentDetailsFormComponent},

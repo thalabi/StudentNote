@@ -1,0 +1,6 @@
+Copy 
+- mongoose.conf
+- mongoose.exe from C:\temp\StudentNotes-mongoose
+- StudentNotes.bat
+- jar
+- portqry from C:\PortQryV2
