@@ -1,9 +1,17 @@
-<ul>
+<!--<ul>
   <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
-  <!--<li><a [routerLink]="['/pdf']">PDF</a></li>-->
-  <!--<li><a href="http://localhost:8080/StudentNotesService/pdfAll" target="_blank" >Print</a></li>-->
   <li><a routerLink="/print" routerLinkActive="active">Print</a></li>
   <li><a routerLink="/about" routerLinkActive="active">About</a></li>
   <li><a routerLink="/contact-us"routerLinkActive="active">Contact Us</a></li>
   <li *ngIf="user != null"><a routerLink="/login"routerLinkActive="active">Logout</a></li>
-</ul>
+</ul>-->
+<button md-icon-button [mdMenuTriggerFor]="menu">
+  <md-icon>more_vert</md-icon><span>Student Notes Application</span>
+</button>
+<md-menu #menu="mdMenu">
+  <button md-menu-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</button>
+  <button md-menu-item routerLink="/print" routerLinkActive="active">Print</button>
+  <button md-menu-item routerLink="/about" routerLinkActive="active">About</button>
+  <button md-menu-item routerLink="/contact-us" routerLinkActive="active">Contact Us</button>
+  <button *ngIf="user != null" md-menu-item routerLink="/login" routerLinkActive="active">Logout</button>
+</md-menu>

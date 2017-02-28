@@ -22,6 +22,9 @@ import { AuthenticationService } from './security/authentication.service';
 import { MenuComponent } from './menu/menu.component';
 import { PrintComponent } from './print/print.component';
 
+import { MaterialModule } from '@angular/material';
+import 'hammerjs';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +45,8 @@ import { PrintComponent } from './print/print.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRouting
+    AppRouting,
+    MaterialModule
   ],
   providers: [
     StudentService,

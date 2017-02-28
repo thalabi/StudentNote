@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+/*
 p {
     text-indent: 1rem;
 }
@@ -27,7 +28,6 @@ table {
 }
 
 button {
-  /*font-family: Arial;*/
   background-color: #eee;
   border: none;
   padding: 5px 10px;
@@ -44,3 +44,6 @@ button:hover {
 .cell {display: table-cell; padding: 0.1rem; vertical-align: middle;}
 
 textarea { font-family: inherit; font-size: inherit; }
+*/
+
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
