@@ -6,7 +6,8 @@
   <li *ngIf="user != null"><a routerLink="/login"routerLinkActive="active">Logout</a></li>
 </ul>-->
 <button md-icon-button [mdMenuTriggerFor]="menu">
-  <md-icon>more_vert</md-icon><span>Student Notes Application</span>
+  <md-icon>more_vert</md-icon>
+  <span>Student Notes Application</span>
 </button>
 <md-menu #menu="mdMenu">
   <button md-menu-item routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</button>

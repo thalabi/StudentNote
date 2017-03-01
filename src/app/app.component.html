@@ -1,9 +1,13 @@
-<md-toolbar color="primary">
-        <span>Student Notes Application</span>
-    <md-toolbar-row>
-        <app-menu></app-menu>        
-    </md-toolbar-row>
-</md-toolbar>
+<div class="mat-app-background">
 
-<router-outlet></router-outlet>
-<div style="margin-top: 1rem; text-align: center"><small style="color: darkgrey">&copy; Copyright 2017 Kernel Development &amp; Consulting</small></div>
+        <md-toolbar color="primary">
+            <!--<md-toolbar-row>-->
+                <app-menu></app-menu>        
+            <!--</md-toolbar-row>-->
+        </md-toolbar>
+
+            <router-outlet></router-outlet>
+
+    <!--<div style="margin-top: 1rem; text-align: center"><small style="color: darkgrey">&copy; Copyright 2017 Kernel Development &amp; Consulting</small></div>-->
+    <div style="width: 100%; text-align: center;"><small style="color: darkgrey">&copy; Copyright 2017 Kernel Development &amp; Consulting</small></div>
+</div>
