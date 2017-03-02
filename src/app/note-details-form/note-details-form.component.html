@@ -3,20 +3,25 @@
 
 <form [formGroup]="noteForm" (ngSubmit)="onSubmit()" novalidate>
 
-<div class="table">
-  <div class="row">
-    <div class="cell">Date and Time:</div>
-    <div class="cell">
-      <input type="text" formControlName="timestamp" (blur)="timestampBlur = true" (focus)="timestampBlur = false">
+<!--<div class="table">-->
+  <!--<div class="row">-->
+    <!--<div class="cell">Date and Time:</div>-->
+    <div>
+      <md-input-container>
+      <input mdInput placeholder="Date and time" type="text" formControlName="timestamp" (blur)="timestampBlur = true" (focus)="timestampBlur = false">
+      </md-input-container>
       <span *ngIf="noteForm.controls.timestamp.invalid && noteForm.controls.timestamp.dirty && timestampBlur">Invalid date and time</span>
     </div>
-  </div>
-  <div class="row">
-    <div class="cell">Note:</div>
-    <div class="cell"><textarea formControlName="text" rows="4" cols="50"></textarea>
+  <!--</div>-->
+  <!--<div class="row">-->
+    <!--<div class="cell">Note:</div>-->
+    <div>
+      <md-input-container>
+      <textarea mdInput placeholder="Note" formControlName="text" rows="4" cols="50"></textarea>
+      </md-input-container>
     </div>
-  </div>
-</div>
+  <!--</div>-->
+<!--</div>-->
 
 <div style="margin-top: 0.5rem;">
 <button md-raised-button type="submit" [disabled]="!noteForm.valid && crudMode != 'Delete'">Submit</button>
