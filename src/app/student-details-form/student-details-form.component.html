@@ -22,9 +22,12 @@
 </div>
 
 <div>
-<md-select placeholder="Grade">
+<md-select formControlName="grade" placeholder="Grade">
   <md-option *ngFor="let gradeOption of gradeOptionArray" [value]="gradeOption">{{gradeOption}}</md-option>
 </md-select>
+<!--<select formControlName="grade">
+        <option *ngFor="let gradeOption of gradeOptionArray" [value]="gradeOption">{{gradeOption}}</option>
+</select>-->
 </div>
 
 <div style="margin-top: 0.5rem;">
