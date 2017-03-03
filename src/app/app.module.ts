@@ -22,6 +22,8 @@ import { AuthenticationService } from './security/authentication.service';
 import { MenuComponent } from './menu/menu.component';
 import { PrintComponent } from './print/print.component';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +44,8 @@ import { PrintComponent } from './print/print.component';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AppRouting
+    AppRouting,
+    NgbModule.forRoot()
   ],
   providers: [
     StudentService,

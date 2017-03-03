@@ -1,5 +1,10 @@
+<div class="card-group">
   <a *ngFor="let student of studentArray; let i = index" (click)="tileOnClick(i)">
-    <div class="tile">
+    <!--<div class="tile">
       <h4>{{student.firstName}} {{student.lastName}}</h4>
+    </div>-->
+    <div class="card card-inverse card-primary mb-2 ml-2">
+      <div class="card-block">{{student.firstName}} {{student.lastName}}</div>
     </div>
   </a>
+</div>
