@@ -1,4 +1,5 @@
-<div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">{{student.firstName}} {{student.lastName}}, {{student.grade}}</div>
+<!--<div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">{{student.firstName}} {{student.lastName}}, {{student.grade}}</div>-->
+<h4>{{student.firstName}} {{student.lastName}}, {{student.grade}}</h4>
 <table class="hoverTable">
   <thead>
   <tr>
@@ -14,7 +15,7 @@
   </tbody>
 </table>
 <div style="margin-top: 0.5rem;">
-<button (click)="onAddNote()">Add Note</button>
-<button (click)="onModifyNote()" [disabled]="modifyAndDeleteButtonsDisable">Modify Note</button>
-<button (click)="onDeleteNote()" [disabled]="modifyAndDeleteButtonsDisable">Delete Note</button>
+<button (click)="onAddNote()" class="btn btn-primary btn-sm" >Add Note</button>
+<button (click)="onModifyNote()" class="btn btn-primary btn-sm" [disabled]="modifyAndDeleteButtonsDisable">Modify Note</button>
+<button (click)="onDeleteNote()" class="btn btn-primary btn-sm" [disabled]="modifyAndDeleteButtonsDisable">Delete Note</button>
 </div>

@@ -2,39 +2,33 @@
 
 <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" novalidate>
 
-<div class="table">
 
-  <div formGroupName="nameGroup" style="border-spacing: 0px;">  
-    <div class="row">
-      <div class="cell">First name:</div>
-      <div class="cell"><input type="text" formControlName="firstName"></div>
-      <div class="cell" *ngIf="studentForm.controls.nameGroup.invalid && studentForm.controls.nameGroup.dirty">First name and last name must not be blank</div>
+  <div formGroupName="nameGroup">  
+    <div class="form-group">
+      <label for="firstName">First name</label>
+      <input type="text" class="form-control form-control-sm" formControlName="firstName" id="firstName">
+      <div *ngIf="studentForm.controls.nameGroup.invalid && studentForm.controls.nameGroup.dirty">First name and last name must not be blank</div>
     </div>
 
-    <div class="row">
-      <div class="cell">Last name:</div>
-      <div class="cell"><input type="text" formControlName="lastName"></div>
-      <div class="cell" *ngIf="studentForm.controls.nameGroup.invalid && studentForm.controls.nameGroup.dirty">First name and last name must not be blank</div>
-    </div>
-  </div>
-</div>
-
-<div class="table">
-  <div class="row">
-    <div class="cell" style="width: 4.6rem;">Grade:</div>
-    <div class="cell">
-      <select formControlName="grade">
-        <option *ngFor="let gradeOption of gradeOptionArray" [value]="gradeOption">{{gradeOption}}</option>
-      </select>
+    <div class="form-group">
+      <label for="lastName">Last name</label>
+      <input type="text" class="form-control form-control-sm" formControlName="lastName" id="lastName">
+      <div *ngIf="studentForm.controls.nameGroup.invalid && studentForm.controls.nameGroup.dirty">First name and last name must not be blank</div>
     </div>
   </div>
 
 
+<div class="form-group">
+    <label for="grade" class="cell" >Grade</label>
+    <select class="form-control form-control-sm" formControlName="grade" id="grade">
+      <option *ngFor="let gradeOption of gradeOptionArray" [value]="gradeOption">{{gradeOption}}</option>
+    </select>
 </div>
+
 
 <div style="margin-top: 0.5rem;">
-<button type="submit" [disabled]="!studentForm.valid && crudMode != 'Delete'">Submit</button>
-<button type="button" (click)="onCancel()">Cancel</button>
+<button type="submit" class="btn btn-primary btn-sm" [disabled]="!studentForm.valid && crudMode != 'Delete'">Submit</button>
+<button type="button" class="btn btn-primary btn-sm" (click)="onCancel()">Cancel</button>
 </div>
 
 </form>
