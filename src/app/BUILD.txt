@@ -1,6 +1,9 @@
-Copy 
+Target dir C:\Users\Tarif Halabi\StudentNotes
+Delete everything from target dir except db files
+Copy to target dir
 - mongoose.conf
-- mongoose.exe from C:\temp\StudentNotes-mongoose
+- mongoose-free-6.5.exe from C:\temp\StudentNotes-mongoose
+- portqry from C:\PortQryV2
 - StudentNotes.bat
 - jar
-- portqry from C:\PortQryV2
+- copy all files from dist dir to target dir
