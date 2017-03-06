@@ -1,1 +1,44 @@
-<button (click)="onDownloadAllPdf()" class="btn btn-primary btn-sm">Print all</button>
+<!--<button (click)="onDownloadAllPdf()" class="btn btn-primary btn-sm">Print all</button>-->
+<ngb-tabset>
+  <ngb-tab title="All">
+    <template ngbTabContent>
+        <button (click)="onDownloadAllPdf()" class="btn btn-primary btn-sm">Print all</button>
+    </template>
+  </ngb-tab>
+  <ngb-tab title="Date Range">
+    <template ngbTabContent>
+
+      <form class="form-inline">
+
+        <div class="form-group">
+          <div class="input-group">
+            <label for="fromTimestamp">From</label>
+            <input class="form-control" placeholder="yyyy-mm-dd"
+                        [(ngModel)]="fromTimestamp" ngbDatepicker #d="ngbDatepicker" id="fromTimestamp">
+            <div class="input-group-addon" (click)="d.toggle()" >
+              <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </div>
+          </div>
+        </div>
+&nbsp;
+        <div class="form-group">
+          <div class="input-group">
+            <label for="toTimestamp">To</label>
+            <input class="form-control" placeholder="yyyy-mm-dd"
+                        [(ngModel)]="toTimestamp" ngbDatepicker #d="ngbDatepicker" id="toTimestamp">
+            <div class="input-group-addon" (click)="d.toggle()" >
+              <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </template>
+  </ngb-tab>
+  <ngb-tab title="Student Select">
+    <template ngbTabContent>
+        Print by selecting students
+    </template>
+  </ngb-tab>
+</ngb-tabset>
