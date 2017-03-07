@@ -8,11 +8,15 @@ import { StudentService } from '../student.service';
 })
 export class PrintComponent implements OnInit {
 
+  fromTimestamp: Date;
+  toTimestamp: Date;
+
   constructor(
     private studentService: StudentService
   ) { }
 
   ngOnInit() {
+  
   }
 
   onDownloadAllPdf(): void {
@@ -23,4 +27,14 @@ export class PrintComponent implements OnInit {
         }
     );
   }
+
+  onDownloadDateRangePdf(): void {
+    this.studentService.downloadAllPdf().subscribe(
+        (response) => {
+        var pdfUrl = URL.createObjectURL(response);
+        window.open(pdfUrl);
+        }
+    );
+  }
+  
 }

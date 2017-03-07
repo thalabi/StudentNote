@@ -24,6 +24,9 @@ import { PrintComponent } from './print/print.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
+import { ErrorHandler } from '@angular/core';
+import { AppErrorHandler } from './app.error.handler';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +54,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     StudentService,
     SessionDataService,
     AuthGuard,
-    AuthenticationService
+    AuthenticationService,
+    {provide: ErrorHandler, useClass: AppErrorHandler}
     ],
   bootstrap: [AppComponent]
 })
