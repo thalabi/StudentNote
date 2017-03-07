@@ -1,3 +1,4 @@
+/*
 ul {
     list-style-type: none;
     margin: 0;
@@ -10,7 +11,6 @@ ul {
 li {
     float: left;
 }
-
 li a {
     display: block;
     color: #666;
@@ -27,3 +27,4 @@ li a.active {
     color: white;
     background-color: lightblue;
 }
+*/

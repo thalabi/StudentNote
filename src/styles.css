@@ -42,4 +42,8 @@ button:hover {
 .row { display: table-row;}
 .cell {display: table-cell; padding: 0.1rem; vertical-align: middle;}*/
 
+.my-table-nonfluid {
+   width: auto !important;
+}
+
 textarea { font-family: inherit; font-size: inherit; }
