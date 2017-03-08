@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student.service';
+import { TimestampRange } from '../TimestampRange';
 
 @Component({
   selector: 'app-print',
@@ -43,12 +44,20 @@ export class PrintComponent implements OnInit {
   }
 
   onDownloadDateRangePdf(): void {
-    this.studentService.downloadAllPdf().subscribe(
-        (response) => {
-        var pdfUrl = URL.createObjectURL(response);
-        window.open(pdfUrl);
-        }
-    );
+    let timestampRange: TimestampRange;
+    timestampRange.fromYear = this.fromTimestamp.getFullYear();
+    timestampRange.fromMonth = this.fromTimestamp.getMonth();
+    timestampRange.fromDay = this.fromTimestamp.getDay();
+    timestampRange.toYear = this.toTimestamp.getFullYear();
+    timestampRange.toMonth = this.toTimestamp.getMonth();
+    timestampRange.toDay = this.toTimestamp.getDay();
+    console.log('timestampRange: ', timestampRange);
+    // this.studentService.downloadAllPdf().subscribe(
+    //     (response) => {
+    //     var pdfUrl = URL.createObjectURL(response);
+    //     window.open(pdfUrl);
+    //     }
+    // );
   }
   
 }
