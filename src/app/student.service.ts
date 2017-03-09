@@ -14,6 +14,8 @@ import 'rxjs/add/operator/map';
 import { Constants } from './constants';
 
 import { SessionDataService } from './session-data.service';
+import { TimestampRange } from './TimestampRange';
+
 
 @Injectable()
 export class StudentService {
@@ -97,6 +99,15 @@ export class StudentService {
 
   downloadAllPdf(): any {
     return this.http.get('http://localhost:8080/StudentNotesService/pdfAll', {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+      .map(
+        (response: Response) => {
+            return new Blob([response.blob()], { type: 'application/pdf' })
+        }
+    );
+  }
+
+  downloadStudentsByTimestampRangePdf(timestampRange: TimestampRange): any {
+    return this.http.post('http://localhost:8080/StudentNotesService/pdfStudentsByTimestampRange', JSON.stringify(timestampRange), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })

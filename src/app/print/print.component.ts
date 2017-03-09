@@ -9,8 +9,8 @@ import { TimestampRange } from '../TimestampRange';
 })
 export class PrintComponent implements OnInit {
 
-  fromTimestamp: Date;
-  toTimestamp: Date;
+  fromTimestamp: any;
+  toTimestamp: any;
   studentIds: number[] = [];
 
   constructor(
@@ -43,21 +43,23 @@ export class PrintComponent implements OnInit {
     );
   }
 
+  // change to use fromTimestamp and toTimestamp as Date types
   onDownloadDateRangePdf(): void {
-    let timestampRange: TimestampRange;
-    timestampRange.fromYear = this.fromTimestamp.getFullYear();
-    timestampRange.fromMonth = this.fromTimestamp.getMonth();
-    timestampRange.fromDay = this.fromTimestamp.getDay();
-    timestampRange.toYear = this.toTimestamp.getFullYear();
-    timestampRange.toMonth = this.toTimestamp.getMonth();
-    timestampRange.toDay = this.toTimestamp.getDay();
+    console.log(this.fromTimestamp, this.toTimestamp);
+    let timestampRange: TimestampRange = new TimestampRange();
+    timestampRange.fromYear = this.fromTimestamp.year;
+    timestampRange.fromMonth = this.fromTimestamp.month;
+    timestampRange.fromDay = this.fromTimestamp.day;
+    timestampRange.toYear = this.toTimestamp.year;
+    timestampRange.toMonth = this.toTimestamp.month;
+    timestampRange.toDay = this.toTimestamp.day;
     console.log('timestampRange: ', timestampRange);
-    // this.studentService.downloadAllPdf().subscribe(
-    //     (response) => {
-    //     var pdfUrl = URL.createObjectURL(response);
-    //     window.open(pdfUrl);
-    //     }
-    // );
+    this.studentService.downloadStudentsByTimestampRangePdf(timestampRange).subscribe(
+        (response) => {
+        var pdfUrl = URL.createObjectURL(response);
+        window.open(pdfUrl);
+        }
+    );
   }
   
 }

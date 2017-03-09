@@ -39,7 +39,8 @@
 
       </form>
 
-      <button (click)="onDownloadDateRangePdf()" class="btn btn-primary btn-sm mt-2" [disabled]="fromTimestamp == null || toTimestamp == null">Print</button>
+      <button (click)="onDownloadDateRangePdf()" class="btn btn-primary btn-sm mt-2"
+        [disabled]="fromTimestamp == null || toTimestamp == null">Print</button>
 
       <pre>Model: {{ fromTimestamp | json }}</pre>
       <pre>Model: {{ toTimestamp | json }}</pre>
