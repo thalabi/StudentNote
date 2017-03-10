@@ -25,7 +25,7 @@ export class PrintComponent implements OnInit {
   onFromTimestampChange(event) {
     try {
       this.timestampRange.fromTimestamp = new Date(this.fromTimestamp.year, this.fromTimestamp.month-1, this.fromTimestamp.day);
-    } catch (Exception) {
+    } catch (exception) {
       this.timestampRange.fromTimestamp = null;
     }
     console.log("this.timestampRange.fromTimestamp", this.timestampRange.fromTimestamp);
@@ -34,7 +34,7 @@ export class PrintComponent implements OnInit {
   onToTimestampChange(event) {
     try {
       this.timestampRange.toTimestamp = new Date(this.toTimestamp.year, this.toTimestamp.month-1, this.toTimestamp.day, 23, 59, 59, 999);
-    } catch (Exception) {
+    } catch (exception) {
       this.timestampRange.toTimestamp = null;
     }
     console.log("this.timestampRange.toTimestamp", this.timestampRange.toTimestamp);
