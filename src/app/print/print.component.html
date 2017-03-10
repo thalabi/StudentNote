@@ -19,7 +19,8 @@
           <div class="input-group">
             <label for="fromTimestamp">From</label>
             <input class="form-control ml-2" placeholder="yyyy-mm-dd"
-              name="fromTimestamp" [(ngModel)]="fromTimestamp" ngbDatepicker #d1="ngbDatepicker" id="fromTimestamp">
+              name="fromTimestamp" [(ngModel)]="fromTimestamp" ngbDatepicker #d1="ngbDatepicker" id="fromTimestamp"
+              (ngModelChange)="onFromTimestampChange($event)">
             <div class="input-group-addon" (click)="d1.toggle()" >
               <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
             </div>
@@ -30,7 +31,8 @@
           <div class="input-group">
             <label for="toTimestamp">To</label>
             <input class="form-control ml-2" placeholder="yyyy-mm-dd"
-              name="toTimestamp" [(ngModel)]="toTimestamp" ngbDatepicker #d2="ngbDatepicker" id="toTimestamp">
+              name="toTimestamp" [(ngModel)]="toTimestamp" ngbDatepicker #d2="ngbDatepicker" id="toTimestamp"
+              (ngModelChange)="onToTimestampChange($event)">
             <div class="input-group-addon" (click)="d2.toggle()" >
               <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
             </div>
@@ -40,7 +42,7 @@
       </form>
 
       <button (click)="onDownloadDateRangePdf()" class="btn btn-primary btn-sm mt-2"
-        [disabled]="fromTimestamp == null || toTimestamp == null">Print</button>
+        [disabled]="timestampRange.fromTimestamp == null || timestampRange.toTimestamp == null || timestampRange.fromTimestamp>timestampRange.toTimestamp">Print</button>
 
       <pre>Model: {{ fromTimestamp | json }}</pre>
       <pre>Model: {{ toTimestamp | json }}</pre>

@@ -12,6 +12,7 @@ export class PrintComponent implements OnInit {
   fromTimestamp: any;
   toTimestamp: any;
   studentIds: number[] = [];
+  timestampRange: TimestampRange = new TimestampRange();
 
   constructor(
     private studentService: StudentService
@@ -21,6 +22,24 @@ export class PrintComponent implements OnInit {
   
   }
 
+  onFromTimestampChange(event) {
+    try {
+      this.timestampRange.fromTimestamp = new Date(this.fromTimestamp.year, this.fromTimestamp.month-1, this.fromTimestamp.day);
+    } catch (Exception) {
+      this.timestampRange.fromTimestamp = null;
+    }
+    console.log("this.timestampRange.fromTimestamp", this.timestampRange.fromTimestamp);
+  }
+
+  onToTimestampChange(event) {
+    try {
+      this.timestampRange.toTimestamp = new Date(this.toTimestamp.year, this.toTimestamp.month-1, this.toTimestamp.day, 23, 59, 59, 999);
+    } catch (Exception) {
+      this.timestampRange.toTimestamp = null;
+    }
+    console.log("this.timestampRange.toTimestamp", this.timestampRange.toTimestamp);
+  }
+  
   onCheckboxChange(event) {
     console.log('onCheckboxChange: ', event.target.checked, event.target.value);
     // console.log('onCheckboxChange: ', event);
@@ -42,24 +61,17 @@ export class PrintComponent implements OnInit {
         }
     );
   }
-
-  // change to use fromTimestamp and toTimestamp as Date types
+  
   onDownloadDateRangePdf(): void {
     console.log(this.fromTimestamp, this.toTimestamp);
-    let timestampRange: TimestampRange = new TimestampRange();
-    timestampRange.fromYear = this.fromTimestamp.year;
-    timestampRange.fromMonth = this.fromTimestamp.month;
-    timestampRange.fromDay = this.fromTimestamp.day;
-    timestampRange.toYear = this.toTimestamp.year;
-    timestampRange.toMonth = this.toTimestamp.month;
-    timestampRange.toDay = this.toTimestamp.day;
-    console.log('timestampRange: ', timestampRange);
-    this.studentService.downloadStudentsByTimestampRangePdf(timestampRange).subscribe(
+    //this.timestampRange.fromTimestamp = new Date(this.fromTimestamp.year, this.fromTimestamp.month-1, this.fromTimestamp.day);
+    //this.timestampRange.toTimestamp = new Date(this.toTimestamp.year, this.toTimestamp.month-1, this.toTimestamp.day, 23, 59, 59, 999);
+    console.log('this.timestampRange: ', this.timestampRange);
+    this.studentService.downloadStudentsByTimestampRangePdf(this.timestampRange).subscribe(
         (response) => {
         var pdfUrl = URL.createObjectURL(response);
         window.open(pdfUrl);
         }
     );
   }
-  
 }
