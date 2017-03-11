@@ -106,7 +106,7 @@ export class StudentService {
   }
 
   downloadStudentsByTimestampRangePdf(timestampRange: TimestampRange): any {
-    return this.http.post('http://localhost:8080/StudentNotesService/pdfStudentsByTimestampRange2', JSON.stringify(timestampRange), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+    return this.http.post('http://localhost:8080/StudentNotesService/pdfStudentsByTimestampRange', JSON.stringify(timestampRange), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
