@@ -68,13 +68,13 @@
       <td>
         <div class="form-check">
         <label class="form-check-label">
-        <input class="form-check-input" type="checkbox" [value]="student.id" (change)="onCheckboxChange($event)">
+        <input class="form-check-input align-middle" type="checkbox" [value]="student.id" (change)="onCheckboxChange($event)">
         </label>
         </div>
       </td>
-      <td>{{student.firstName}}</td>
-      <td>{{student.lastName}}</td>
-      <td>{{student.grade}}</td>
+      <td class="align-middle">{{student.firstName}}</td>
+      <td class="align-middle">{{student.lastName}}</td>
+      <td class="align-middle">{{student.grade}}</td>
       </tr>
       </tbody>
       </table>
