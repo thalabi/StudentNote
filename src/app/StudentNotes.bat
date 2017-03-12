@@ -1,5 +1,5 @@
 @echo off
-portqry -q -n 127.0.0.1 -e 8080 || start javaw -jar studentNotes-2.0.0-SNAPSHOT.jar
+portqry -q -n 127.0.0.1 -e 8080 || start javaw -jar studentNotes-2.0.1-SNAPSHOT.jar
 :loop-for-service
 timeout /t 3 >null
 portqry -q -n 127.0.0.1 -e 8080 || goto loop-for-service
