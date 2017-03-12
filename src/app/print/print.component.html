@@ -44,8 +44,8 @@
       <button (click)="onDownloadDateRangePdf()" class="btn btn-primary btn-sm mt-2"
         [disabled]="timestampRange.fromTimestamp == null || timestampRange.toTimestamp == null || timestampRange.fromTimestamp>timestampRange.toTimestamp">Print</button>
 
-      <pre>Model: {{ fromTimestamp | json }}</pre>
-      <pre>Model: {{ toTimestamp | json }}</pre>
+      <!--<pre>Model: {{ fromTimestamp | json }}</pre>
+      <pre>Model: {{ toTimestamp | json }}</pre>-->
 
     </template>
   </ngb-tab>
@@ -79,7 +79,7 @@
       </tbody>
       </table>
 
-      <pre>Model: {{ studentIds | json }}</pre>
+      <!--<pre>Model: {{ studentIds | json }}</pre>-->
 
       <button (click)="onDownloadStudentSelectPdf()" class="btn btn-primary btn-sm mt-2"
         [disabled]="studentIds.length == 0">Print</button>
