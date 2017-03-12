@@ -27,20 +27,21 @@ export class LoginComponent implements OnInit {
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
-    login() {
-        this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
-            .subscribe(
-                data => {
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                  
-                  // TODO replace with some type of error message
-                    //this.alertService.error(error);
-                    console.log('Username or password is incorrect. Message from server: '+error);
-                    this.loading = false;
-                });
-    }
+
+  login() {
+      this.loading = true;
+      this.authenticationService.login(this.model.username, this.model.password)
+          .subscribe(
+              data => {
+                  this.router.navigate([this.returnUrl]);
+              },
+              error => {
+                
+                // TODO replace with some type of error message
+                  //this.alertService.error(error);
+                  console.log('Username or password is incorrect. Message from server: '+error);
+                  this.loading = false;
+              });
+  }
 
 }

@@ -29,7 +29,7 @@ export class StudentService {
 
   httpHeaders(): Headers {
     return new Headers({
-      'X-AUTH-TOKEN': this.sessionDataService.user.token,
+      'Authorization': 'Bearer ' + this.sessionDataService.user.token,
       'Content-Type': 'application/json'});
   }
 
@@ -43,6 +43,12 @@ export class StudentService {
               .catch(this.handleError);
   }
   
+  getAllStudentsWithoutNotesList(): Observable<Student[]> {
+
+    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getAllStudentsWithoutNotesList", {headers: this.httpHeaders()})
+              .map(response => response.json() as Student[])
+              .catch(this.handleError);
+  }
 
   saveStudent(student: Student): Observable<Student> {
 
