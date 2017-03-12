@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student.service';
 import { TimestampRange } from '../TimestampRange';
+import { Student } from '../Student';
 
 @Component({
   selector: 'app-print',
@@ -13,13 +14,19 @@ export class PrintComponent implements OnInit {
   toTimestamp: any;
   studentIds: number[] = [];
   timestampRange: TimestampRange = new TimestampRange();
+  studentArray: Student[];
+
 
   constructor(
     private studentService: StudentService
   ) { }
 
   ngOnInit() {
-  
+    this.studentService.getAllStudentsWithoutNotesList().subscribe(
+      students => {
+        this.studentArray = students;
+        console.log('studentArray[]: ', this.studentArray);
+      });
   }
 
   onFromTimestampChange(event) {
@@ -68,6 +75,16 @@ export class PrintComponent implements OnInit {
     //this.timestampRange.toTimestamp = new Date(this.toTimestamp.year, this.toTimestamp.month-1, this.toTimestamp.day, 23, 59, 59, 999);
     console.log('this.timestampRange: ', this.timestampRange);
     this.studentService.downloadStudentsByTimestampRangePdf(this.timestampRange).subscribe(
+        (response) => {
+        var pdfUrl = URL.createObjectURL(response);
+        window.open(pdfUrl);
+        }
+    );
+  }
+
+  onDownloadStudentSelectPdf(): void {
+    console.log("studentIds: ", this.studentIds);
+    this.studentService.downloadStudentsByStudentIdsPdf(this.studentIds).subscribe(
         (response) => {
         var pdfUrl = URL.createObjectURL(response);
         window.open(pdfUrl);

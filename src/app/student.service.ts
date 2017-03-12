@@ -120,6 +120,15 @@ export class StudentService {
     );
   }
 
+  downloadStudentsByStudentIdsPdf(studentIds: number[]): any {
+    return this.http.post('http://localhost:8080/StudentNotesService/pdfStudentsByStudentIds', JSON.stringify(studentIds), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+      .map(
+        (response: Response) => {
+            return new Blob([response.blob()], { type: 'application/pdf' })
+        }
+    );
+  }
+
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
