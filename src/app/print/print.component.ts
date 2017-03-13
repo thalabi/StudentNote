@@ -33,6 +33,19 @@ export class PrintComponent implements OnInit {
       this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
   }
 
+  onCheckboxChange(event) {
+    console.log('onCheckboxChange: ', event.target.checked, event.target.value);
+    // console.log('onCheckboxChange: ', event);
+    if (event.target.checked) {
+      this.studentIds[this.studentIds.length] = event.target.value;
+    } else {
+      let index = this.studentIds.indexOf(event.target.value);
+      if (index > 1) {
+        this.studentIds.splice(index,1);
+      }
+    }
+  }
+  
   onDownloadAllPdf(): void {
     this.studentService.downloadAllPdf().subscribe(
         (response) => {

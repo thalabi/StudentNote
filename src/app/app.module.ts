@@ -27,6 +27,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './app.error.handler';
 
+import { NgbDateMomentParserFormatter } from './util/NgbDateMomentParserFormatter';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +58,9 @@ import { AppErrorHandler } from './app.error.handler';
     SessionDataService,
     AuthGuard,
     AuthenticationService,
-    {provide: ErrorHandler, useClass: AppErrorHandler}
+    {provide: ErrorHandler, useClass: AppErrorHandler},
+    {provide: NgbDateParserFormatter, useFactory: () => { return new NgbDateMomentParserFormatter("MMM DD, YYYY")} 
+    }
     ],
   bootstrap: [AppComponent]
 })
