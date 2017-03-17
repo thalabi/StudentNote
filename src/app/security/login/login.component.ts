@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
  
 import { AuthenticationService } from '../authentication.service';
+import { MessageService } from './../../error/message.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService    
+    private authenticationService: AuthenticationService  ,
+    private nessageService: MessageService  
   ) { }
 
   ngOnInit() {
@@ -34,12 +36,14 @@ export class LoginComponent implements OnInit {
           .subscribe(
               data => {
                   this.router.navigate([this.returnUrl]);
+                  this.nessageService.clear();
               },
               error => {
                 
                 // TODO replace with some type of error message
                   //this.alertService.error(error);
                   console.log('Username or password is incorrect. Message from server: '+error);
+                  this.nessageService.error('Username or password is incorrect. Message from server: '+error);
                   this.loading = false;
               });
   }

@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map'
 import { Constants } from '../constants';
 import { User } from './user';
 import { SessionDataService } from '../session-data.service';
+import { MessageService } from './../error/message.service';
  
 @Injectable()
 export class AuthenticationService {
@@ -20,7 +21,8 @@ export class AuthenticationService {
 
     constructor(
       private http: Http,
-      private sessionDataService: SessionDataService) {
+      private sessionDataService: SessionDataService,
+      private nessageService: MessageService) {
         this.userSubject = new Subject<User>();
         this.userSubject.next(new User())
        }
@@ -47,7 +49,8 @@ export class AuthenticationService {
                     this.sessionDataService.user = null;
                     throw ('Login invalid');
                 }
-            });
+            })
+            .catch(this.handleError);
     }
  
     logout() {
@@ -58,4 +61,22 @@ export class AuthenticationService {
         this.sessionDataService.user = null;
     }
 
+    private handleError (error: Response | any) {
+        // In a real world app, we might use a remote logging infrastructure
+        console.log(error);
+        let errMsg: string;
+        if (error instanceof Response) {
+            console.log('error is of type Response');
+            const body = error.json() || '';
+            console.error(body);
+            const err = body.error || JSON.stringify(body);
+            console.error(err);
+            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        } else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        this.nessageService.error(errMsg);
+        return Observable.throw(errMsg);
+    }
 }

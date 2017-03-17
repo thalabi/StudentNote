@@ -30,6 +30,10 @@ import { AppErrorHandler } from './app.error.handler';
 import { NgbDateMomentParserFormatter } from './util/NgbDateMomentParserFormatter';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
+import { MessageService } from './error/message.service';
+import { CustomErrorHandler } from './error/custom-error-handler';
+import { ExceptionComponent } from './error/error.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +47,8 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
     StudentDashboardComponent,
     LoginComponent,
     MenuComponent,
-    PrintComponent
+    PrintComponent,
+    ExceptionComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,9 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
     AuthenticationService,
     {provide: ErrorHandler, useClass: AppErrorHandler},
     {provide: NgbDateParserFormatter, useFactory: () => { return new NgbDateMomentParserFormatter("MMM DD, YYYY")} 
-    }
+  },
+    MessageService, // added
+    { provide: ErrorHandler, useClass: CustomErrorHandler } // overrride default error handler
     ],
   bootstrap: [AppComponent]
 })

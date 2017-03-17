@@ -4,6 +4,8 @@ import { TimestampRange } from '../TimestampRange';
 import { Student } from '../Student';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
+import { MessageService } from './../error/message.service';
+
 @Component({
   selector: 'app-print',
   templateUrl: './print.component.html',
@@ -19,7 +21,8 @@ export class PrintComponent implements OnInit {
 
 
   constructor(
-    private studentService: StudentService
+    private studentService: StudentService,
+    private nessageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -66,6 +69,9 @@ export class PrintComponent implements OnInit {
         window.open(pdfUrl);
         }
     );
+
+    // test only
+    this.nessageService.success('hello');
   }
 
   onDownloadStudentSelectPdf(): void {
