@@ -69,9 +69,6 @@ export class PrintComponent implements OnInit {
         window.open(pdfUrl);
         }
     );
-
-    // test only
-    this.nessageService.success('hello');
   }
 
   onDownloadStudentSelectPdf(): void {

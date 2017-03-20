@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService  ,
-    private nessageService: MessageService  
+    private messageService: MessageService  
   ) { }
 
   ngOnInit() {
@@ -36,14 +36,16 @@ export class LoginComponent implements OnInit {
           .subscribe(
               data => {
                   this.router.navigate([this.returnUrl]);
-                  this.nessageService.clear();
+                  this.messageService.clear();
               },
               error => {
                 
                 // TODO replace with some type of error message
                   //this.alertService.error(error);
-                  console.log('Username or password is incorrect. Message from server: '+error);
-                  this.nessageService.error('Username or password is incorrect. Message from server: '+error);
+                  console.log(error);
+                  console.log(error);
+                  this.messageService.clear();
+                  this.messageService.error(error);
                   this.loading = false;
               });
   }

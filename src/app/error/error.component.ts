@@ -6,7 +6,7 @@ import { Message } from './message';
 @Component({
     selector: 'error',
     template: `
-        <p *ngFor="let message of getMessages(); let i = index">{{i}} {{message.severity}} {{message.summary}} {{message.detail}}</p>
+        <p *ngFor="let message of getMessages(); let i = index">{{message.severity}} {{message.summary}} {{message.detail}}</p>
     `
 })
 export class ExceptionComponent{

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map'
+import 'rxjs/add/observable/throw'
 
 import { Constants } from '../constants';
 import { User } from './user';
@@ -27,7 +28,7 @@ export class AuthenticationService {
         this.userSubject.next(new User())
        }
  
-    login(username: string, password: string) {
+    login(username: string, password: string): Observable<any> {
         return this.http.post(Constants.STUDENT_NOTES_SERVICE_URL+'/Security/authenticate', JSON.stringify({ username: username, password: password }), {headers: this.jsonHeaders})
             .map((response: Response) => {
                 console.log('response: ', response);
@@ -50,6 +51,7 @@ export class AuthenticationService {
                     throw ('Login invalid');
                 }
             })
+            // .map(this.processResponse)
             .catch(this.handleError);
     }
  
@@ -60,23 +62,19 @@ export class AuthenticationService {
         this.userSubject.next(null);
         this.sessionDataService.user = null;
     }
-
-    private handleError (error: Response | any) {
-        // In a real world app, we might use a remote logging infrastructure
-        console.log(error);
-        let errMsg: string;
-        if (error instanceof Response) {
-            console.log('error is of type Response');
-            const body = error.json() || '';
-            console.error(body);
-            const err = body.error || JSON.stringify(body);
-            console.error(err);
-            errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    private processResponse (response: Response) {
+    }
+    private handleError (response: Response | any) {
+        console.log(response);
+        let errorMessage: string;
+        if (response instanceof Response) {
+            const bodyJson = response.json() || '';
+            const serverErrorMessage = bodyJson.errorMessage || JSON.stringify(bodyJson);
+            console.error(serverErrorMessage);
+            errorMessage = `HTTP: ${response.status} - ${response.statusText || ''}. Server error message: ${serverErrorMessage}`;
         } else {
-            errMsg = error.message ? error.message : error.toString();
+            errorMessage = response.message ? response.message : response.toString();
         }
-        console.error(errMsg);
-        this.nessageService.error(errMsg);
-        return Observable.throw(errMsg);
+        return Observable.throw(errorMessage);
     }
 }
