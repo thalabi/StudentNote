@@ -27,7 +27,7 @@ export class MessageService {
 
     warning(detail: string, summary?: string): void {
         this.message.push({
-            severity: 'warn', summary: summary, detail: detail
+            severity: 'warning', summary: summary, detail: detail
         });
     }
 

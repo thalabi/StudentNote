@@ -129,8 +129,23 @@ export class StudentService {
     );
   }
 
-  private handleError(error: any): Promise<any> {
+  private handleErrorXXXXXXXXXXXX(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }  
+
+  private handleError (response: Response | any) {
+      console.log(response);
+      let errorMessage: string;
+      if (response instanceof Response) {
+          const bodyJson = response.json() || '';
+          const serverErrorMessage = bodyJson.errorMessage || JSON.stringify(bodyJson);
+          console.error(serverErrorMessage);
+          errorMessage = `HTTP: ${response.status} - ${response.statusText || ''}. Server error message: ${serverErrorMessage}`;
+      } else {
+          errorMessage = response.message ? response.message : response.toString();
+      }
+      return Observable.throw(errorMessage);
+  }
+
 }

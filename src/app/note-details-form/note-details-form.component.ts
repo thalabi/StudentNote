@@ -7,6 +7,7 @@ import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Constants } from '../constants';
+import { MessageService } from './../error/message.service';
 
 @Component({
   selector: 'app-note-details-form',
@@ -26,7 +27,8 @@ export class NoteDetailsFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private studentService: StudentService,
     private sessionDataService: SessionDataService,    
-    private router: Router) { }
+    private router: Router,
+    private messageService: MessageService) { }
 
   ngOnInit() {
     this.crudMode = this.sessionDataService.crudMode;
@@ -94,19 +96,20 @@ export class NoteDetailsFormComponent implements OnInit {
     }
 
     this.studentService.saveNote(this.student)
-      .subscribe(
-          student => {
+      .subscribe({
+          next: student => {
             this.sessionDataService.student = student;
             console.log('from subscribe 1 student: ', student);
-            //this.router.navigate(['noteTable']);
           },
-          error => {
-            console.log('error');
+          error: error => {
+            console.error(error);
+            this.messageService.clear();
+            this.messageService.error(error);
           },
-          () => {
+          complete: () => {
             this.router.navigate(['noteTable']);
           }
-          );
+      });
     console.log('after saveNote()');
     //this.router.navigate(['noteTable']);
   }

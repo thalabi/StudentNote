@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService  ,
+    private authenticationService: AuthenticationService,
     private messageService: MessageService  
   ) { }
 
@@ -33,21 +33,26 @@ export class LoginComponent implements OnInit {
   login() {
       this.loading = true;
       this.authenticationService.login(this.model.username, this.model.password)
-          .subscribe(
-              data => {
+        .subscribe({
+              next: data => {
                   this.router.navigate([this.returnUrl]);
                   this.messageService.clear();
               },
-              error => {
+              error: error => {
                 
                 // TODO replace with some type of error message
                   //this.alertService.error(error);
                   console.log(error);
-                  console.log(error);
                   this.messageService.clear();
+                  // test
+                  // this.messageService.success(error);
+                  // this.messageService.info(error);
+                  // this.messageService.warning(error);
+
                   this.messageService.error(error);
                   this.loading = false;
-              });
+              }
+        });
   }
 
 }

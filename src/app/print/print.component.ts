@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student.service';
 import { TimestampRange } from '../TimestampRange';
 import { Student } from '../Student';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
+
 
 import { MessageService } from './../error/message.service';
 
@@ -36,9 +37,26 @@ export class PrintComponent implements OnInit {
       this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
   }
 
-  onCheckboxChange(event) {
-    console.log('onCheckboxChange: ', event.target.checked, event.target.value);
-    // console.log('onCheckboxChange: ', event);
+  onTabsetChange(tab: NgbTabset) {
+    // Note: the activeId is the id of the tab that was selected before the change event
+    switch (tab.activeId) {
+      case 'allTab':
+        break;
+      case 'dateRangeTab':
+        this.fromTimestamp = undefined;
+        let today = new Date();
+        this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
+        break;
+      case 'studentSelectTab':
+        this.studentIds = [];
+        break;
+      default:
+        throw('Some went wrong on our end. Invalid activeId: '+ tab.activeId);
+    }
+  }
+  onSelectStudentCheckbox(event) {
+    console.log('onSelectStudentCheckbox: ', event.target.checked, event.target.value);
+    // console.log('onSelectStudentCheckbox: ', event);
     if (event.target.checked) {
       this.studentIds[this.studentIds.length] = event.target.value;
     } else {

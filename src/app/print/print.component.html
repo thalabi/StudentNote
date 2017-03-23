@@ -1,16 +1,16 @@
 <div class="container-fluid">
 
-<ngb-tabset>
+<ngb-tabset #tab="ngbTabset" (tabChange)="onTabsetChange(tab)">
 
   <!--print all tab-->
-  <ngb-tab title="All">
+  <ngb-tab id="allTab" title="All">
     <template ngbTabContent>
       <button (click)="onDownloadAllPdf()" class="btn btn-primary btn-sm mt-2">Print</button>
     </template>
   </ngb-tab>
 
   <!--print by date range tab-->
-  <ngb-tab title="Date Range">
+  <ngb-tab id="dateRangeTab" title="Date Range">
     <template ngbTabContent>
 
       <form class="form-inline mt-2">
@@ -52,7 +52,7 @@
   </ngb-tab>
 
   <!--print by student selection-->
-  <ngb-tab title="Student Select">
+  <ngb-tab id="studentSelectTab" title="Student Select">
     <template ngbTabContent>
 
       <table class="table table-striped table-sm mt-2 my-table-nonfluid">
@@ -69,7 +69,7 @@
       <td>
         <div class="form-check">
         <label class="form-check-label">
-        <input class="form-check-input align-middle" type="checkbox" [value]="student.id" (change)="onCheckboxChange($event)">
+        <input class="form-check-input align-middle" type="checkbox" [value]="student.id" (change)="onSelectStudentCheckbox($event)">
         </label>
         </div>
       </td>

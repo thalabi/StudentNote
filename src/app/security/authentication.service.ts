@@ -44,13 +44,17 @@ export class AuthenticationService {
                     for (let authority of this.user.authorities) {
                         console.log('authority: ', authority);
                     }
+                    //throw('Something went wrong on our end (test)')
                 } else {
-                    //this.userObservable = Observable.from([null]);
-                    this.isAuthenticated = false;
-                    this.sessionDataService.user = null;
-                    throw ('Login invalid');
+                    // TODO should indicate an exception
+                    throw('Something went wrong on our end');
+                //     //this.userObservable = Observable.from([null]);
+                //     this.isAuthenticated = false;
+                //     this.sessionDataService.user = null;
+                //     throw ('Login invalid');
                 }
-            })
+            }
+            )
             // .map(this.processResponse)
             .catch(this.handleError);
     }
