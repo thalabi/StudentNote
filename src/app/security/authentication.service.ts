@@ -72,10 +72,14 @@ export class AuthenticationService {
         console.log(response);
         let errorMessage: string;
         if (response instanceof Response) {
-            const bodyJson = response.json() || '';
-            const serverErrorMessage = bodyJson.errorMessage || JSON.stringify(bodyJson);
-            console.error(serverErrorMessage);
-            errorMessage = `HTTP: ${response.status} - ${response.statusText || ''}. Server error message: ${serverErrorMessage}`;
+            if (response.status = 401) {
+                errorMessage = 'Login failed; invalid username or password'
+            } else {
+                const bodyJson = response.json() || '';
+                const serverErrorMessage = bodyJson.errorMessage || JSON.stringify(bodyJson);
+                console.error(serverErrorMessage);
+                errorMessage = `HTTP: ${response.status} - ${response.statusText || ''}. Server error message: ${serverErrorMessage}`;
+            }
         } else {
             errorMessage = response.message ? response.message : response.toString();
         }
