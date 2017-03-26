@@ -19,15 +19,11 @@ import { TimestampRange } from './TimestampRange';
 @Injectable()
 export class StudentService {
 
-  // private httpHeaders = new Headers({
-  //   'X-AUTH-TOKEN': this.sessionDataService.user.token,
-  //   'Content-Type': 'application/json'});
-
   constructor(
     private http: Http,
     private sessionDataService: SessionDataService) { }
 
-  httpHeaders(): Headers {
+  private httpHeaders(): Headers {
     return new Headers({
       'Authorization': 'Bearer ' + this.sessionDataService.user.token,
       'Content-Type': 'application/json'});
@@ -103,7 +99,7 @@ export class StudentService {
   }
 
   downloadAllPdf(): any {
-    return this.http.get('http://localhost:8080/StudentNotesService/pdfAll', {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+'/pdfAll', {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
@@ -112,7 +108,7 @@ export class StudentService {
   }
 
   downloadStudentsByTimestampRangePdf(timestampRange: TimestampRange): any {
-    return this.http.post('http://localhost:8080/StudentNotesService/pdfStudentsByTimestampRange', JSON.stringify(timestampRange), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+    return this.http.post(Constants.STUDENT_NOTES_SERVICE_URL+'/pdfStudentsByTimestampRange', JSON.stringify(timestampRange), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
@@ -121,18 +117,13 @@ export class StudentService {
   }
 
   downloadStudentsByStudentIdsPdf(studentIds: number[]): any {
-    return this.http.post('http://localhost:8080/StudentNotesService/pdfStudentsByStudentIds', JSON.stringify(studentIds), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+    return this.http.post(Constants.STUDENT_NOTES_SERVICE_URL+'/pdfStudentsByStudentIds', JSON.stringify(studentIds), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
         }
     );
   }
-
-  private handleErrorXXXXXXXXXXXX(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }  
 
   private handleError (response: Response | any) {
       console.log(response);
@@ -147,5 +138,4 @@ export class StudentService {
       }
       return Observable.throw(errorMessage);
   }
-
 }

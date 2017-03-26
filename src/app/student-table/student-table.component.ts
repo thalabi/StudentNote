@@ -3,6 +3,7 @@ import { Student } from '../Student';
 import { StudentService } from '../student.service';
 import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
+import { MessageService } from './../error/message.service';
 
 @Component({
   selector: 'app-student-table',
@@ -19,7 +20,8 @@ export class StudentTableComponent implements OnInit {
   constructor (
     private studentService: StudentService,
     private sessionDataService: SessionDataService,
-    private router: Router) {
+    private router: Router,
+    private messageService: MessageService) {
 
     console.log('StudentTableComponent constructor ...');
   }
@@ -30,11 +32,16 @@ export class StudentTableComponent implements OnInit {
     // setTimeout(function() {
     //   console.log('Waiting 2000 milli seconds ...');
     // }, millisecondsToWait);
-    this.studentService.getStudents().subscribe(
-      students => {
+    this.studentService.getStudents().subscribe({
+      next: students => {
         this.studentArray = students;
         console.log('studentArray[]: ', this.studentArray);
-      });
+      },
+      error: error => {
+        console.error(error);
+        this.messageService.clear();
+        this.messageService.error(error);
+      }});
     console.log('StudentTableComponent ngOnInit() end ...');
   }
 

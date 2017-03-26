@@ -42,15 +42,12 @@ export class LoginComponent implements OnInit {
               },
               error: error => {
                 
-                // TODO replace with some type of error message
-                  //this.alertService.error(error);
                   console.log(error);
                   this.messageService.clear();
                   // test
                   // this.messageService.success(error);
                   // this.messageService.info(error);
                   // this.messageService.warning(error);
-
                   this.messageService.error(error);
                   this.loading = false;
               }
