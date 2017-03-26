@@ -77,18 +77,18 @@ export class StudentService {
     return Observable.concat(saveStudentObservable$, getStudentByIdObservable$);
   }
 
-  deleteNote(student: Student, note: Note) {
+  // deleteNote(student: Student, note: Note) {
 
-    for (let i=0; i<student.noteList.length; i++){
-      if (student.noteList[i].id == note.id) {
-        console.log("deleteStudent(), i: " + i + ", this.studentArray.length: " + student.noteList.length);
-        student.noteList.splice(i, 1);
-        console.log("deleteStudent(), after splice, this.studentArray.length: " + student.noteList.length);
-        return;
-      }
-    }
-    console.error("element not found");
-  }
+  //   for (let i=0; i<student.noteList.length; i++){
+  //     if (student.noteList[i].id == note.id) {
+  //       console.log("deleteStudent(), i: " + i + ", this.studentArray.length: " + student.noteList.length);
+  //       student.noteList.splice(i, 1);
+  //       console.log("deleteStudent(), after splice, this.studentArray.length: " + student.noteList.length);
+  //       return;
+  //     }
+  //   }
+  //   console.error("element not found");
+  // }
 
   getLatestActiveStudents(): Observable<Student[]> {
 
@@ -123,6 +123,13 @@ export class StudentService {
             return new Blob([response.blob()], { type: 'application/pdf' })
         }
     );
+  }
+
+  getVersion(): Observable<string> {
+
+    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getVersion")
+              .map(response => response.text())
+              .catch(this.handleError);
   }
 
   private handleError (response: Response | any) {
