@@ -28,6 +28,9 @@ export class StudentTableComponent implements OnInit {
 
   ngOnInit () {
     console.log('StudentTableComponent ngOnInit() begin ...');
+
+    this.messageService.clear();
+    
     // let millisecondsToWait = 2000;
     // setTimeout(function() {
     //   console.log('Waiting 2000 milli seconds ...');

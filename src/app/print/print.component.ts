@@ -3,8 +3,6 @@ import { StudentService } from '../student.service';
 import { TimestampRange } from '../TimestampRange';
 import { Student } from '../Student';
 import {NgbDateStruct, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
-
-
 import { MessageService } from './../error/message.service';
 
 @Component({
@@ -23,10 +21,12 @@ export class PrintComponent implements OnInit {
 
   constructor(
     private studentService: StudentService,
-    private nessageService: MessageService
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
+    this.messageService.clear();
+
     this.studentService.getAllStudentsWithoutNotesList().subscribe(
       students => {
         this.studentArray = students;

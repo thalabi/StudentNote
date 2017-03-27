@@ -4,6 +4,7 @@ import { Student } from '../Student';
 import { StudentService } from '../student.service';
 import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
+import { MessageService } from './../error/message.service';
 
 @Component({
   selector: 'app-student-details-form',
@@ -21,9 +22,12 @@ export class StudentDetailsFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private studentService: StudentService,
     private sessionDataService: SessionDataService,    
-    private router: Router) {}
+    private router: Router,
+    private messageService: MessageService) {}
 
   ngOnInit() {
+    this.messageService.clear();
+
     this.crudMode = this.sessionDataService.crudMode;
     if (this.crudMode == 'Add') {
       this.student = new Student();
@@ -57,18 +61,28 @@ export class StudentDetailsFormComponent implements OnInit {
     switch (this.crudMode) {
       case 'Add':
         this.studentService.saveStudent(this.student)
-          .subscribe(student => {
-                  //console.log('student: ', student);
-                  this.router.navigate(['studentTable']);
-                });
+          .subscribe({
+            error: error => {
+              console.error(error);
+              this.messageService.error(error);
+            },
+            complete: () => {
+              this.router.navigate(['studentTable']);
+            }
+          });
         break;
       case 'Modify':
         console.log('before call to studentService');
         this.studentService.saveStudent(this.student)
-          .subscribe(student => {
-                  //console.log('student: ', student);
-                  this.router.navigate(['studentTable']);
-                });
+          .subscribe({
+            error: error => {
+              console.error(error);
+              this.messageService.error(error);
+            },
+            complete: () => {
+              this.router.navigate(['studentTable']);
+            }
+          });
         break;
       case 'Delete':
         this.studentService.deleteStudent(this.student)

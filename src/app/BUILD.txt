@@ -1,5 +1,5 @@
 Target dir C:\Users\Tarif Halabi\StudentNotes
-Delete everything from target dir except db files
+Delete everything from target dir except db files and application.properties file
 Copy to target dir
 - mongoose.conf
 - mongoose-free-6.5.exe from C:\temp\StudentNotes-mongoose
@@ -7,3 +7,4 @@ Copy to target dir
 - StudentNotes.bat
 - jar
 - copy all files from dist dir to target dir
+- if there were changes to application.properties file migrate them. Do a diff.
