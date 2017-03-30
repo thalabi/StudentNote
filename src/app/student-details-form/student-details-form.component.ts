@@ -86,10 +86,16 @@ export class StudentDetailsFormComponent implements OnInit {
         break;
       case 'Delete':
         this.studentService.deleteStudent(this.student)
-          .subscribe(student => {
+          .subscribe({
+            error: error => {
+              console.error(error);
+              this.messageService.error(error);
+            },
+            complete: () => {
                   //console.log('student: ', student);
                   this.router.navigate(['studentTable']);
-                });
+            }
+          });
         break;
       default:
         console.error('this.crudMode is invalid. this.crudMode: ' + this.crudMode);

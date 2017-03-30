@@ -136,10 +136,15 @@ export class StudentService {
       console.log(response);
       let errorMessage: string;
       if (response instanceof Response) {
-          const bodyJson = response.json() || '';
-          const serverErrorMessage = bodyJson.errorMessage || JSON.stringify(bodyJson);
-          console.error(serverErrorMessage);
-          errorMessage = `HTTP: ${response.status} - ${response.statusText || ''}. Server error message: ${serverErrorMessage}`;
+        let serverErrorMessage: string;
+        try {
+          const bodyJson = response.json();
+          serverErrorMessage = bodyJson.errorMessage || JSON.stringify(bodyJson);
+        } catch (error) {
+          serverErrorMessage = response.text();
+        } 
+        console.error(serverErrorMessage);
+         errorMessage = `HTTP: ${response.status} - ${response.statusText || ''}. Server error message: ${serverErrorMessage}`;
       } else {
           errorMessage = response.message ? response.message : response.toString();
       }
