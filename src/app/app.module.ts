@@ -27,7 +27,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './app.error.handler';
 
-import { NgbDateMomentParserFormatter } from './util/NgbDateMomentParserFormatter';
+import { snParserFormatter } from './util/NgbDateMomentParserFormatter';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 
 import { MessageService } from './error/message.service';
@@ -64,8 +64,7 @@ import { ExceptionComponent } from './error/error.component';
     AuthGuard,
     AuthenticationService,
     {provide: ErrorHandler, useClass: AppErrorHandler},
-    {provide: NgbDateParserFormatter, useFactory: () => { return new NgbDateMomentParserFormatter("MMM DD, YYYY")} 
-  },
+    {provide: NgbDateParserFormatter, useFactory: snParserFormatter},
     MessageService, // added
     { provide: ErrorHandler, useClass: CustomErrorHandler } // overrride default error handler
     ],

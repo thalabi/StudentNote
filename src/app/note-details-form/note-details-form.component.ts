@@ -21,7 +21,7 @@ export class NoteDetailsFormComponent implements OnInit {
   note: Note;
   crudMode: string;
   datePipe: DatePipe = new DatePipe('en-US');
-  // timestampBlur: boolean;
+  timestampBlur: boolean;
 
   constructor(
     private formBuilder: FormBuilder,

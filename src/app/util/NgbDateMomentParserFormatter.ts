@@ -25,3 +25,6 @@ export class NgbDateMomentParserFormatter extends NgbDateParserFormatter {
                                day: d.date() } : null;
     }
 }
+export function snParserFormatter () {
+    return new NgbDateMomentParserFormatter("MMM DD, YYYY")
+}
