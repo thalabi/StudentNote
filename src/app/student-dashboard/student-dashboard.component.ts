@@ -3,6 +3,8 @@ import { Student } from '../Student';
 import { StudentService } from '../student.service';
 import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
+import { MessageService } from './../error/message.service';
+
 
 @Component({
   selector: 'app-student-dashboard',
@@ -13,25 +15,26 @@ export class StudentDashboardComponent implements OnInit {
 
   studentArray: Student[];
 
-  public names: string[];
   public selectedRowIndex : number;
 
   constructor(
     private studentService: StudentService,
     private sessionDataService: SessionDataService,
-    private router: Router) { }
+    private router: Router,
+    private messageService: MessageService) { }
 
   ngOnInit() {
-    let name1: string = 'first1 last1';
-    let name2: string = 'first2 last2';
-    let name3: string = 'long first3 last3';
-    let name4: string = 'first4 last4';
-    let name5: string = 'first5 last5';
-    this.names = [name1, name2, name3, name4, name5];
-    this.studentService.getLatestActiveStudents().subscribe(
-      students => {
-        this.studentArray = students;
-        console.log('studentArray[]: ', this.studentArray);
+    this.studentService.getLatestActiveStudents()
+      .subscribe({
+          next: students => {
+            this.studentArray = students;
+            console.log('studentArray[]: ', this.studentArray);
+          },
+          error: error => {
+            console.error(error);
+            this.messageService.clear();
+            this.messageService.error(error);
+          }
       });
     
   }

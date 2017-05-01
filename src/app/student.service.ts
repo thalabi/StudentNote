@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Student } from './Student';
 import { Note } from './Note';
+import { SchoolYear } from './SchoolYear';
 
 import { Http, Headers, Response, ResponseContentType } from '@angular/http';
 
@@ -34,9 +35,17 @@ export class StudentService {
     console.log('in getStudents()');
     console.log('this.httpHeaders(): ', this.httpHeaders());
     console.log('this.sessionDataService.user.token: ', this.sessionDataService.user.token);
-    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getAllStudents", {headers: this.httpHeaders()})
-              .map(response => response.json() as Student[])
-              .catch(this.handleError);
+
+    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/schoolYear/getStudentsBySchoolYearId/1", {headers: this.httpHeaders()})
+              .map(response => {
+                let schoolYear = response.json() as SchoolYear;
+                return schoolYear.studentSet;
+              })
+              .catch(this.handleError);    
+
+    // return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getAllStudents", {headers: this.httpHeaders()})
+    //           .map(response => response.json() as Student[])
+    //           .catch(this.handleError);
   }
   
   getAllStudentsWithoutNotesList(): Observable<Student[]> {
@@ -77,25 +86,23 @@ export class StudentService {
     return Observable.concat(saveStudentObservable$, getStudentByIdObservable$);
   }
 
-  // deleteNote(student: Student, note: Note) {
-
-  //   for (let i=0; i<student.noteList.length; i++){
-  //     if (student.noteList[i].id == note.id) {
-  //       console.log("deleteStudent(), i: " + i + ", this.studentArray.length: " + student.noteList.length);
-  //       student.noteList.splice(i, 1);
-  //       console.log("deleteStudent(), after splice, this.studentArray.length: " + student.noteList.length);
-  //       return;
-  //     }
-  //   }
-  //   console.error("element not found");
-  // }
-
   getLatestActiveStudents(): Observable<Student[]> {
 
     console.log('in getLatestActiveStudents()');
-    return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getLatestActiveStudents/5", {headers: this.httpHeaders()})
-              .map(response => response.json() as Student[])
+    let schoolYearIdAndLimit: any = {};
+    schoolYearIdAndLimit.schoolYearId = 1;
+    schoolYearIdAndLimit.limit = 5;
+    return this.http.post(Constants.STUDENT_NOTES_SERVICE_URL+"/schoolYear/getLatestActiveStudentsBySchoolYearId",
+                  JSON.stringify(schoolYearIdAndLimit), 
+                  {headers: this.httpHeaders()})
+              .map(response => {
+                let schoolYear = response.json() as SchoolYear;
+                return schoolYear.studentSet;
+              })
               .catch(this.handleError);
+    // return this.http.get(Constants.STUDENT_NOTES_SERVICE_URL+"/getLatestActiveStudents/5", {headers: this.httpHeaders()})
+    //           .map(response => response.json() as Student[])
+    //           .catch(this.handleError);
   }
 
   downloadAllPdf(): any {
