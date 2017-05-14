@@ -10,6 +10,8 @@ import { Constants } from '../constants';
 import { User } from './user';
 import { SessionDataService } from '../session-data.service';
 import { MessageService } from './../error/message.service';
+import { ConfigService } from './../config/config.service';
+import { ApplicationProperties } from './../config/application.properties';
  
 @Injectable()
 export class AuthenticationService {
@@ -20,16 +22,24 @@ export class AuthenticationService {
 
     private jsonHeaders = new Headers({'Content-Type': 'application/json'});
 
+    serviceUrl: string;
+
     constructor(
       private http: Http,
       private sessionDataService: SessionDataService,
-      private nessageService: MessageService) {
-        this.userSubject = new Subject<User>();
-        this.userSubject.next(new User())
-       }
+      private nessageService: MessageService,
+      private configService: ConfigService
+    ) {
+      this.userSubject = new Subject<User>();
+      this.userSubject.next(new User());
+
+      const applicationProperties: ApplicationProperties = this.configService.getApplicationProperties();
+      this.serviceUrl = applicationProperties.serviceUrl;
+      console.log(this.serviceUrl);
+    }
  
     login(username: string, password: string): Observable<any> {
-        return this.http.post(Constants.STUDENT_NOTES_SERVICE_URL+'/Security/authenticate', JSON.stringify({ username: username, password: password }), {headers: this.jsonHeaders})
+        return this.http.post(this.serviceUrl+'/Security/authenticate', JSON.stringify({ username: username, password: password }), {headers: this.jsonHeaders})
             .map((response: Response) => {
                 console.log('response: ', response);
                 // login successful if there's a jwt token in the response

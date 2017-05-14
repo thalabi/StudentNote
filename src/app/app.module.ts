@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -33,6 +33,7 @@ import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from './error/message.service';
 import { CustomErrorHandler } from './error/custom-error-handler';
 import { ExceptionComponent } from './error/error.component';
+import { ConfigService, configServiceLoadConfig } from './config/config.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,9 @@ import { ExceptionComponent } from './error/error.component';
     {provide: ErrorHandler, useClass: AppErrorHandler},
     {provide: NgbDateParserFormatter, useFactory: snParserFormatter},
     MessageService, // added
-    { provide: ErrorHandler, useClass: CustomErrorHandler } // overrride default error handler
+    { provide: ErrorHandler, useClass: CustomErrorHandler }, // overrride default error handler
+    ConfigService,
+    { provide: APP_INITIALIZER, useFactory: configServiceLoadConfig, deps: [ConfigService], multi: true }
     ],
   bootstrap: [AppComponent]
 })
