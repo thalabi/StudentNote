@@ -23,6 +23,7 @@ import { ApplicationProperties } from './config/application.properties';
 export class StudentService {
 
   private serviceUrl: string;
+  private activeStudentsLimit: number;
 
   constructor(
     private http: Http,
@@ -31,7 +32,9 @@ export class StudentService {
   ) {
     const applicationProperties: ApplicationProperties = this.configService.getApplicationProperties();
     this.serviceUrl = applicationProperties.serviceUrl;
+    this.activeStudentsLimit = applicationProperties.activeStudentsLimit;
     console.log(this.serviceUrl);
+    console.log(this.activeStudentsLimit);
   }
 
   private httpHeaders(): Headers {
@@ -46,12 +49,21 @@ export class StudentService {
     console.log('this.httpHeaders(): ', this.httpHeaders());
     console.log('this.sessionDataService.user.token: ', this.sessionDataService.user.token);
 
-    return this.http.get(this.serviceUrl+"/schoolYear/getStudentsBySchoolYearId/1", {headers: this.httpHeaders()})
+    let username: string = this.sessionDataService.user.username;
+    return this.http.get(this.serviceUrl+"/getStudentsBySchoolYearFromUserPreference/" + username, {headers: this.httpHeaders()})
               .map(response => {
                 let schoolYear = response.json() as SchoolYear;
                 return schoolYear.studentSet;
               })
               .catch(this.handleError);    
+
+
+    // return this.http.get(this.serviceUrl+"/schoolYear/getStudentsBySchoolYearId/1", {headers: this.httpHeaders()})
+    //           .map(response => {
+    //             let schoolYear = response.json() as SchoolYear;
+    //             return schoolYear.studentSet;
+    //           })
+    //           .catch(this.handleError);    
 
     // return this.http.get(this.serviceUrl+"/getAllStudents", {headers: this.httpHeaders()})
     //           .map(response => response.json() as Student[])
@@ -99,20 +111,10 @@ export class StudentService {
   getLatestActiveStudents(): Observable<Student[]> {
 
     console.log('in getLatestActiveStudents()');
-    let schoolYearIdAndLimit: any = {};
-    schoolYearIdAndLimit.schoolYearId = 1;
-    schoolYearIdAndLimit.limit = 5;
-    return this.http.post(this.serviceUrl+"/schoolYear/getLatestActiveStudentsBySchoolYearId",
-                  JSON.stringify(schoolYearIdAndLimit), 
-                  {headers: this.httpHeaders()})
-              .map(response => {
-                let schoolYear = response.json() as SchoolYear;
-                return schoolYear.studentSet;
-              })
+    let username: string = this.sessionDataService.user.username;
+    return this.http.get(this.serviceUrl+"/getLatestActiveStudents/"+username+"/"+this.activeStudentsLimit, {headers: this.httpHeaders()})
+              .map(response => response.json() as Student[])
               .catch(this.handleError);
-    // return this.http.get(this.serviceUrl+"/getLatestActiveStudents/5", {headers: this.httpHeaders()})
-    //           .map(response => response.json() as Student[])
-    //           .catch(this.handleError);
   }
 
   downloadAllPdf(): any {

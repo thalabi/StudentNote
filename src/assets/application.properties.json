@@ -1,1 +1,4 @@
-{"serviceUrl": "http://localhost:8080/StudentNotesService"}
+{
+    "serviceUrl": "http://localhost:8080/StudentNotesService",
+    "activeStudentsLimit": "5"
+}
