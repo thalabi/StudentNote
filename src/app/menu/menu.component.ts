@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './../security/user';
+import { User } from '../security/user';
+import { UserPreference } from '../domain/UserPreference';
 
-import { AuthenticationService } from './../security/authentication.service';
+import { AuthenticationService } from '../security/authentication.service';
+import { StudentService } from '../student.service';
 
 @Component({
   selector: 'app-menu',
@@ -11,9 +13,11 @@ import { AuthenticationService } from './../security/authentication.service';
 export class MenuComponent implements OnInit {
 
   user: User;
+  userPreference: UserPreference;
 
   constructor(
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private studentService: StudentService
   ) { }
 
   ngOnInit() {
@@ -30,6 +34,19 @@ export class MenuComponent implements OnInit {
           error => console.error(error),
           () => console.log('completed')
         );  
-  }
+
+      this.studentService.userPreferenceSubject
+        //.map((data:User)=>{console.log(data})
+        .subscribe(
+          data => {
+            this.userPreference = data;
+            console.log('userPreference: ', this.userPreference);
+          },
+          error => console.error(error),
+          () => console.log('completed')
+        );  
+
+
+      }
 
 }

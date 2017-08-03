@@ -40,6 +40,9 @@ export class LoginComponent implements OnInit {
         .subscribe({
               next: data => {
                   this.router.navigate([this.returnUrl]);
+                  console.log('before calll getUserPrefernce');
+                  this.studentService.getUserPreference();
+                  console.log('after calll getUserPrefernce');
                   this.messageService.clear();
               },
               error: error => {
@@ -54,6 +57,7 @@ export class LoginComponent implements OnInit {
                   this.loading = false;
               }
         });
+          
   }
 
 }

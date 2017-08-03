@@ -12,6 +12,7 @@ import 'rxjs/add/observable/concat';
 // Observale operators
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { Subject } from 'rxjs/Subject';
 
 import { Constants } from './constants';
 
@@ -25,6 +26,8 @@ export class StudentService {
 
   private serviceUrl: string;
   private activeStudentsLimit: number;
+  public userPreferenceSubject: Subject<UserPreference>;// = Subject.from([null]);
+
 
   constructor(
     private http: Http,
@@ -36,6 +39,9 @@ export class StudentService {
     this.activeStudentsLimit = applicationProperties.activeStudentsLimit;
     console.log(this.serviceUrl);
     console.log(this.activeStudentsLimit);
+    this.userPreferenceSubject = new Subject<UserPreference>();
+    this.userPreferenceSubject.next(new UserPreference());
+
   }
 
   private httpHeaders(): Headers {
@@ -156,8 +162,13 @@ export class StudentService {
 
     console.log('in getUserPreference()');
     let username: string = this.sessionDataService.user.username;
-    return this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username+"/"+this.activeStudentsLimit, {headers: this.httpHeaders()})
-              .map(response => response.json() as UserPreference)
+    console.log('username: ', username);
+    return this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username, {headers: this.httpHeaders()})
+              .map((response: Response) => {
+                let userPreference = response.json() as UserPreference;
+                console.log('userPreference = ', userPreference);
+                this.userPreferenceSubject.next(userPreference);
+              })
               .catch(this.handleError);
   }
 
