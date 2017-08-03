@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Student } from './Student';
 import { Note } from './Note';
 import { SchoolYear } from './SchoolYear';
+import { UserPreference } from './domain/UserPreference';
 
 import { Http, Headers, Response, ResponseContentType } from '@angular/http';
 
@@ -148,6 +149,15 @@ export class StudentService {
 
     return this.http.get(this.serviceUrl+"/getVersion")
               .map(response => response.text())
+              .catch(this.handleError);
+  }
+
+  getUserPreference(): Observable<UserPreference> {
+
+    console.log('in getUserPreference()');
+    let username: string = this.sessionDataService.user.username;
+    return this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username+"/"+this.activeStudentsLimit, {headers: this.httpHeaders()})
+              .map(response => response.json() as UserPreference)
               .catch(this.handleError);
   }
 

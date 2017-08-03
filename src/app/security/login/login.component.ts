@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
  
 import { AuthenticationService } from '../authentication.service';
+import { StudentService } from '../../student.service';
 import { MessageService } from './../../error/message.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
+    private studentService: StudentService,
     private messageService: MessageService  
   ) { }
 

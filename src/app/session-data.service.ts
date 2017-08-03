@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Student } from './Student';
 import { User } from './security/user';
+import { UserPreference } from './domain/UserPreference';
+
 @Injectable()
 export class SessionDataService {
 
@@ -10,6 +12,7 @@ export class SessionDataService {
   public noteListIndex: number;
 
   public user: User;
+  public userPreference: UserPreference;
 
   constructor() { }
 
