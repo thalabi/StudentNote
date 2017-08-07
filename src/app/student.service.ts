@@ -12,7 +12,7 @@ import 'rxjs/add/observable/concat';
 // Observale operators
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { Subject } from 'rxjs/Subject';
+//import { Subject } from 'rxjs/Subject';
 
 import { Constants } from './constants';
 
@@ -26,8 +26,7 @@ export class StudentService {
 
   private serviceUrl: string;
   private activeStudentsLimit: number;
-  public userPreferenceSubject: Subject<UserPreference>;// = Subject.from([null]);
-
+  //public userPreferenceSubject: Subject<UserPreference>;// = Subject.from([null]);
 
   constructor(
     private http: Http,
@@ -39,8 +38,8 @@ export class StudentService {
     this.activeStudentsLimit = applicationProperties.activeStudentsLimit;
     console.log(this.serviceUrl);
     console.log(this.activeStudentsLimit);
-    this.userPreferenceSubject = new Subject<UserPreference>();
-    this.userPreferenceSubject.next(new UserPreference());
+    // this.userPreferenceSubject = new Subject<UserPreference>();
+    // this.userPreferenceSubject.next(new UserPreference());
 
   }
 
@@ -158,18 +157,41 @@ export class StudentService {
               .catch(this.handleError);
   }
 
-  getUserPreference(): Observable<UserPreference> {
+  getUserPreference() {
 
     console.log('in getUserPreference()');
     let username: string = this.sessionDataService.user.username;
     console.log('username: ', username);
+    console.log('url used: ', this.serviceUrl+"/userPreference");
+    //this.http.get(this.serviceUrl+"/userPreference").subscribe();
+    console.log('after http call');
+    this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username, {headers: this.httpHeaders()})
+              .map((response: Response) => {
+                let userPreference = response.json() as UserPreference;
+                console.log('userPreference = ', userPreference);
+                this.sessionDataService.userPreferenceSubject.next(userPreference);
+              })
+              .catch(this.handleError)
+              .subscribe();
+  }
+
+  getUserPreference2(): Observable<UserPreference> {
+
+    console.log('in getUserPreference()');
+    let username: string = 'JohnDoe';//this.sessionDataService.user.username;
+    console.log('username: ', username);
+    console.log('url used: ', this.serviceUrl+"/userPreference");
+    //this.http.get(this.serviceUrl+"/userPreference").subscribe();
+    console.log('after http call');
     return this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username, {headers: this.httpHeaders()})
               .map((response: Response) => {
                 let userPreference = response.json() as UserPreference;
                 console.log('userPreference = ', userPreference);
-                this.userPreferenceSubject.next(userPreference);
+                this.sessionDataService.userPreferenceSubject.next(userPreference);
+                return userPreference;
               })
               .catch(this.handleError);
+    
   }
 
   private handleError (response: Response | any) {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Student } from './Student';
 import { User } from './security/user';
 import { UserPreference } from './domain/UserPreference';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class SessionDataService {
@@ -14,6 +15,15 @@ export class SessionDataService {
   public user: User;
   public userPreference: UserPreference;
 
-  constructor() { }
+  public userSubject: Subject<User>;// = Subject.from([null]);
+  public userPreferenceSubject: Subject<UserPreference>;// = Subject.from([null]);
+
+  constructor(      ) {
+      this.userSubject = new Subject<User>();
+      this.userSubject.next(new User());
+      this.userPreferenceSubject = new Subject<UserPreference>();
+      this.userPreferenceSubject.next(new UserPreference());
+
+  }
 
 }

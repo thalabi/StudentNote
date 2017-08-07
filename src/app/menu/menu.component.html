@@ -51,6 +51,9 @@
     <li *ngIf="user != null" class="nav-item">
       <a class="nav-link navbar-right" routerLink="/login"routerLinkActive="active">Logout</a>
     </li>
+    <li *ngIf="userPreference != null" class="nav-item">
+      <a class="nav-link navbar-right" >{{userPreference.schoolYear.schoolYear}}</a>
+    </li>
   </ul>
 </nav>
 </div>
