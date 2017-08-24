@@ -11,6 +11,7 @@ import { User } from './user';
 import { MessageService } from './../error/message.service';
 import { ConfigService } from './../config/config.service';
 import { ApplicationProperties } from './../config/application.properties';
+import { SessionDataService } from '../session-data.service';
  
 @Injectable()
 export class AuthenticationService {
@@ -26,7 +27,8 @@ export class AuthenticationService {
     constructor(
       private http: Http,
       private nessageService: MessageService,
-      private configService: ConfigService
+      private configService: ConfigService,
+      private sessionDataService: SessionDataService        
     ) {
     //   this.userSubject = new Subject<User>();
     //   this.userSubject.next(new User());
@@ -76,7 +78,8 @@ export class AuthenticationService {
                 if (this.user && this.user.token) {
                     this.isAuthenticated = true;
                     //this.userSubject.next(this.user);
-                    //this.sessionDataService.userSubject.next(this.user);
+                    this.sessionDataService.user = this.user;
+                    this.sessionDataService.userSubject.next(this.user);
                     console.log('JSON.stringify(this.user): ', JSON.stringify(this.user));
                     console.log('this.user: ', this.user);
                     for (let authority of this.user.authorities) {

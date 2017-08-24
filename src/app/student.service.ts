@@ -160,7 +160,10 @@ export class StudentService {
   getUserPreference() {
 
     console.log('in getUserPreference()');
-    let username: string = this.sessionDataService.user.username;
+
+//TODO
+
+    let username: string = 'JohnDoe';                        //this.sessionDataService.user.username;
     console.log('username: ', username);
     console.log('url used: ', this.serviceUrl+"/userPreference");
     //this.http.get(this.serviceUrl+"/userPreference").subscribe();
@@ -176,21 +179,60 @@ export class StudentService {
   }
 
   getUserPreference2(): Observable<UserPreference> {
-
     console.log('in getUserPreference()');
-    let username: string = 'JohnDoe';//this.sessionDataService.user.username;
-    console.log('username: ', username);
-    console.log('url used: ', this.serviceUrl+"/userPreference");
-    //this.http.get(this.serviceUrl+"/userPreference").subscribe();
-    console.log('after http call');
+
+    console.log('in getUserPreference2() this.sessionDataService.user: ', this.sessionDataService.user);
+    console.log('in getUserPreference2() this.sessionDataService.user.username: ', this.sessionDataService.user.username);
+    let username: string = this.sessionDataService.user.username;
+    console.log('in getUserPreference2() username: ', username);
     return this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username, {headers: this.httpHeaders()})
-              .map((response: Response) => {
-                let userPreference = response.json() as UserPreference;
-                console.log('userPreference = ', userPreference);
-                this.sessionDataService.userPreferenceSubject.next(userPreference);
-                return userPreference;
-              })
-              .catch(this.handleError);
+    .map((response: Response) => {
+      let userPreference = response.json() as UserPreference;
+      console.log('userPreference = ', userPreference);
+      this.sessionDataService.userPreferenceSubject.next(userPreference);
+      return userPreference;
+    })
+    .catch(this.handleError);
+
+
+    // let username: string;// = 'JohnDoe';
+    // try {
+    //   this.sessionDataService.userSubject
+    //   .subscribe(
+    //     data => {
+    //       let user = data;
+    //       console.log('in getUserPreference2() user: ', user);
+    //       username = user.username;
+    //       return this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username/*, {headers: this.httpHeaders()}*/)
+    //       .map((response: Response) => {
+    //         let userPreference = response.json() as UserPreference;
+    //         console.log('userPreference = ', userPreference);
+    //         this.sessionDataService.userPreferenceSubject.next(userPreference);
+    //         return userPreference;
+    //       })
+    //       .catch(this.handleError);
+
+    // },
+    //     error => console.error(error),
+    //     () => console.log('completed')
+    //   );
+    // } catch(e) {
+    //   console.log('exception with username2', e);
+    // }
+    // return null;
+
+    // console.log('username: ', username);
+    // console.log('url used: ', this.serviceUrl+"/userPreference");
+    //this.http.get(this.serviceUrl+"/userPreference").subscribe();
+    // console.log('after http call');
+    // return this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username/*, {headers: this.httpHeaders()}*/)
+    //           .map((response: Response) => {
+    //             let userPreference = response.json() as UserPreference;
+    //             console.log('userPreference = ', userPreference);
+    //             this.sessionDataService.userPreferenceSubject.next(userPreference);
+    //             return userPreference;
+    //           })
+    //           .catch(this.handleError);
     
   }
 
