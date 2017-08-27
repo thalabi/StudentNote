@@ -4,14 +4,14 @@
 
   <!--print all tab-->
   <ngb-tab id="allTab" title="All">
-    <template ngbTabContent>
+    <ng-template ngbTabContent>
       <button (click)="onDownloadAllPdf()" class="btn btn-primary btn-sm mt-2">Print</button>
-    </template>
+    </ng-template>
   </ngb-tab>
 
   <!--print by date range tab-->
   <ngb-tab id="dateRangeTab" title="Date Range">
-    <template ngbTabContent>
+    <ng-template ngbTabContent>
 
       <form class="form-inline mt-2">
 
@@ -48,12 +48,12 @@
       <!--<pre>Model: {{ fromTimestamp | json }}</pre>
       <pre>Model: {{ toTimestamp | json }}</pre>-->
 
-    </template>
+    </ng-template>
   </ngb-tab>
 
   <!--print by student selection-->
   <ngb-tab id="studentSelectTab" title="Student Select">
-    <template ngbTabContent>
+    <ng-template ngbTabContent>
 
       <table class="table table-striped table-sm mt-2 my-table-nonfluid">
       <thead>
@@ -85,7 +85,7 @@
       <button (click)="onDownloadStudentSelectPdf()" class="btn btn-primary btn-sm mt-2"
         [disabled]="studentIds.length == 0">Print</button>
 
-    </template>
+    </ng-template>
   </ngb-tab>
 
 </ngb-tabset>
