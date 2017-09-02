@@ -101,14 +101,15 @@ export class AuthenticationService {
             .catch(this.handleError);
     }
 
-    // logout() {
-    //     // remove user from local storage to log user out
-    //     //localStorage.removeItem('currentUser');
-    //     //this.isAuthenticated = false;
-    //     this.userSubject.next(null);
-    //     //this.userPreferenceSubject.next(null);
-    //     //this.sessionDataService.user = null;
-    // }
+    logout() {
+        // remove user from local storage to log user out
+        //localStorage.removeItem('currentUser');
+        this.isAuthenticated = false;
+        //this.userSubject.next(null);
+        //this.userPreferenceSubject.next(null);
+        //this.sessionDataService.user = null;
+    }
+
     private processResponse (response: Response) {
     }
     private handleError (response: Response | any) {
