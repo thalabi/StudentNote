@@ -6,6 +6,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { StudentDetailsFormComponent } from './student-details-form/student-details-form.component';
 import { NoteTableComponent } from './note-table/note-table.component';
 import { NoteDetailsFormComponent } from './note-details-form/note-details-form.component';
+import { DatatableScrollableComponent } from './datatable-scrollable/datatable-scrollable.component';
 
 import { LoginComponent } from './security/login/login.component';
 import { AuthGuard } from './security/auth.guard';
@@ -22,6 +23,7 @@ const routes: Routes = [
     {path: 'noteTable', component: NoteTableComponent},
     {path: 'noteDetailsForm',  component: NoteDetailsFormComponent},
     {path: 'login',  component: LoginComponent},
+    {path: 'datatableScrollable', component: DatatableScrollableComponent},
     {path: '**',            component: _404Component}
 ]
 

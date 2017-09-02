@@ -16,8 +16,8 @@
 </div>
 
 <div style="margin-top: 0.5rem;">
-<button type="submit" class="btn btn-primary btn-sm" [disabled]="!noteForm.valid && crudMode != 'Delete'">Submit</button>
-<button type="button" class="btn btn-primary btn-sm" (click)="onCancel()">Cancel</button>
+<button pButton type="submit" label="Submit" [disabled]="!noteForm.valid && crudMode != 'Delete'"></button>
+<button pButton type="button" (click)="onCancel()" label="Cancel"></button>
 </div>
 
 </form>

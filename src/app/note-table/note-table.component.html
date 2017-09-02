@@ -15,7 +15,7 @@
   </tbody>
 </table>
 <div style="margin-top: 0.5rem;">
-<button (click)="onAddNote()" class="btn btn-primary btn-sm" >Add Note</button>
-<button (click)="onModifyNote()" class="btn btn-primary btn-sm" [disabled]="modifyAndDeleteButtonsDisable">Modify Note</button>
-<button (click)="onDeleteNote()" class="btn btn-primary btn-sm" [disabled]="modifyAndDeleteButtonsDisable">Delete Note</button>
+<button pButton type="button" (click)="onAddNote()" label="Add Note"></button>
+<button pButton type="button" (click)="onModifyNote()" label="Modify Note" [disabled]="modifyAndDeleteButtonsDisable"></button>
+<button pButton type="button" (click)="onDeleteNote()" label="Delete Note" [disabled]="modifyAndDeleteButtonsDisable"></button>
 </div>

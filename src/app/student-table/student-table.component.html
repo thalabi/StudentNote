@@ -18,8 +18,8 @@
 </table>
 </div>  
 <div style="margin-top: 0.5rem;">
-<button (click)="onAddStudent()" class="btn btn-primary btn-sm">Add Student</button>
-<button (click)="onModifyStudent()" [disabled]="modifyAndDeleteButtonsDisable" class="btn btn-primary btn-sm">Modify Student</button>
-<button (click)="onDeleteStudent()" [disabled]="modifyAndDeleteButtonsDisable" class="btn btn-primary btn-sm">Delete Student</button>
-<button (click)="onManageNotes()" [disabled]="modifyAndDeleteButtonsDisable" class="btn btn-primary btn-sm">Manage Notes</button>
+<button pButton type="button" (click)="onAddStudent()" label="Add Student"></button>
+<button pButton type="button" (click)="onModifyStudent()" label="Modify Student" [disabled]="modifyAndDeleteButtonsDisable" ></button>
+<button pButton type="button" (click)="onDeleteStudent()" label="Delete Student" [disabled]="modifyAndDeleteButtonsDisable"></button>
+<button pButton type="button" (click)="onManageNotes()" label="Manage Notes" [disabled]="modifyAndDeleteButtonsDisable"></button>
 </div>

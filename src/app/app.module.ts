@@ -34,6 +34,9 @@ import { MessageService } from './error/message.service';
 import { CustomErrorHandler } from './error/custom-error-handler';
 import { ExceptionComponent } from './error/error.component';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
+import { DatatableScrollableComponent } from './datatable-scrollable/datatable-scrollable.component';
+
+import { InputTextModule, DataTableModule, ButtonModule, DialogModule, SharedModule } from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { ConfigService, configServiceLoadConfig } from './config/config.service'
     LoginComponent,
     MenuComponent,
     PrintComponent,
-    ExceptionComponent
+    ExceptionComponent,
+    DatatableScrollableComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,8 @@ import { ConfigService, configServiceLoadConfig } from './config/config.service'
     ReactiveFormsModule,
     HttpModule,
     AppRouting,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    InputTextModule, DataTableModule, ButtonModule, DialogModule, SharedModule
   ],
   providers: [
     StudentService,
