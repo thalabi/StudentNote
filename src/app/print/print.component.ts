@@ -13,7 +13,7 @@ export class PrintComponent implements OnInit {
 
   fromTimestamp: Date;
   toTimestamp: Date;
-  studentIds: number[] = [];
+  selectedStudents: Student[] = [];
   timestampRange: TimestampRange = new TimestampRange();
   studentArray: Student[];
 
@@ -48,7 +48,7 @@ onTabChange(event) {
       this.toTimestamp = new Date();      
       break;
     case 2:
-      this.studentIds = [];
+      this.selectedStudents = [];
       break;
     default:
       throw('Something went wrong on our end. Invalid tabIndex: '+ tabIndex);
@@ -79,8 +79,12 @@ onTabChange(event) {
   }
 
   onDownloadStudentSelectPdf(): void {
-    console.log("studentIds: ", this.studentIds);
-    this.studentService.downloadStudentsByStudentIdsPdf(this.studentIds).subscribe(
+    let studentIds: number[] = [];
+    for (let student of this.selectedStudents) {
+      studentIds.push(student.id);
+    }
+    console.log("studentIds: ", studentIds);
+    this.studentService.downloadStudentsByStudentIdsPdf(studentIds).subscribe(
         (response) => {
         var pdfUrl = URL.createObjectURL(response);
         window.open(pdfUrl);

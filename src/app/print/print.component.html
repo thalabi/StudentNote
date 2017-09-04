@@ -40,20 +40,15 @@
     <!--print by student selection-->
     
     <p-dataTable [value]="studentArray"
-      scrollable="true" scrollHeight="300px">
+      scrollable="true" scrollHeight="300px"
+      [(selection)]="selectedStudents" dataKey="id">
+      <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
       <p-column field="firstName" header="First Name"></p-column>
       <p-column field="lastName" header="Last Name"></p-column>
       <p-column field="grade" header="Grade"></p-column>
-      <p-column>
-        <ng-template pTemplate="header">
-            <span class="fa fa-check"></span>
-        </ng-template>
-        <ng-template let-student="rowData" pTemplate="body">
-            <p-checkbox name="groupname" [value]="student.id" [(ngModel)]="studentIds"></p-checkbox>
-        </ng-template>  
-      </p-column>      
     </p-dataTable>
-    <button pButton type="button" (click)="onDownloadStudentSelectPdf()" [disabled]="studentIds.length == 0" label="Print"></button>
+    <button pButton type="button" (click)="onDownloadStudentSelectPdf()"
+      [disabled]="selectedStudents.length == 0" label="Print" style="margin-top: 0.5em;"></button>
 
 </p-tabPanel>
 </p-tabView>
