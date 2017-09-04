@@ -19,10 +19,10 @@ const routes: Routes = [
     {path: 'print',  component: PrintComponent, canActivate: [AuthGuard]},
     {path: 'about',  component: AboutComponent},
     {path: 'contact-us',  component: ContactUsComponent},
-    {path: 'studentDetailsForm',  component: StudentDetailsFormComponent},
-    {path: 'noteTable', component: NoteTableComponent},
-    {path: 'noteDetailsForm',  component: NoteDetailsFormComponent},
-    {path: 'schoolYearCrud',  component: SchoolYearCrudComponent},
+    {path: 'studentDetailsForm',  component: StudentDetailsFormComponent, canActivate: [AuthGuard]},
+    {path: 'noteTable', component: NoteTableComponent, canActivate: [AuthGuard]},
+    {path: 'noteDetailsForm',  component: NoteDetailsFormComponent, canActivate: [AuthGuard]},
+    {path: 'schoolYearCrud',  component: SchoolYearCrudComponent, canActivate: [AuthGuard]},
     {path: 'login',  component: LoginComponent},
     {path: '**',            component: _404Component}
 ]
