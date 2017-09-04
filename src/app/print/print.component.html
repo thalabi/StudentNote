@@ -1,97 +1,6 @@
-<div class="container-fluid">
+<!-- <div class="ui-g ui-fluid"> -->
 
-<ngb-tabset #tab="ngbTabset" (tabChange)="onTabsetChange(tab)">
-
-  <!--print all tab-->
-  <ngb-tab id="allTab" title="All">
-    <ng-template ngbTabContent>
-      <button (click)="onDownloadAllPdf()" class="btn btn-primary btn-sm mt-2">Print</button>
-    </ng-template>
-  </ngb-tab>
-
-  <!--print by date range tab-->
-  <ngb-tab id="dateRangeTab" title="Date Range">
-    <ng-template ngbTabContent>
-
-      <form class="form-inline mt-2">
-
-        <div class="form-group">
-          <div class="input-group">
-            <label for="fromTimestamp">From</label>
-            <input class="form-control ml-2" readonly="readonly"
-              name="fromTimestamp" [(ngModel)]="fromTimestamp" ngbDatepicker #d1="ngbDatepicker" id="fromTimestamp"
-              >
-            <div class="input-group-addon" (click)="d1.toggle()" >
-              <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group ml-4">
-          <div class="input-group">
-            <label for="toTimestamp">To</label>
-            <input class="form-control ml-2" readonly="readonly"
-              name="toTimestamp" [(ngModel)]="toTimestamp" ngbDatepicker #d2="ngbDatepicker" id="toTimestamp"
-              >
-            <div class="input-group-addon" (click)="d2.toggle()" >
-              <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
-            </div>
-          </div>
-        </div>
-
-      </form>
-
-      <button (click)="onDownloadDateRangePdf()" class="btn btn-primary btn-sm mt-2"
-        [disabled]="fromTimestamp == null || toTimestamp == null || 
-          ngbDateStructToDate(fromTimestamp)>ngbDateStructToDate(toTimestamp)">Print</button>
-
-      <!--<pre>Model: {{ fromTimestamp | json }}</pre>
-      <pre>Model: {{ toTimestamp | json }}</pre>-->
-
-    </ng-template>
-  </ngb-tab>
-
-  <!--print by student selection-->
-  <ngb-tab id="studentSelectTab" title="Student Select">
-    <ng-template ngbTabContent>
-
-      <table class="table table-striped table-sm mt-2 my-table-nonfluid">
-      <thead>
-      <tr>
-      <th></th>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Grade</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let student of studentArray; let i = index">
-      <td>
-        <div class="form-check">
-        <label class="form-check-label">
-        <input class="form-check-input align-middle" type="checkbox" [value]="student.id"
-          (change)="onSelectStudentCheckbox($event)">
-        </label>
-        </div>
-      </td>
-      <td class="align-middle">{{student.firstName}}</td>
-      <td class="align-middle">{{student.lastName}}</td>
-      <td class="align-middle">{{student.grade}}</td>
-      </tr>
-      </tbody>
-      </table>
-
-      <!--<pre>Model: {{ studentIds | json }}</pre>-->
-
-      <button (click)="onDownloadStudentSelectPdf()" class="btn btn-primary btn-sm mt-2"
-        [disabled]="studentIds.length == 0">Print</button>
-
-    </ng-template>
-  </ngb-tab>
-
-</ngb-tabset>
-
-<p-tabView (onChange)="onTabChange($event)">
+  <p-tabView (onChange)="onTabChange($event)">
   <p-tabPanel header="All" [selected]="true">
 
   <!--print all tab-->
@@ -102,8 +11,29 @@
   <p-tabPanel header="Date Range">
   
     <!--print by date range tab-->
+    
+    <div class="ui-g ui-fluid"> 
 
-    Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.
+      <div class="ui-g-12 ui-md-2">
+        <label for="fromTimestampId">From: </label>
+        <p-calendar [(ngModel)]="fromTimestamp" [monthNavigator]="true" [yearNavigator]="true"
+          yearRange="2015:2030" dateFormat="M d, yy" [showIcon]="true" readonlyInput="readonlyInput"
+          id="fromTimestampId"></p-calendar>
+      </div>
+
+      <div class="ui-g-12 ui-md-2">
+        <label for="toTimestampId">To: </label>
+        <p-calendar [(ngModel)]="toTimestamp" [monthNavigator]="true" [yearNavigator]="true"
+          yearRange="2015:2030" dateFormat="M d, yy" [showIcon]="true" readonlyInput="readonlyInput"
+          id="toTimestampId"></p-calendar>
+      </div>
+
+    </div>
+
+    <button pButton type="button" (click)="onDownloadDateRangePdf()" label="Print"
+    [disabled]="fromTimestamp == null || toTimestamp == null || 
+      fromTimestamp > toTimestamp" style="margin-left: 0.5em;"></button>
+
   </p-tabPanel>
   <p-tabPanel header="Student Select">
 
@@ -128,4 +58,4 @@
 </p-tabPanel>
 </p-tabView>
 
-</div>
+<!-- </div> -->

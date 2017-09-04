@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student.service';
 import { TimestampRange } from '../TimestampRange';
 import { Student } from '../Student';
-import {NgbDateStruct, NgbTabset } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from './../error/message.service';
 
 @Component({
@@ -12,8 +11,8 @@ import { MessageService } from './../error/message.service';
 })
 export class PrintComponent implements OnInit {
 
-  fromTimestamp: NgbDateStruct;
-  toTimestamp: NgbDateStruct;
+  fromTimestamp: Date;
+  toTimestamp: Date;
   studentIds: number[] = [];
   timestampRange: TimestampRange = new TimestampRange();
   studentArray: Student[];
@@ -32,26 +31,7 @@ export class PrintComponent implements OnInit {
         console.log('studentArray[]: ', this.studentArray);
       });
 
-      let today = new Date();
-      this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
-  }
-
-  onTabsetChange(tab: NgbTabset) {
-    // Note: the activeId is the id of the tab that was selected before the change event
-    switch (tab.activeId) {
-      case 'allTab':
-        break;
-      case 'dateRangeTab':
-        this.fromTimestamp = undefined;
-        let today = new Date();
-        this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
-        break;
-      case 'studentSelectTab':
-        this.studentIds = [];
-        break;
-      default:
-        throw('Some went wrong on our end. Invalid activeId: '+ tab.activeId);
-    }
+      this.toTimestamp = new Date();
   }
 
 onTabChange(event) {
@@ -61,9 +41,11 @@ onTabChange(event) {
     case 0:
       break;
     case 1:
+      // this.fromTimestamp = undefined;
+      // let today = new Date();
+      // this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
       this.fromTimestamp = undefined;
-      let today = new Date();
-      this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
+      this.toTimestamp = new Date();      
       break;
     case 2:
       this.studentIds = [];
@@ -73,20 +55,6 @@ onTabChange(event) {
   }
 }
 
-
-  onSelectStudentCheckbox(event) {
-    console.log('onSelectStudentCheckbox: ', event.target.checked, event.target.value);
-    // console.log('onSelectStudentCheckbox: ', event);
-    if (event.target.checked) {
-      this.studentIds[this.studentIds.length] = event.target.value;
-    } else {
-      let index = this.studentIds.indexOf(event.target.value);
-      if (index > 1) {
-        this.studentIds.splice(index,1);
-      }
-    }
-  }
-  
   onDownloadAllPdf(): void {
     this.studentService.downloadAllPdf().subscribe(
         (response) => {
@@ -98,8 +66,9 @@ onTabChange(event) {
   
   onDownloadDateRangePdf(): void {
     console.log(this.fromTimestamp, this.toTimestamp);
-    this.timestampRange.fromTimestamp = new Date(this.fromTimestamp.year, this.fromTimestamp.month-1, this.fromTimestamp.day);
-    this.timestampRange.toTimestamp = new Date(this.toTimestamp.year, this.toTimestamp.month-1, this.toTimestamp.day, 23, 59, 59, 999);
+    this.timestampRange.fromTimestamp = this.fromTimestamp;
+    this.timestampRange.toTimestamp = new Date(this.toTimestamp.getFullYear(), this.toTimestamp.getMonth(), this.toTimestamp.getDate(), 23, 59, 59, 999);
+    
     console.log('this.timestampRange: ', this.timestampRange);
     this.studentService.downloadStudentsByTimestampRangePdf(this.timestampRange).subscribe(
         (response) => {
@@ -118,8 +87,4 @@ onTabChange(event) {
         }
     );
   }
-
-  ngbDateStructToDate (ngbDateStruct: NgbDateStruct): Date {
-    return new Date(ngbDateStruct.year, ngbDateStruct.month-1, ngbDateStruct.day);
-  } 
 }

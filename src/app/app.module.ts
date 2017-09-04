@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -27,16 +28,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './app.error.handler';
 
-import { snParserFormatter } from './util/NgbDateMomentParserFormatter';
-import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
-
 import { MessageService } from './error/message.service';
 import { CustomErrorHandler } from './error/custom-error-handler';
 import { ExceptionComponent } from './error/error.component';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
 import { DatatableScrollableComponent } from './datatable-scrollable/datatable-scrollable.component';
 
-import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule, SharedModule } from 'primeng/primeng';
+import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule, CalendarModule, SharedModule } from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -57,12 +55,13 @@ import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewMo
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
     AppRouting,
     NgbModule.forRoot(),
-    InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule, SharedModule
+    InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule, CalendarModule, SharedModule
   ],
   providers: [
     StudentService,
@@ -70,7 +69,6 @@ import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewMo
     AuthGuard,
     AuthenticationService,
     {provide: ErrorHandler, useClass: AppErrorHandler},
-    {provide: NgbDateParserFormatter, useFactory: snParserFormatter},
     MessageService, // added
     { provide: ErrorHandler, useClass: CustomErrorHandler }, // overrride default error handler
     ConfigService,
