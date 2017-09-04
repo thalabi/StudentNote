@@ -38,10 +38,10 @@
 <a class="navbar-brand">Student Notes<span *ngIf="userPreference != null"> ({{userPreference.schoolYear.schoolYear}})</span></a>
 
   <ul class="nav navbar-nav">
-    <li class="nav-item">
+    <li *ngIf="user != null" class="nav-item">
       <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
     </li>
-    <li class="nav-item">
+    <li *ngIf="user != null" class="nav-item">
       <a class="nav-link" routerLink="/print" routerLinkActive="active">Print</a>
     </li>
     <li class="nav-item">
