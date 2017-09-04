@@ -34,6 +34,7 @@ import { ExceptionComponent } from './error/error.component';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
 
 import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule, CalendarModule, SharedModule } from 'primeng/primeng';
+import { SchoolYearCrudComponent } from './school-year-crud/school-year-crud.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewMo
     LoginComponent,
     MenuComponent,
     PrintComponent,
-    ExceptionComponent
+    ExceptionComponent,
+    SchoolYearCrudComponent
   ],
   imports: [
     BrowserModule,

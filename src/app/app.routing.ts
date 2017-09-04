@@ -6,6 +6,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { StudentDetailsFormComponent } from './student-details-form/student-details-form.component';
 import { NoteTableComponent } from './note-table/note-table.component';
 import { NoteDetailsFormComponent } from './note-details-form/note-details-form.component';
+import { SchoolYearCrudComponent } from './school-year-crud/school-year-crud.component';
 
 import { LoginComponent } from './security/login/login.component';
 import { AuthGuard } from './security/auth.guard';
@@ -21,6 +22,7 @@ const routes: Routes = [
     {path: 'studentDetailsForm',  component: StudentDetailsFormComponent},
     {path: 'noteTable', component: NoteTableComponent},
     {path: 'noteDetailsForm',  component: NoteDetailsFormComponent},
+    {path: 'schoolYearCrud',  component: SchoolYearCrudComponent},
     {path: 'login',  component: LoginComponent},
     {path: '**',            component: _404Component}
 ]
