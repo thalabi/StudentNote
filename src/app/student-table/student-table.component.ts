@@ -14,7 +14,7 @@ export class StudentTableComponent implements OnInit {
 
   studentArray: Student[];
 
-  selectedRowIndex : number;
+  selectedStudent: Student;
   modifyAndDeleteButtonsDisable : boolean = true;
 
   constructor (
@@ -48,38 +48,35 @@ export class StudentTableComponent implements OnInit {
     console.log('StudentTableComponent ngOnInit() end ...');
   }
 
-  rowOnClick (selectedRowIndex: number) {
-    //console.log('StudentTableComponent begin ...');
-    //console.log('this.studentArray[selectedRowIndex].firstName: '+this.studentArray[selectedRowIndex].firstName);
-    //this.router.navigate(['/studentDetails', student.id]);
-    if (selectedRowIndex != this.selectedRowIndex) {
-      this.selectedRowIndex = selectedRowIndex;
-      this.modifyAndDeleteButtonsDisable = false;
-    } else {
-      this.selectedRowIndex = -1;
-      this.modifyAndDeleteButtonsDisable = true;
-    }
-    
-    //console.log('StudentTableComponent end ...');
+  onRowSelect(event) {
+    console.log(this.selectedStudent);
+    this.modifyAndDeleteButtonsDisable = false;
+    console.log(this.modifyAndDeleteButtonsDisable);
+  }
+
+  onRowUnselect(event) {
+    console.log(this.selectedStudent);
+    this.modifyAndDeleteButtonsDisable = true;
+    console.log(this.modifyAndDeleteButtonsDisable);
   }
 
   onAddStudent() {
-    this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
+    this.sessionDataService.student = this.selectedStudent;
     this.sessionDataService.crudMode = 'Add';
     this.router.navigate(['/studentDetailsForm']);
   }
   onModifyStudent() {
-    this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
+    this.sessionDataService.student = this.selectedStudent;
     this.sessionDataService.crudMode = 'Modify';
     this.router.navigate(['/studentDetailsForm']);
   }
   onDeleteStudent() {
-    this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
+    this.sessionDataService.student = this.selectedStudent;
     this.sessionDataService.crudMode = 'Delete';
     this.router.navigate(['/studentDetailsForm']);
   }
   onManageNotes() {
-    this.sessionDataService.student = this.studentArray[this.selectedRowIndex];
+    this.sessionDataService.student = this.selectedStudent;    
     this.router.navigate(['/noteTable']);    
   }
 }

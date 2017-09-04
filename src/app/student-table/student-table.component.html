@@ -1,23 +1,19 @@
 <app-student-dashboard></app-student-dashboard>
-<div style="clear: both;">
-<table class="hoverTable">
-  <thead>
-  <tr>
-    <td>First name</td>
-    <td>Last name</td>
-    <td>Grade</td>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let student of studentArray; let i = index" (click)="rowOnClick(i)" [class.selected]="i == selectedRowIndex">
-    <td>{{student.firstName}}</td>
-    <td>{{student.lastName}}</td>
-    <td>{{student.grade}}</td>
-  </tr>
-  </tbody>
-</table>
-</div>  
+
 <div style="margin-top: 0.5rem;">
+
+  <p-dataTable [value]="studentArray"
+    scrollable="true" scrollHeight="300px"
+    selectionMode="single" [(selection)]="selectedStudent" dataKey="id"
+    (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+    <p-column field="firstName" header="First Name"></p-column>
+    <p-column field="lastName" header="Last Name"></p-column>
+    <p-column field="grade" header="Grade"></p-column>
+  </p-dataTable>
+
+</div>
+
+<div style="margin-top: 0.5rem;">      
 <button pButton type="button" (click)="onAddStudent()" label="Add Student"></button>
 <button pButton type="button" (click)="onModifyStudent()" label="Modify Student" [disabled]="modifyAndDeleteButtonsDisable" ></button>
 <button pButton type="button" (click)="onDeleteStudent()" label="Delete Student" [disabled]="modifyAndDeleteButtonsDisable"></button>
