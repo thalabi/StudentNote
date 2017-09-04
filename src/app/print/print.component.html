@@ -69,7 +69,8 @@
       <td>
         <div class="form-check">
         <label class="form-check-label">
-        <input class="form-check-input align-middle" type="checkbox" [value]="student.id" (change)="onSelectStudentCheckbox($event)">
+        <input class="form-check-input align-middle" type="checkbox" [value]="student.id"
+          (change)="onSelectStudentCheckbox($event)">
         </label>
         </div>
       </td>
@@ -89,4 +90,42 @@
   </ngb-tab>
 
 </ngb-tabset>
+
+<p-tabView (onChange)="onTabChange($event)">
+  <p-tabPanel header="All" [selected]="true">
+
+  <!--print all tab-->
+
+  <button pButton type="button" (click)="onDownloadAllPdf()" label="Print"></button>    
+
+  </p-tabPanel>
+  <p-tabPanel header="Date Range">
+  
+    <!--print by date range tab-->
+
+    Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows.
+  </p-tabPanel>
+  <p-tabPanel header="Student Select">
+
+    <!--print by student selection-->
+    
+    <p-dataTable [value]="studentArray"
+      scrollable="true" scrollHeight="300px">
+      <p-column field="firstName" header="First Name"></p-column>
+      <p-column field="lastName" header="Last Name"></p-column>
+      <p-column field="grade" header="Grade"></p-column>
+      <p-column>
+        <ng-template pTemplate="header">
+            <span class="fa fa-check"></span>
+        </ng-template>
+        <ng-template let-student="rowData" pTemplate="body">
+            <p-checkbox name="groupname" [value]="student.id" [(ngModel)]="studentIds"></p-checkbox>
+        </ng-template>  
+      </p-column>      
+    </p-dataTable>
+    <button pButton type="button" (click)="onDownloadStudentSelectPdf()" [disabled]="studentIds.length == 0" label="Print"></button>
+
+</p-tabPanel>
+</p-tabView>
+
 </div>

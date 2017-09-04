@@ -18,7 +18,6 @@ export class PrintComponent implements OnInit {
   timestampRange: TimestampRange = new TimestampRange();
   studentArray: Student[];
 
-
   constructor(
     private studentService: StudentService,
     private messageService: MessageService
@@ -54,6 +53,27 @@ export class PrintComponent implements OnInit {
         throw('Some went wrong on our end. Invalid activeId: '+ tab.activeId);
     }
   }
+
+onTabChange(event) {
+  console.log(event.index);
+  let tabIndex = event.index;
+  switch (tabIndex) {
+    case 0:
+      break;
+    case 1:
+      this.fromTimestamp = undefined;
+      let today = new Date();
+      this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
+      break;
+    case 2:
+      this.studentIds = [];
+      break;
+    default:
+      throw('Something went wrong on our end. Invalid tabIndex: '+ tabIndex);
+  }
+}
+
+
   onSelectStudentCheckbox(event) {
     console.log('onSelectStudentCheckbox: ', event.target.checked, event.target.value);
     // console.log('onSelectStudentCheckbox: ', event);

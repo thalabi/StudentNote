@@ -36,7 +36,7 @@ import { ExceptionComponent } from './error/error.component';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
 import { DatatableScrollableComponent } from './datatable-scrollable/datatable-scrollable.component';
 
-import { InputTextModule, DataTableModule, ButtonModule, DialogModule, SharedModule } from 'primeng/primeng';
+import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule, SharedModule } from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,7 @@ import { InputTextModule, DataTableModule, ButtonModule, DialogModule, SharedMod
     HttpModule,
     AppRouting,
     NgbModule.forRoot(),
-    InputTextModule, DataTableModule, ButtonModule, DialogModule, SharedModule
+    InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule, SharedModule
   ],
   providers: [
     StudentService,
