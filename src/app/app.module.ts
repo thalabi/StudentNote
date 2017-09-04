@@ -32,7 +32,6 @@ import { MessageService } from './error/message.service';
 import { CustomErrorHandler } from './error/custom-error-handler';
 import { ExceptionComponent } from './error/error.component';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
-import { DatatableScrollableComponent } from './datatable-scrollable/datatable-scrollable.component';
 
 import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule, CalendarModule, SharedModule } from 'primeng/primeng';
 
@@ -50,8 +49,7 @@ import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewMo
     LoginComponent,
     MenuComponent,
     PrintComponent,
-    ExceptionComponent,
-    DatatableScrollableComponent
+    ExceptionComponent
   ],
   imports: [
     BrowserModule,
