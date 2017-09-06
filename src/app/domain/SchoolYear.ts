@@ -7,7 +7,4 @@ export class SchoolYear {
     endDate: Date;
     studentSet: Student[];
     version: number;
-
-    startDateFormatted: string;
-    endDateFormatted: string;
 }

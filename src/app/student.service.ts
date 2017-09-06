@@ -195,47 +195,41 @@ export class StudentService {
     .catch(this.handleError);
 
 
-    // let username: string;// = 'JohnDoe';
-    // try {
-    //   this.sessionDataService.userSubject
-    //   .subscribe(
-    //     data => {
-    //       let user = data;
-    //       console.log('in getUserPreference2() user: ', user);
-    //       username = user.username;
-    //       return this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username/*, {headers: this.httpHeaders()}*/)
-    //       .map((response: Response) => {
-    //         let userPreference = response.json() as UserPreference;
-    //         console.log('userPreference = ', userPreference);
-    //         this.sessionDataService.userPreferenceSubject.next(userPreference);
-    //         return userPreference;
-    //       })
-    //       .catch(this.handleError);
-
-    // },
-    //     error => console.error(error),
-    //     () => console.log('completed')
-    //   );
-    // } catch(e) {
-    //   console.log('exception with username2', e);
-    // }
-    // return null;
-
-    // console.log('username: ', username);
-    // console.log('url used: ', this.serviceUrl+"/userPreference");
-    //this.http.get(this.serviceUrl+"/userPreference").subscribe();
-    // console.log('after http call');
-    // return this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username/*, {headers: this.httpHeaders()}*/)
-    //           .map((response: Response) => {
-    //             let userPreference = response.json() as UserPreference;
-    //             console.log('userPreference = ', userPreference);
-    //             this.sessionDataService.userPreferenceSubject.next(userPreference);
-    //             return userPreference;
-    //           })
-    //           .catch(this.handleError);
-    
   }
 
+  getAllSchoolYears(): Observable<SchoolYear[]> {
+    return this.http.get(this.serviceUrl+"/schoolYear/getAllSchoolYears",
+                          {headers: this.httpHeaders()})
+          .map(response => {
+            let schoolYears = response.json() as SchoolYear[];
+            schoolYears.forEach(schoolYear => {
+              schoolYear.startDate = new Date(schoolYear.startDate);
+              schoolYear.endDate = new Date(schoolYear.endDate);
+            });
+            return schoolYears;
+          })
+          .catch(this.handleError);
+  }
+
+  saveSchoolYear(schoolYear: SchoolYear): Observable<SchoolYear> {
+    
+    console.log('in saveSchoolYear, schoolYear: ', schoolYear);
+    return this.http
+      .post(this.serviceUrl+"/schoolYear/saveSchoolYear", JSON.stringify(schoolYear),
+              {headers: this.httpHeaders()})
+      .map(response => {
+        return response.json() as SchoolYear;
+      })
+      .catch(this.handleError);
+  }
+    
+  deleteSchoolYear(schoolYear: SchoolYear) {
+
+    return this.http
+      .delete(this.serviceUrl+"/schoolYear/deleteSchoolYearById/"+schoolYear.id, {headers: this.httpHeaders()})
+      .catch(this.handleError);
+  }
+      
   private handleError (response: Response | any) {
       console.log(response);
       let errorMessage: string;

@@ -1,3 +1,58 @@
-<p>
-  school-year-crud works!
-</p>
+<p-dataTable [value]="schoolYears" selectionMode="single" scrollable="true" scrollHeight="200px"
+  [(selection)]="selectedSchoolYear" dataKey="id"
+  (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+  [responsive]="true">
+  <p-header>School Year Maintenance</p-header>
+  <p-column field="schoolYear" header="Label"></p-column>
+  <p-column field="startDate" header="Start">
+      <ng-template let-student="rowData" pTemplate="body">
+          <span>{{student.startDate|date:'mediumDate'}}</span>
+      </ng-template>        
+  </p-column>
+  <p-column field="endDate" header="End">
+      <ng-template let-student="rowData" pTemplate="body">
+          <span>{{student.endDate|date:'mediumDate'}}</span>
+      </ng-template>        
+  </p-column>
+  <p-footer>
+    <div class="ui-helper-clearfix" style="width:100%">
+      <button type="button" pButton icon="fa-plus" style="float:left"
+          (click)="showDialog('Add')" label="Add"></button>
+      <button type="button" pButton icon="fa-edit" style="float:left"
+          (click)="showDialog('Modify')" label="Modify" [disabled]="modifyAndDeleteButtonsDisable"></button>
+      <button type="button" pButton icon="fa-remove" style="float:left"
+          (click)="showDialog('Delete')" label="Delete" [disabled]="modifyAndDeleteButtonsDisable"></button>
+      </div>
+  </p-footer>
+</p-dataTable>
+
+<p-dialog header="School Year {{crudMode}}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade"
+  [modal]="true">
+    <div class="ui-g">
+      <div class="ui-g-2"><label for="schoolYear">School year</label></div>
+      <div class="ui-g-10"><input pInputText id="schoolYear" [(ngModel)]="selectedSchoolYear.schoolYear"
+          [readonly]="crudMode == 'Delete'"/></div>
+      <div class="ui-g-2"><label for="startDateId">Start date</label></div>
+      <div class="ui-g-10">
+          <p-calendar [(ngModel)]="selectedSchoolYear.startDate" [monthNavigator]="true" [yearNavigator]="true"
+              yearRange="2015:2030" dateFormat="M d, yy" [showIcon]="true" readonlyInput="readonlyInput"
+              id="startDateId" [disabled]="crudMode == 'Delete'" appendTo="body"></p-calendar></div>
+      <div class="ui-g-2"><label for="endDateId">End date</label></div>
+      <div class="ui-g-10">
+          <p-calendar [(ngModel)]="selectedSchoolYear.endDate" [monthNavigator]="true" [yearNavigator]="true"
+              yearRange="2015:2030" dateFormat="M d, yy" [showIcon]="true" readonlyInput="readonlyInput"
+              id="endDateId" [disabled]="crudMode == 'Delete'" appendTo="body"></p-calendar></div>
+      <p-footer>
+          <div class="ui-g-6">
+              <!-- TODO replace disabled logic with a function -->
+              <button pButton type="submit" (click)="onSubmit()" label="Submit"
+                  [disabled]="(selectedSchoolYear.schoolYear == null ||
+                                  selectedSchoolYear.startDate == null || selectedSchoolYear.endDate == null) &&
+                               (crudMode == 'Add' || crudMode == 'Modify')"></button>
+          </div>
+          <div class="ui-g-6">
+              <button pButton type="reset" label="Cancel" (click)="onCancel()"></button>
+          </div>
+          </p-footer>
+    </div>
+</p-dialog>
