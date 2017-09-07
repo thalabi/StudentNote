@@ -33,8 +33,10 @@ import { CustomErrorHandler } from './error/custom-error-handler';
 import { ExceptionComponent } from './error/error.component';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
 
-import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule, CalendarModule, SharedModule } from 'primeng/primeng';
+import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule,
+  CalendarModule, DropdownModule, SharedModule } from 'primeng/primeng';
 import { SchoolYearCrudComponent } from './school-year-crud/school-year-crud.component';
+import { SchoolYearSelectComponent } from './school-year-select/school-year-select.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import { SchoolYearCrudComponent } from './school-year-crud/school-year-crud.com
     MenuComponent,
     PrintComponent,
     ExceptionComponent,
-    SchoolYearCrudComponent
+    SchoolYearCrudComponent,
+    SchoolYearSelectComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { SchoolYearCrudComponent } from './school-year-crud/school-year-crud.com
     HttpModule,
     AppRouting,
     NgbModule.forRoot(),
-    InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule, CalendarModule, SharedModule
+    InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule,
+      CalendarModule, DropdownModule, SharedModule
   ],
   providers: [
     StudentService,

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SchoolYear } from '../domain/SchoolYear';
 import { StudentService } from './../student.service';
 import { DatePipe } from '@angular/common';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Constants } from '../constants';
 
 @Component({
@@ -19,8 +18,7 @@ export class SchoolYearCrudComponent implements OnInit {
   crudMode: string;
 
   constructor(
-    private studentService: StudentService,
-    private formBuilder: FormBuilder
+    private studentService: StudentService
   ) { }
 
   ngOnInit() {

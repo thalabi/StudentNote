@@ -7,6 +7,7 @@ import { StudentDetailsFormComponent } from './student-details-form/student-deta
 import { NoteTableComponent } from './note-table/note-table.component';
 import { NoteDetailsFormComponent } from './note-details-form/note-details-form.component';
 import { SchoolYearCrudComponent } from './school-year-crud/school-year-crud.component';
+import { SchoolYearSelectComponent } from './school-year-select/school-year-select.component';
 
 import { LoginComponent } from './security/login/login.component';
 import { AuthGuard } from './security/auth.guard';
@@ -23,6 +24,7 @@ const routes: Routes = [
     {path: 'noteTable', component: NoteTableComponent, canActivate: [AuthGuard]},
     {path: 'noteDetailsForm',  component: NoteDetailsFormComponent, canActivate: [AuthGuard]},
     {path: 'schoolYearCrud',  component: SchoolYearCrudComponent, canActivate: [AuthGuard]},
+    {path: 'schoolYearSelect',  component: SchoolYearSelectComponent, canActivate: [AuthGuard]},
     {path: 'login',  component: LoginComponent},
     {path: '**',            component: _404Component}
 ]

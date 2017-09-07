@@ -1,0 +1,15 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <p-dropdown [options]="schoolYearSelectItems" [(ngModel)]="selectedSchoolYear"
+      placeholder="Select school year" [style]="{'width':'12em'}"></p-dropdown>
+  </div>
+
+  <div class="ui-g-1">
+    <!-- TODO add disabled -->
+    <button pButton type="submit" (click)="onSubmit()" label="Submit"></button>
+  </div>
+  <div class="ui-g-11">
+      <button pButton type="reset" label="Cancel" (click)="onCancel()"></button>
+  </div>
+
+</div>
