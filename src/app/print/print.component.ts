@@ -34,26 +34,26 @@ export class PrintComponent implements OnInit {
       this.toTimestamp = new Date();
   }
 
-onTabChange(event) {
-  console.log(event.index);
-  let tabIndex = event.index;
-  switch (tabIndex) {
-    case 0:
-      break;
-    case 1:
-      // this.fromTimestamp = undefined;
-      // let today = new Date();
-      // this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
-      this.fromTimestamp = undefined;
-      this.toTimestamp = new Date();      
-      break;
-    case 2:
-      this.selectedStudents = [];
-      break;
-    default:
-      throw('Something went wrong on our end. Invalid tabIndex: '+ tabIndex);
+  onTabChange(event) {
+    console.log(event.index);
+    let tabIndex = event.index;
+    switch (tabIndex) {
+      case 0:
+        break;
+      case 1:
+        // this.fromTimestamp = undefined;
+        // let today = new Date();
+        // this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
+        this.fromTimestamp = undefined;
+        this.toTimestamp = new Date();      
+        break;
+      case 2:
+        this.selectedStudents = [];
+        break;
+      default:
+        throw('Something went wrong on our end. Invalid tabIndex: '+ tabIndex);
+    }
   }
-}
 
   onDownloadAllPdf(): void {
     this.studentService.downloadAllPdf().subscribe(
