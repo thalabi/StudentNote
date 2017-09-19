@@ -1,4 +1,4 @@
-import { SchoolYear } from './../SchoolYear';
+import { SchoolYear } from './SchoolYear';
 
 export class UserPreference {
     id: number;

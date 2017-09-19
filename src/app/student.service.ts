@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Student } from './Student';
 import { Note } from './Note';
-import { SchoolYear } from './SchoolYear';
+import { SchoolYear } from './domain/SchoolYear';
 import { UserPreference } from './domain/UserPreference';
 
 import { Http, Headers, Response, ResponseContentType } from '@angular/http';
