@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Student } from './Student';
-import { Note } from './Note';
+import { Student } from './domain/Student';
+import { Note } from './domain/Note';
 import { SchoolYear } from './domain/SchoolYear';
 import { UserPreference } from './domain/UserPreference';
 
@@ -56,7 +56,7 @@ export class StudentService {
     console.log('this.sessionDataService.user.token: ', this.sessionDataService.user.token);
 
     let username: string = this.sessionDataService.user.username;
-    return this.http.get(this.serviceUrl+"/getStudentsBySchoolYearFromUserPreference/" + username, {headers: this.httpHeaders()})
+    return this.http.get(this.serviceUrl+"/getStudentDtosBySchoolYearFromUserPreference/" + username, {headers: this.httpHeaders()})
               .map(response => {
                 let schoolYear = response.json() as SchoolYear;
                 return schoolYear.studentSet;
@@ -118,7 +118,7 @@ export class StudentService {
 
     console.log('in getLatestActiveStudents()');
     let username: string = this.sessionDataService.user.username;
-    return this.http.get(this.serviceUrl+"/getLatestActiveStudents/"+username+"/"+this.activeStudentsLimit, {headers: this.httpHeaders()})
+    return this.http.get(this.serviceUrl+"/getLatestActiveStudentDtos/"+username+"/"+this.activeStudentsLimit, {headers: this.httpHeaders()})
               .map(response => response.json() as Student[])
               .catch(this.handleError);
   }
@@ -179,17 +179,18 @@ export class StudentService {
   }
 
   getUserPreference2(): Observable<UserPreference> {
-    console.log('in getUserPreference()');
+    console.log('in getUserPreference2()');
 
     console.log('in getUserPreference2() this.sessionDataService.user: ', this.sessionDataService.user);
     console.log('in getUserPreference2() this.sessionDataService.user.username: ', this.sessionDataService.user.username);
     let username: string = this.sessionDataService.user.username;
     console.log('in getUserPreference2() username: ', username);
-    return this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username, {headers: this.httpHeaders()})
+    return this.http.get(this.serviceUrl+"/userPreference/getDtoByUsername/"+username, {headers: this.httpHeaders()})
     .map((response: Response) => {
       let userPreference = response.json() as UserPreference;
       console.log('userPreference = ', userPreference);
       this.sessionDataService.userPreferenceSubject.next(userPreference);
+      this.sessionDataService.userPreference = userPreference;
       return userPreference;
     })
     .catch(this.handleError);
@@ -198,7 +199,7 @@ export class StudentService {
   }
 
   getAllSchoolYears(): Observable<SchoolYear[]> {
-    return this.http.get(this.serviceUrl+"/schoolYear/getAllSchoolYears",
+    return this.http.get(this.serviceUrl+"/schoolYear/getAllSchoolYearDtos",
                           {headers: this.httpHeaders()})
           .map(response => {
             let schoolYears = response.json() as SchoolYear[];
@@ -229,7 +230,20 @@ export class StudentService {
       .delete(this.serviceUrl+"/schoolYear/deleteSchoolYearById/"+schoolYear.id, {headers: this.httpHeaders()})
       .catch(this.handleError);
   }
-      
+
+  saveUserPreference(userPreference: UserPreference): Observable<UserPreference> {
+    
+    console.log('in saveUserPreference, userPreference: ', userPreference);
+    return this.http
+      .post(this.serviceUrl+"/userPreference/saveUserPreferenceDto", JSON.stringify(userPreference),
+              {headers: this.httpHeaders()})
+      .map(response => {
+        return response.json() as UserPreference;
+      })
+      .catch(this.handleError);
+  }
+    
+  
   private handleError (response: Response | any) {
       console.log(response);
       let errorMessage: string;

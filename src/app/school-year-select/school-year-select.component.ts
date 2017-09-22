@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SchoolYear } from '../domain/SchoolYear';
 import { StudentService } from './../student.service';
+import { SessionDataService } from '../session-data.service';
 import {SelectItem} from 'primeng/primeng';
+import { UserPreference } from '../domain/UserPreference';
 
 @Component({
   selector: 'app-school-year-select',
@@ -15,11 +17,24 @@ export class SchoolYearSelectComponent implements OnInit {
   selectedSchoolYear: SchoolYear;
   
   constructor(
-    private studentService: StudentService
+    private studentService: StudentService,
+    private sessionDataService: SessionDataService
   ) {  }
 
   ngOnInit() {
     this.loadSchoolYears();
+    console.log('this.sessionDataService.userPreference', this.sessionDataService.userPreference);
+    // this.sessionDataService.userPreferenceSubject
+    // //.map((data:User)=>{console.log(data})
+    // .subscribe(
+    //   data => {
+    //     this.userPreference = data;
+    //     console.log('second userPreference: ', this.userPreference);
+    //   },
+    //   error => console.error(error),
+    //   () => console.log('completed')
+    // );  
+
   }
 
   loadSchoolYears() {
@@ -41,5 +56,20 @@ export class SchoolYearSelectComponent implements OnInit {
 
   onSubmit() {
     console.log('this.selectedSchoolYear', this.selectedSchoolYear);
-  }    
+    console.log('this.sessionDataService.userPreference', this.sessionDataService.userPreference);
+    let userPreference : UserPreference = this.sessionDataService.userPreference;
+    userPreference.schoolYear = this.selectedSchoolYear;
+    console.log('userPreference', userPreference);
+    this.studentService.saveUserPreference(userPreference)
+    .subscribe({
+        error: error => {
+          console.error(error);
+          // this.messageService.clear();
+          // this.messageService.error(error);
+        },
+        complete: () => {
+          this.loadSchoolYears();
+        }
+    });
+}    
 }

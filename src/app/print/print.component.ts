@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student.service';
 import { TimestampRange } from '../TimestampRange';
-import { Student } from '../Student';
+import { Student } from '../domain/Student';
 import { MessageService } from './../error/message.service';
 
 @Component({

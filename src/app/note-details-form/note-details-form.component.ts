@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Student } from '../Student';
-import { Note } from '../Note';
+import { Student } from '../domain/Student';
+import { Note } from '../domain/Note';
 import { StudentService } from '../student.service';
 import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
