@@ -87,7 +87,7 @@ export class StudentService {
 
     console.log('in saveStudent, student: ', student);
     return this.http
-      .post(this.serviceUrl+"/saveStudent", JSON.stringify(student), {headers: this.httpHeaders()})
+      .post(this.serviceUrl+"/saveStudentDto", JSON.stringify(student), {headers: this.httpHeaders()})
       .map(response => response.json() as Student)
       .catch(this.handleError);
   }
@@ -102,18 +102,18 @@ export class StudentService {
   saveNote (student: Student): Observable<Student> {
 
     let saveStudentObservable$: Observable<Student> =
-      this.http.post(this.serviceUrl+"/saveStudent", JSON.stringify(student), {headers: this.httpHeaders()})
+      this.http.post(this.serviceUrl+"/saveStudentDto", JSON.stringify(student), {headers: this.httpHeaders()})
       //.map(response => response.json() as Student)
       .catch(this.handleError);
-
+    // getStudentById so that the notes are ordered chronlogically
     let getStudentByIdObservable$: Observable<Student> =
-      this.http.get(this.serviceUrl+"/getStudentById/"+student.id, {headers: this.httpHeaders()})
+      this.http.get(this.serviceUrl+"/getStudentDtoById/"+student.id, {headers: this.httpHeaders()})
       .map(response => response.json() as Student)
       .catch(this.handleError);
 
     return Observable.concat(saveStudentObservable$, getStudentByIdObservable$);
   }
-
+    
   getLatestActiveStudents(): Observable<Student[]> {
 
     console.log('in getLatestActiveStudents()');
@@ -216,7 +216,7 @@ export class StudentService {
     
     console.log('in saveSchoolYear, schoolYear: ', schoolYear);
     return this.http
-      .post(this.serviceUrl+"/schoolYear/saveSchoolYear", JSON.stringify(schoolYear),
+      .post(this.serviceUrl+"/schoolYear/saveSchoolYearDto", JSON.stringify(schoolYear),
               {headers: this.httpHeaders()})
       .map(response => {
         return response.json() as SchoolYear;
@@ -237,8 +237,10 @@ export class StudentService {
     return this.http
       .post(this.serviceUrl+"/userPreference/saveUserPreferenceDto", JSON.stringify(userPreference),
               {headers: this.httpHeaders()})
-      .map(response => {
-        return response.json() as UserPreference;
+      .map((response: Response) => {
+        userPreference = response.json() as UserPreference;
+        console.log('userPreference = ', userPreference);
+        return userPreference;
       })
       .catch(this.handleError);
   }

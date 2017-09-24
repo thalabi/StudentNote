@@ -62,6 +62,11 @@ export class SchoolYearSelectComponent implements OnInit {
     console.log('userPreference', userPreference);
     this.studentService.saveUserPreference(userPreference)
     .subscribe({
+        next: userPreference => {
+          this.sessionDataService.userPreferenceSubject.next(userPreference);
+          this.sessionDataService.userPreference = userPreference;
+          console.log('in school-year-select, subscribe, next. userPreference: ', userPreference);
+        },
         error: error => {
           console.error(error);
           // this.messageService.clear();
