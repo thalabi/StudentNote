@@ -99,7 +99,7 @@ export class StudentService {
       .catch(this.handleError);
   }
 
-  saveNote (student: Student): Observable<Student> {
+  saveNoteOld (student: Student): Observable<Student> {
 
     let saveStudentObservable$: Observable<Student> =
       this.http.post(this.serviceUrl+"/saveStudentDto", JSON.stringify(student), {headers: this.httpHeaders()})
@@ -113,7 +113,15 @@ export class StudentService {
 
     return Observable.concat(saveStudentObservable$, getStudentByIdObservable$);
   }
+
+  saveNote (student: Student): Observable<Student> {
     
+      return this.http.post(this.serviceUrl+"/saveStudentDto", JSON.stringify(student), {headers: this.httpHeaders()})
+        .map(response => response.json() as Student)
+        .catch(this.handleError);
+    }
+      
+
   getLatestActiveStudents(): Observable<Student[]> {
 
     console.log('in getLatestActiveStudents()');
