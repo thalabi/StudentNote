@@ -253,7 +253,32 @@ export class StudentService {
       .catch(this.handleError);
   }
     
-  
+  getAllStudents(): Observable<Student[]> {
+        return this.http.get(this.serviceUrl+"/getAllStudentDtos", {headers: this.httpHeaders()})
+                  .map(response => {
+                    let students = response.json() as Student[];
+                    return students;
+                  })
+                  .catch(this.handleError);    
+  }
+
+  getStudentDtosNotInSchoolYear(schoolYearId: number): Observable<Student[]> {
+    return this.http.get(this.serviceUrl+"/getStudentDtosNotInSchoolYear/"+schoolYearId, {headers: this.httpHeaders()})
+              .map(response => {
+                let students = response.json() as Student[];
+                return students;
+              })
+              .catch(this.handleError);    
+  }
+  getStudentDtosInSchoolYear(schoolYearId: number): Observable<Student[]> {
+    return this.http.get(this.serviceUrl+"/getStudentDtosInSchoolYear/"+schoolYearId, {headers: this.httpHeaders()})
+              .map(response => {
+                let students = response.json() as Student[];
+                return students;
+              })
+              .catch(this.handleError);    
+  }
+
   private handleError (response: Response | any) {
       console.log(response);
       let errorMessage: string;

@@ -1,0 +1,17 @@
+<p-pickList [source]="availableStudents" [target]="schoolYearStudents"
+sourceHeader="Available Students" targetHeader="{{userPreference.schoolYear.schoolYear}} Students"
+[showSourceControls]="false" [showTargetControls]="false">
+<ng-template let-student pTemplate="item">
+    <div class="ui-helper-clearfix">
+        <div style="font-size:14px;float:left;margin:0 0 0 0">
+          {{student.firstName}} - {{student.lastName}}</div>
+    </div>
+</ng-template>
+</p-pickList>
+
+<div class="ui-g-6">
+    <button pButton type="submit" (click)="onSubmit()" label="Submit"></button>
+</div>
+<div class="ui-g-6">
+    <button pButton type="reset" label="Cancel" (click)="onCancel()"></button>
+</div>
