@@ -5,6 +5,7 @@ import { UserPreference } from '../domain/UserPreference';
 import { SessionDataService } from '../session-data.service';
 import { StudentService } from '../student.service';
 import { MessageService } from './../error/message.service';
+import { SaveRemoveStudentsToFromSchoolYearVO } from '../vo/SaveRemoveStudentsToFromSchoolYearVO';
 
 @Component({
   selector: 'app-school-year-students',
@@ -18,6 +19,7 @@ export class SchoolYearStudentsComponent implements OnInit {
   availableStudents: Student[];
   schoolYearStudents: Student[];
   oldSchoolYearStudents: Student[];
+  schoolYearId: number;
 
   constructor(
     private sessionDataService: SessionDataService,
@@ -27,9 +29,9 @@ export class SchoolYearStudentsComponent implements OnInit {
 
   ngOnInit() {
     this.userPreference = this.sessionDataService.userPreference;
-    let schoolYearId: number = this.userPreference.schoolYear.id;
+    this.schoolYearId = this.userPreference.schoolYear.id;
 //
-    this.studentService.getStudentDtosNotInSchoolYear(schoolYearId).subscribe({
+    this.studentService.getStudentDtosNotInSchoolYear(this.schoolYearId).subscribe({
       next: students => {
         this.availableStudents = students;
         console.log('allStudents[]: ', this.availableStudents);
@@ -40,10 +42,10 @@ export class SchoolYearStudentsComponent implements OnInit {
         this.messageService.error(error);
       }});
 
-    this.studentService.getStudentDtosInSchoolYear(schoolYearId).subscribe({
+    this.studentService.getStudentDtosInSchoolYear(this.schoolYearId).subscribe({
       next: students => {
         this.schoolYearStudents = students;
-        this.oldSchoolYearStudents = students;
+        this.oldSchoolYearStudents = students.slice(0); // copies array
         console.log('schoolYearStudents[]: ', this.schoolYearStudents);
       },
       error: error => {
@@ -55,9 +57,37 @@ export class SchoolYearStudentsComponent implements OnInit {
   }
 
   onSubmit(){
+    let oldStudentIds: number[] = [];
+    for (let student of this.oldSchoolYearStudents) {
+      oldStudentIds.push(student.id);
+    }
+    let studentIds: number[] = [];
+    for (let student of this.schoolYearStudents) {
+      studentIds.push(student.id);
+    }
+    console.log('oldStudentIds', oldStudentIds);
+    console.log('studentIds', studentIds);
+    console.log('this.schoolYearId', this.schoolYearId);
+
+    let saveRemoveStudentsToFromSchoolYearVO: SaveRemoveStudentsToFromSchoolYearVO = new SaveRemoveStudentsToFromSchoolYearVO();
+    saveRemoveStudentsToFromSchoolYearVO.schoolYearId = this.schoolYearId;
+    saveRemoveStudentsToFromSchoolYearVO.oldSchoolYearStudents = this.oldSchoolYearStudents;
+    saveRemoveStudentsToFromSchoolYearVO.newSchoolYearStudents = this.schoolYearStudents;
+
+    this.studentService.saveRemoveStudentsToFromSchoolYear(saveRemoveStudentsToFromSchoolYearVO).subscribe({
+      // next: students => {
+      //   this.schoolYearStudents = students;
+      //   this.oldSchoolYearStudents = students.slice(0); // copies array
+      //   console.log('schoolYearStudents[]: ', this.schoolYearStudents);
+      // },
+      error: error => {
+        console.error(error);
+        this.messageService.clear();
+        this.messageService.error(error);
+      }});
 
   }
   onCancel(){
-    
+
   }
 }

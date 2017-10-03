@@ -3,6 +3,7 @@ import { Student } from './domain/Student';
 import { Note } from './domain/Note';
 import { SchoolYear } from './domain/SchoolYear';
 import { UserPreference } from './domain/UserPreference';
+import { SaveRemoveStudentsToFromSchoolYearVO } from './vo/SaveRemoveStudentsToFromSchoolYearVO';
 
 import { Http, Headers, Response, ResponseContentType } from '@angular/http';
 
@@ -278,7 +279,10 @@ export class StudentService {
               })
               .catch(this.handleError);    
   }
-
+  saveRemoveStudentsToFromSchoolYear(saveRemoveStudentsToFromSchoolYearVO: SaveRemoveStudentsToFromSchoolYearVO) {
+    return this.http.post(this.serviceUrl+"/saveRemoveStudentsToFromSchoolYear", JSON.stringify(saveRemoveStudentsToFromSchoolYearVO), {headers: this.httpHeaders()})
+      .catch(this.handleError);    
+  }
   private handleError (response: Response | any) {
       console.log(response);
       let errorMessage: string;
