@@ -200,7 +200,7 @@ export class StudentService {
     console.log('in getUserPreference2() this.sessionDataService.user.username: ', this.sessionDataService.user.username);
     let username: string = this.sessionDataService.user.username;
     console.log('in getUserPreference2() username: ', username);
-    return this.http.get(this.serviceUrl+"/userPreference/getDtoByUsername/"+username, {headers: this.httpHeaders()})
+    return this.http.get(this.serviceUrl+"/userPreference/getUiDtoByUsername/"+username, {headers: this.httpHeaders()})
     .map((response: Response) => {
       let userPreference = response.json() as UserPreference;
       console.log('userPreference = ', userPreference);

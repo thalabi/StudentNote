@@ -33,6 +33,8 @@ export class StudentDetailsFormComponent implements OnInit {
     this.crudMode = this.sessionDataService.crudMode;
     if (this.crudMode == 'Add') {
       this.student = new Student();
+      this.student.gradeUiDto = new Grade();
+      this.student.schoolYear = this.sessionDataService.userPreference.schoolYear;
     } else {
       this.student = Object.assign({}, this.sessionDataService.student);
       console.log(JSON.stringify(this.student));

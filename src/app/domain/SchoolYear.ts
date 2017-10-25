@@ -5,6 +5,6 @@ export class SchoolYear {
     schoolYear: string;
     startDate: Date;
     endDate: Date;
-    studentSet: Student[];
+    //studentSet: Student[];
     version: number;
 }
