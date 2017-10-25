@@ -57,12 +57,18 @@ export class StudentService {
     console.log('this.sessionDataService.user.token: ', this.sessionDataService.user.token);
 
     let username: string = this.sessionDataService.user.username;
-    return this.http.get(this.serviceUrl+"/getStudentDtosBySchoolYearFromUserPreference/" + username, {headers: this.httpHeaders()})
-              .map(response => {
-                let schoolYear = response.json() as SchoolYear;
-                return schoolYear.studentSet;
-              })
-              .catch(this.handleError);    
+    return this.http.get(this.serviceUrl+"/getStudentsByUsername/" + username, {headers: this.httpHeaders()})
+      .map(response => {
+        return response.json() as Student[];
+      })
+      .catch(this.handleError);    
+
+    // return this.http.get(this.serviceUrl+"/getStudentDtosBySchoolYearFromUserPreference/" + username, {headers: this.httpHeaders()})
+    //           .map(response => {
+    //             let schoolYear = response.json() as SchoolYear;
+    //             return schoolYear.studentSet;
+    //           })
+    //           .catch(this.handleError);    
 
 
     // return this.http.get(this.serviceUrl+"/schoolYear/getStudentsBySchoolYearId/1", {headers: this.httpHeaders()})
@@ -88,7 +94,7 @@ export class StudentService {
 
     console.log('in saveStudent, student: ', student);
     return this.http
-      .post(this.serviceUrl+"/saveStudentDto", JSON.stringify(student), {headers: this.httpHeaders()})
+      .post(this.serviceUrl+"/saveStudentUiDto", JSON.stringify(student), {headers: this.httpHeaders()})
       .map(response => response.json() as Student)
       .catch(this.handleError);
   }
@@ -117,7 +123,7 @@ export class StudentService {
 
   saveNote (student: Student): Observable<Student> {
     
-      return this.http.post(this.serviceUrl+"/saveStudentDto", JSON.stringify(student), {headers: this.httpHeaders()})
+      return this.http.post(this.serviceUrl+"/saveStudentUiDto", JSON.stringify(student), {headers: this.httpHeaders()})
         .map(response => response.json() as Student)
         .catch(this.handleError);
     }

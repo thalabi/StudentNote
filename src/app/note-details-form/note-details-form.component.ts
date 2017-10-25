@@ -38,7 +38,7 @@ export class NoteDetailsFormComponent implements OnInit {
       this.note.timestamp = new Date();
     } else {
       let noteListIndex: number = this.sessionDataService.noteListIndex;
-      this.note = Object.assign({}, this.student.noteList[noteListIndex]);
+      this.note = Object.assign({}, this.student.noteSet[noteListIndex]);
     }
 
     this.noteForm = this.formBuilder.group({
@@ -70,24 +70,25 @@ export class NoteDetailsFormComponent implements OnInit {
   onSubmit() {
     this.note.timestamp = new Date(this.noteForm.get('timestamp').value);
     this.note.text = this.noteForm.get('text').value;
+    //this.student.schoolYearSet = [this.sessionDataService.userPreference.schoolYear];
     switch (this.crudMode) {
       case 'Add':
-        this.student.noteList[this.student.noteList.length] = this.note;
+        this.student.noteSet[this.student.noteSet.length] = this.note;
         break;
       case 'Modify':
-        for (let i=0; i<this.student.noteList.length; i++){
-          if (this.student.noteList[i].id == this.note.id) {
-            this.student.noteList[i] = this.note;
+        for (let i=0; i<this.student.noteSet.length; i++){
+          if (this.student.noteSet[i].id == this.note.id) {
+            this.student.noteSet[i] = this.note;
             break;
           }
         }
         break;
       case 'Delete':
-        for (let i=0; i<this.student.noteList.length; i++){
-          if (this.student.noteList[i].id == this.note.id) {
-            console.log("deleteStudent(), i: " + i + ", this.studentArray.length: " + this.student.noteList.length);
-            this.student.noteList.splice(i, 1);
-            console.log("deleteStudent(), after splice, this.studentArray.length: " + this.student.noteList.length);
+        for (let i=0; i<this.student.noteSet.length; i++){
+          if (this.student.noteSet[i].id == this.note.id) {
+            console.log("deleteStudent(), i: " + i + ", this.studentArray.length: " + this.student.noteSet.length);
+            this.student.noteSet.splice(i, 1);
+            console.log("deleteStudent(), after splice, this.studentArray.length: " + this.student.noteSet.length);
           }
         }
         break;

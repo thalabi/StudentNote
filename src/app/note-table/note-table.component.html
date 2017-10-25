@@ -8,7 +8,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let note of student.noteList; let i = index" (click)="rowOnClick(i)" [class.selected]="i == selectedRowIndex">
+  <tr *ngFor="let note of student.noteSet; let i = index" (click)="rowOnClick(i)" [class.selected]="i == selectedRowIndex">
     <td style="white-space: nowrap">{{note.timestamp | date: 'MMM dd, yyyy hh:mm a'}}</td>
     <td>{{note.text}}</td>
   </tr>

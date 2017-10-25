@@ -5,6 +5,8 @@ import { StudentService } from '../student.service';
 import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
 import { MessageService } from './../error/message.service';
+import { Grade } from 'app/domain/Grade';
+import { SchoolYear } from 'app/domain/SchoolYear';
 
 @Component({
   selector: 'app-student-details-form',
@@ -41,7 +43,7 @@ export class StudentDetailsFormComponent implements OnInit {
         'firstName' : [{value: this.student.firstName, disabled: this.crudMode == 'Delete'}],
         'lastName': [{value: this.student.lastName, disabled: this.crudMode == 'Delete'}]
       }, {validator: nameNotNullValidator}),
-      'grade' : [{value: this.student.grade, disabled: this.crudMode == 'Delete'}]
+      'grade' : [{value: this.student.gradeUiDto.grade, disabled: this.crudMode == 'Delete'}]
     })
 
 
@@ -57,7 +59,15 @@ export class StudentDetailsFormComponent implements OnInit {
     console.log("onSubmit(), this.studentForm.get(\'firstName\').value: ", this.studentForm.get('nameGroup.firstName').value);
     this.student.firstName = this.studentForm.get('nameGroup.firstName').value;
     this.student.lastName = this.studentForm.get('nameGroup.lastName').value;
-    this.student.grade = this.studentForm.get('grade').value;
+    this.student.gradeUiDto.grade = this.studentForm.get('grade').value;
+    // let grade : Grade = new Grade();
+    // grade.grade = this.studentForm.get('grade').value;
+    // console.log('this.student.gradeSet[0]',this.student.gradeSet[0]);
+    // this.student.gradeSet[0] = grade;
+    //console.log('this.student.gradeSet[0]',this.student.gradeSet[0]);
+    //this.student.schoolYearSet.push(schoolYear);
+    //this.student.schoolYearSet = [this.sessionDataService.userPreference.schoolYear];
+    console.log('this.student',this.student);
     switch (this.crudMode) {
       case 'Add':
         this.studentService.saveStudent(this.student)

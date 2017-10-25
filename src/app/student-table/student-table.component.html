@@ -8,7 +8,7 @@
     (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
     <p-column field="firstName" header="First Name"></p-column>
     <p-column field="lastName" header="Last Name"></p-column>
-    <p-column field="grade" header="Grade"></p-column>
+    <p-column field="gradeUiDto.grade" header="Grade"></p-column>
     <p-footer>
       <div class="ui-helper-clearfix" style="width:100%">
           <button pButton type="button" (click)="onAddStudent()" label="Add Student"
