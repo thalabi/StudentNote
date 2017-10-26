@@ -94,7 +94,7 @@ export class StudentService {
 
     console.log('in saveStudent, student: ', student);
     return this.http
-      .post(this.serviceUrl+"/saveStudentUiDto", JSON.stringify(student), {headers: this.httpHeaders()})
+      .post(this.serviceUrl+"/saveStudentUiDto2", JSON.stringify(student), {headers: this.httpHeaders()})
       .map(response => response.json() as Student)
       .catch(this.handleError);
   }
