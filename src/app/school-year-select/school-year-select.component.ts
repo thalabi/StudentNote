@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SchoolYear } from '../domain/SchoolYear';
 import { StudentService } from './../student.service';
 import { SessionDataService } from '../session-data.service';
+import { Router } from '@angular/router';
+import { MessageService } from './../error/message.service';
 import {SelectItem} from 'primeng/primeng';
 import { UserPreference } from '../domain/UserPreference';
 
@@ -18,10 +20,14 @@ export class SchoolYearSelectComponent implements OnInit {
   
   constructor(
     private studentService: StudentService,
-    private sessionDataService: SessionDataService
+    private sessionDataService: SessionDataService,
+    private router: Router,
+    private messageService: MessageService
   ) {  }
 
   ngOnInit() {
+    this.messageService.clear();
+
     this.loadSchoolYears();
     console.log('this.sessionDataService.userPreference', this.sessionDataService.userPreference);
     // this.sessionDataService.userPreferenceSubject
@@ -48,9 +54,7 @@ export class SchoolYearSelectComponent implements OnInit {
       },
       error: error => {
         console.error(error);
-        // TODO uncomment later
-        //this.messageService.clear();
-        //this.messageService.error(error);
+        this.messageService.error(error);
       }});
   }
 
@@ -69,11 +73,11 @@ export class SchoolYearSelectComponent implements OnInit {
         },
         error: error => {
           console.error(error);
-          // this.messageService.clear();
-          // this.messageService.error(error);
+          this.messageService.error(error);
         },
         complete: () => {
-          this.loadSchoolYears();
+          //this.loadSchoolYears();
+          this.router.navigate(['studentTable']);
         }
     });
 }    

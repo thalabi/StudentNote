@@ -73,7 +73,7 @@ export class StudentDetailsFormComponent implements OnInit {
     console.log('this.student',this.student);
     switch (this.crudMode) {
       case 'Add':
-        this.studentService.saveStudent(this.student)
+        this.studentService.addStudentDetails(this.student)
           .subscribe({
             error: error => {
               console.error(error);
@@ -86,7 +86,7 @@ export class StudentDetailsFormComponent implements OnInit {
         break;
       case 'Modify':
         console.log('before call to studentService');
-        this.studentService.saveStudent(this.student)
+        this.studentService.updateStudentDetails(this.student)
           .subscribe({
             error: error => {
               console.error(error);

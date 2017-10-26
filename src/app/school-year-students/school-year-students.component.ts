@@ -3,8 +3,9 @@ import { SchoolYear } from '../domain/SchoolYear';
 import { Student } from '../domain/Student';
 import { UserPreference } from '../domain/UserPreference';
 import { SessionDataService } from '../session-data.service';
-import { StudentService } from '../student.service';
+import { Router } from '@angular/router';
 import { MessageService } from './../error/message.service';
+import { StudentService } from '../student.service';
 import { SaveRemoveStudentsToFromSchoolYearVO } from '../vo/SaveRemoveStudentsToFromSchoolYearVO';
 
 @Component({
@@ -22,12 +23,14 @@ export class SchoolYearStudentsComponent implements OnInit {
   schoolYearId: number;
 
   constructor(
-    private sessionDataService: SessionDataService,
     private studentService: StudentService,
-    private messageService: MessageService    
+    private sessionDataService: SessionDataService,
+    private router: Router,
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
+    this.messageService.clear();
     this.userPreference = this.sessionDataService.userPreference;
     this.schoolYearId = this.userPreference.schoolYear.id;
 //
@@ -38,7 +41,6 @@ export class SchoolYearStudentsComponent implements OnInit {
       },
       error: error => {
         console.error(error);
-        this.messageService.clear();
         this.messageService.error(error);
       }});
 
@@ -50,7 +52,6 @@ export class SchoolYearStudentsComponent implements OnInit {
       },
       error: error => {
         console.error(error);
-        this.messageService.clear();
         this.messageService.error(error);
       }});
 
@@ -82,9 +83,13 @@ export class SchoolYearStudentsComponent implements OnInit {
       // },
       error: error => {
         console.error(error);
-        this.messageService.clear();
         this.messageService.error(error);
-      }});
+      },
+      complete: () => {
+        //this.loadSchoolYears();
+        this.router.navigate(['studentTable']);
+      }
+    });
 
   }
   onCancel(){

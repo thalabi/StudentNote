@@ -90,11 +90,20 @@ export class StudentService {
               .catch(this.handleError);
   }
 
-  saveStudent(student: Student): Observable<Student> {
+  addStudentDetails(student: Student): Observable<Student> {
 
-    console.log('in saveStudent, student: ', student);
+    console.log('in addStudentDetails, student: ', student);
     return this.http
-      .post(this.serviceUrl+"/saveStudentUiDto2", JSON.stringify(student), {headers: this.httpHeaders()})
+      .post(this.serviceUrl+"/addStudentDetails", JSON.stringify(student), {headers: this.httpHeaders()})
+      .map(response => response.json() as Student)
+      .catch(this.handleError);
+  }
+
+  updateStudentDetails(student: Student): Observable<Student> {
+
+    console.log('in updateStudentDetails, student: ', student);
+    return this.http
+      .post(this.serviceUrl+"/updateStudentDetails", JSON.stringify(student), {headers: this.httpHeaders()})
       .map(response => response.json() as Student)
       .catch(this.handleError);
   }
