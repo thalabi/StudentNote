@@ -115,6 +115,15 @@ export class StudentService {
       .catch(this.handleError);
   }
 
+  updateStudentNotes(student: Student): Observable<Student> {
+    
+        console.log('in updateStudentNotes, student: ', student);
+        return this.http
+          .post(this.serviceUrl+"/updateStudentNotes", JSON.stringify(student), {headers: this.httpHeaders()})
+          .map(response => response.json() as Student)
+          .catch(this.handleError);
+      }
+    
   saveNoteOld (student: Student): Observable<Student> {
 
     let saveStudentObservable$: Observable<Student> =

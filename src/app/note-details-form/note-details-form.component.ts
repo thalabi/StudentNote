@@ -96,7 +96,7 @@ export class NoteDetailsFormComponent implements OnInit {
         console.error('this.crudMode is invalid. this.crudMode: ' + this.crudMode);
     }
 
-    this.studentService.saveNote(this.student)
+    this.studentService.updateStudentNotes(this.student)
       .subscribe({
           next: student => {
             this.sessionDataService.student = student;
