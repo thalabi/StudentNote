@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { MessageService } from './../error/message.service';
 import { StudentService } from '../student.service';
 import { SaveRemoveStudentsToFromSchoolYearVO } from '../vo/SaveRemoveStudentsToFromSchoolYearVO';
+import { SaveRemoveStudentsToFromSchoolYearVO2 } from 'app/vo/SaveRemoveStudentsToFromSchoolYearVO2';
 
 @Component({
   selector: 'app-school-year-students',
@@ -70,12 +71,18 @@ export class SchoolYearStudentsComponent implements OnInit {
     console.log('studentIds', studentIds);
     console.log('this.schoolYearId', this.schoolYearId);
 
-    let saveRemoveStudentsToFromSchoolYearVO: SaveRemoveStudentsToFromSchoolYearVO = new SaveRemoveStudentsToFromSchoolYearVO();
-    saveRemoveStudentsToFromSchoolYearVO.schoolYearId = this.schoolYearId;
-    saveRemoveStudentsToFromSchoolYearVO.oldSchoolYearStudents = this.oldSchoolYearStudents;
-    saveRemoveStudentsToFromSchoolYearVO.newSchoolYearStudents = this.schoolYearStudents;
+    // let saveRemoveStudentsToFromSchoolYearVO: SaveRemoveStudentsToFromSchoolYearVO = new SaveRemoveStudentsToFromSchoolYearVO();
+    // saveRemoveStudentsToFromSchoolYearVO.schoolYearId = this.schoolYearId;
+    // saveRemoveStudentsToFromSchoolYearVO.oldSchoolYearStudents = this.oldSchoolYearStudents;
+    // saveRemoveStudentsToFromSchoolYearVO.newSchoolYearStudents = this.schoolYearStudents;
 
-    this.studentService.saveRemoveStudentsToFromSchoolYear(saveRemoveStudentsToFromSchoolYearVO).subscribe({
+    let saveRemoveStudentsToFromSchoolYearVO2: SaveRemoveStudentsToFromSchoolYearVO2 = new SaveRemoveStudentsToFromSchoolYearVO2();
+    saveRemoveStudentsToFromSchoolYearVO2.schoolYearId = this.schoolYearId;
+    saveRemoveStudentsToFromSchoolYearVO2.oldSchoolYearStudentIds = oldStudentIds;
+    saveRemoveStudentsToFromSchoolYearVO2.newSchoolYearStudentIds = studentIds;
+
+    //this.studentService.saveRemoveStudentsToFromSchoolYear(saveRemoveStudentsToFromSchoolYearVO).subscribe({
+    this.studentService.saveRemoveStudentsToFromSchoolYear2(saveRemoveStudentsToFromSchoolYearVO2).subscribe({
       // next: students => {
       //   this.schoolYearStudents = students;
       //   this.oldSchoolYearStudents = students.slice(0); // copies array

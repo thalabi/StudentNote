@@ -21,6 +21,7 @@ import { SessionDataService } from './session-data.service';
 import { TimestampRange } from './TimestampRange';
 import { ConfigService } from './config/config.service';
 import { ApplicationProperties } from './config/application.properties';
+import { SaveRemoveStudentsToFromSchoolYearVO2 } from 'app/vo/SaveRemoveStudentsToFromSchoolYearVO2';
 
 @Injectable()
 export class StudentService {
@@ -295,6 +296,7 @@ export class StudentService {
               })
               .catch(this.handleError);    
   }
+
   getStudentDtosInSchoolYear(schoolYearId: number): Observable<Student[]> {
     return this.http.get(this.serviceUrl+"/getStudentDtosInSchoolYear/"+schoolYearId, {headers: this.httpHeaders()})
               .map(response => {
@@ -303,10 +305,17 @@ export class StudentService {
               })
               .catch(this.handleError);    
   }
+  
   saveRemoveStudentsToFromSchoolYear(saveRemoveStudentsToFromSchoolYearVO: SaveRemoveStudentsToFromSchoolYearVO) {
     return this.http.post(this.serviceUrl+"/saveRemoveStudentsToFromSchoolYear", JSON.stringify(saveRemoveStudentsToFromSchoolYearVO), {headers: this.httpHeaders()})
       .catch(this.handleError);    
   }
+  
+  saveRemoveStudentsToFromSchoolYear2(saveRemoveStudentsToFromSchoolYearVO2: SaveRemoveStudentsToFromSchoolYearVO2) {
+    return this.http.post(this.serviceUrl+"/schoolYear/saveRemoveStudentsToFromSchoolYear", JSON.stringify(saveRemoveStudentsToFromSchoolYearVO2), {headers: this.httpHeaders()})
+      .catch(this.handleError);    
+  }
+
   private handleError (response: Response | any) {
       console.log(response);
       let errorMessage: string;
