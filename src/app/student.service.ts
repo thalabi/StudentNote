@@ -59,7 +59,9 @@ export class StudentService {
     console.log('this.sessionDataService.user.token: ', this.sessionDataService.user.token);
 
     let username: string = this.sessionDataService.user.username;
-    return this.http.get(this.serviceUrl+"/getStudentsByUsername/" + username, {headers: this.httpHeaders()})
+    let schoolYearId: number = this.sessionDataService.userPreference.schoolYear.id;
+    //return this.http.get(this.serviceUrl+"/getStudentsByUsername/" + username, {headers: this.httpHeaders()})
+    return this.http.get(this.serviceUrl+"/getStudentGraphBySchoolYear/" + schoolYearId, {headers: this.httpHeaders()})
       .map(response => {
         return response.json() as Student[];
       })
@@ -126,20 +128,20 @@ export class StudentService {
           .catch(this.handleError);
       }
     
-  saveNoteOld (student: Student): Observable<Student> {
+  // saveNoteOld (student: Student): Observable<Student> {
 
-    let saveStudentObservable$: Observable<Student> =
-      this.http.post(this.serviceUrl+"/saveStudentDto", JSON.stringify(student), {headers: this.httpHeaders()})
-      //.map(response => response.json() as Student)
-      .catch(this.handleError);
-    // getStudentById so that the notes are ordered chronlogically
-    let getStudentByIdObservable$: Observable<Student> =
-      this.http.get(this.serviceUrl+"/getStudentDtoById/"+student.id, {headers: this.httpHeaders()})
-      .map(response => response.json() as Student)
-      .catch(this.handleError);
+  //   let saveStudentObservable$: Observable<Student> =
+  //     this.http.post(this.serviceUrl+"/saveStudentDto", JSON.stringify(student), {headers: this.httpHeaders()})
+  //     //.map(response => response.json() as Student)
+  //     .catch(this.handleError);
+  //   // getStudentById so that the notes are ordered chronlogically
+  //   let getStudentByIdObservable$: Observable<Student> =
+  //     this.http.get(this.serviceUrl+"/getStudentDtoById/"+student.id, {headers: this.httpHeaders()})
+  //     .map(response => response.json() as Student)
+  //     .catch(this.handleError);
 
-    return Observable.concat(saveStudentObservable$, getStudentByIdObservable$);
-  }
+  //   return Observable.concat(saveStudentObservable$, getStudentByIdObservable$);
+  // }
 
   saveNote (student: Student): Observable<Student> {
     
@@ -158,8 +160,8 @@ export class StudentService {
               .catch(this.handleError);
   }
 
-  downloadAllPdf(): any {
-    return this.http.get(this.serviceUrl+'/pdfAll', {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+  downloadAllPdf(printRequestVO: PrintRequestVO): any {
+    return this.http.post(this.serviceUrl+'/pdfAll', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
@@ -280,17 +282,17 @@ export class StudentService {
       .catch(this.handleError);
   }
     
-  getAllStudents(): Observable<Student[]> {
-        return this.http.get(this.serviceUrl+"/getAllStudentDtos", {headers: this.httpHeaders()})
-                  .map(response => {
-                    let students = response.json() as Student[];
-                    return students;
-                  })
-                  .catch(this.handleError);    
-  }
+  // getAllStudents(): Observable<Student[]> {
+  //       return this.http.get(this.serviceUrl+"/getAllStudentDtos", {headers: this.httpHeaders()})
+  //                 .map(response => {
+  //                   let students = response.json() as Student[];
+  //                   return students;
+  //                 })
+  //                 .catch(this.handleError);    
+  // }
 
-  getStudentDtosNotInSchoolYear(schoolYearId: number): Observable<Student[]> {
-    return this.http.get(this.serviceUrl+"/getStudentDtosNotInSchoolYear/"+schoolYearId, {headers: this.httpHeaders()})
+  getStudentsNotInSchoolYear(schoolYearId: number): Observable<Student[]> {
+    return this.http.get(this.serviceUrl+"/getStudentsNotInSchoolYear/"+schoolYearId, {headers: this.httpHeaders()})
               .map(response => {
                 let students = response.json() as Student[];
                 return students;
@@ -298,8 +300,8 @@ export class StudentService {
               .catch(this.handleError);    
   }
 
-  getStudentDtosInSchoolYear(schoolYearId: number): Observable<Student[]> {
-    return this.http.get(this.serviceUrl+"/getStudentDtosInSchoolYear/"+schoolYearId, {headers: this.httpHeaders()})
+  getStudentsInSchoolYear(schoolYearId: number): Observable<Student[]> {
+    return this.http.get(this.serviceUrl+"/getStudentsInSchoolYear/"+schoolYearId, {headers: this.httpHeaders()})
               .map(response => {
                 let students = response.json() as Student[];
                 return students;

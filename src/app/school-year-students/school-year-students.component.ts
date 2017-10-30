@@ -35,7 +35,7 @@ export class SchoolYearStudentsComponent implements OnInit {
     this.userPreference = this.sessionDataService.userPreference;
     this.schoolYearId = this.userPreference.schoolYear.id;
 //
-    this.studentService.getStudentDtosNotInSchoolYear(this.schoolYearId).subscribe({
+    this.studentService.getStudentsNotInSchoolYear(this.schoolYearId).subscribe({
       next: students => {
         this.availableStudents = students;
         console.log('allStudents[]: ', this.availableStudents);
@@ -45,7 +45,7 @@ export class SchoolYearStudentsComponent implements OnInit {
         this.messageService.error(error);
       }});
 
-    this.studentService.getStudentDtosInSchoolYear(this.schoolYearId).subscribe({
+    this.studentService.getStudentsInSchoolYear(this.schoolYearId).subscribe({
       next: students => {
         this.schoolYearStudents = students;
         this.oldSchoolYearStudents = students.slice(0); // copies array

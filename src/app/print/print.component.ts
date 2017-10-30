@@ -59,7 +59,10 @@ export class PrintComponent implements OnInit {
   }
 
   onDownloadAllPdf(): void {
-    this.studentService.downloadAllPdf().subscribe(
+    let printRequestVO: PrintRequestVO = new PrintRequestVO();
+    printRequestVO.schoolYearId = this.sessionDataService.userPreference.schoolYear.id;
+    
+    this.studentService.downloadAllPdf(printRequestVO).subscribe(
         (response) => {
         var pdfUrl = URL.createObjectURL(response);
         window.open(pdfUrl);
