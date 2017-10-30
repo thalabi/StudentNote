@@ -3,6 +3,8 @@ import { StudentService } from '../student.service';
 import { TimestampRange } from '../TimestampRange';
 import { Student } from '../domain/Student';
 import { MessageService } from './../error/message.service';
+import { PrintRequestVO } from 'app/vo/PrintRequestVO';
+import { SessionDataService } from 'app/session-data.service';
 
 @Component({
   selector: 'app-print',
@@ -19,6 +21,7 @@ export class PrintComponent implements OnInit {
 
   constructor(
     private studentService: StudentService,
+    private sessionDataService: SessionDataService,
     private messageService: MessageService
   ) { }
 
@@ -66,11 +69,14 @@ export class PrintComponent implements OnInit {
   
   onDownloadDateRangePdf(): void {
     console.log(this.fromTimestamp, this.toTimestamp);
-    this.timestampRange.fromTimestamp = this.fromTimestamp;
-    this.timestampRange.toTimestamp = new Date(this.toTimestamp.getFullYear(), this.toTimestamp.getMonth(), this.toTimestamp.getDate(), 23, 59, 59, 999);
-    
+
+    let printRequestVO: PrintRequestVO = new PrintRequestVO();
+    printRequestVO.schoolYearId = this.sessionDataService.userPreference.schoolYear.id;
+    printRequestVO.fromTimestamp = this.fromTimestamp;
+    printRequestVO.toTimestamp = new Date(this.toTimestamp.getFullYear(), this.toTimestamp.getMonth(), this.toTimestamp.getDate(), 23, 59, 59, 999);
+
     console.log('this.timestampRange: ', this.timestampRange);
-    this.studentService.downloadStudentsByTimestampRangePdf(this.timestampRange).subscribe(
+    this.studentService.downloadStudentsByTimestampRangePdf(printRequestVO).subscribe(
         (response) => {
         var pdfUrl = URL.createObjectURL(response);
         window.open(pdfUrl);
@@ -84,7 +90,11 @@ export class PrintComponent implements OnInit {
       studentIds.push(student.id);
     }
     console.log("studentIds: ", studentIds);
-    this.studentService.downloadStudentsByStudentIdsPdf(studentIds).subscribe(
+    let printRequestVO: PrintRequestVO = new PrintRequestVO();
+    printRequestVO.schoolYearId = this.sessionDataService.userPreference.schoolYear.id;
+    printRequestVO.studentIds = studentIds;
+
+    this.studentService.downloadStudentsByStudentIdsPdf(printRequestVO).subscribe(
         (response) => {
         var pdfUrl = URL.createObjectURL(response);
         window.open(pdfUrl);

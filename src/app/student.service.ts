@@ -22,6 +22,7 @@ import { TimestampRange } from './TimestampRange';
 import { ConfigService } from './config/config.service';
 import { ApplicationProperties } from './config/application.properties';
 import { SaveRemoveStudentsToFromSchoolYearVO2 } from 'app/vo/SaveRemoveStudentsToFromSchoolYearVO2';
+import { PrintRequestVO } from 'app/vo/PrintRequestVO';
 
 @Injectable()
 export class StudentService {
@@ -166,8 +167,8 @@ export class StudentService {
     );
   }
 
-  downloadStudentsByTimestampRangePdf(timestampRange: TimestampRange): any {
-    return this.http.post(this.serviceUrl+'/pdfStudentsByTimestampRange', JSON.stringify(timestampRange), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+  downloadStudentsByTimestampRangePdf(printRequestVO: PrintRequestVO): any {
+    return this.http.post(this.serviceUrl+'/pdfStudentsByTimestampRange', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
@@ -175,8 +176,8 @@ export class StudentService {
     );
   }
 
-  downloadStudentsByStudentIdsPdf(studentIds: number[]): any {
-    return this.http.post(this.serviceUrl+'/pdfStudentsByStudentIds', JSON.stringify(studentIds), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+  downloadStudentsByStudentIdsPdf(printRequestVO: PrintRequestVO): any {
+    return this.http.post(this.serviceUrl+'/pdfStudentsByStudentIds', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
