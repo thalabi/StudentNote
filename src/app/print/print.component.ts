@@ -28,7 +28,8 @@ export class PrintComponent implements OnInit {
   ngOnInit() {
     this.messageService.clear();
 
-    this.studentService.getAllStudentsWithoutNotesList().subscribe(
+    //this.studentService.getAllStudentsWithoutNotesList().subscribe(
+    this.studentService.getStudents().subscribe(
       students => {
         this.studentArray = students;
         console.log('studentArray[]: ', this.studentArray);

@@ -23,10 +23,11 @@ export class SchoolYearCrudComponent implements OnInit {
 
   ngOnInit() {
     this.loadSchoolYears();
-    this.selectedSchoolYear = new SchoolYear();
+    //this.selectedSchoolYear = new SchoolYear();
   }
 
   loadSchoolYears() {
+    this.selectedSchoolYear = new SchoolYear();
     this.studentService.getAllSchoolYears().subscribe({
       next: schoolYears => {
         this.schoolYears = schoolYears;
