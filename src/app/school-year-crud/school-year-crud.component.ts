@@ -3,6 +3,7 @@ import { SchoolYear } from '../domain/SchoolYear';
 import { StudentService } from './../student.service';
 import { DatePipe } from '@angular/common';
 import { Constants } from '../constants';
+import { MessageService } from 'app/error/message.service';
 
 @Component({
   selector: 'app-datatable-crud',
@@ -18,10 +19,12 @@ export class SchoolYearCrudComponent implements OnInit {
   crudMode: string;
 
   constructor(
-    private studentService: StudentService
+    private studentService: StudentService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
+    this.messageService.clear();
     this.loadSchoolYears();
     //this.selectedSchoolYear = new SchoolYear();
   }
@@ -74,8 +77,7 @@ export class SchoolYearCrudComponent implements OnInit {
       .subscribe({
           error: error => {
             console.error(error);
-            // this.messageService.clear();
-            // this.messageService.error(error);
+            this.messageService.error(error);
           },
           complete: () => {
             this.loadSchoolYears();
@@ -86,8 +88,7 @@ export class SchoolYearCrudComponent implements OnInit {
       .subscribe({
           error: error => {
             console.error(error);
-            // this.messageService.clear();
-            // this.messageService.error(error);
+            this.messageService.error(error);
           },
           complete: () => {
             this.loadSchoolYears();
