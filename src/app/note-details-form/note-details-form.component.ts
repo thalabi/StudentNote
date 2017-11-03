@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Constants } from '../constants';
 import { MessageService } from './../error/message.service';
-import { NoteRequestVO } from 'app/vo/NoteRequestVO';
+import { NoteRequestVo } from 'app/vo/NoteRequestVo';
 
 @Component({
   selector: 'app-note-details-form',
@@ -72,23 +72,25 @@ export class NoteDetailsFormComponent implements OnInit {
     this.note.timestamp = new Date(this.noteForm.get('timestamp').value);
     this.note.text = this.noteForm.get('text').value;
     //this.student.schoolYearSet = [this.sessionDataService.userPreference.schoolYear];
+    let noteRequestVo: NoteRequestVo = new NoteRequestVo;
     switch (this.crudMode) {
       case 'Add':
         this.student.noteSet[this.student.noteSet.length] = this.note;
         break;
       case 'Modify':
-        let noteReuestVo: NoteRequestVO = new NoteRequestVO;
-        noteReuestVo.operation = 'UPDATE';
-        noteReuestVo.studentId = this.student.id;
-        noteReuestVo.studentVersion = this.student.version;
-        noteReuestVo.noteUiDto = this.note;
-        console.log('noteReuestVo', noteReuestVo);
-        for (let i=0; i<this.student.noteSet.length; i++){
-          if (this.student.noteSet[i].id == this.note.id) {
-            this.student.noteSet[i] = this.note;
-            break;
-          }
-        }
+        
+        noteRequestVo.operation = 'UPDATE';
+        noteRequestVo.studentId = this.student.id;
+        noteRequestVo.studentVersion = this.student.version;
+        noteRequestVo.noteUiDto = this.note;
+        console.log('noteReuestVo', noteRequestVo);
+
+        // for (let i=0; i<this.student.noteSet.length; i++){
+        //   if (this.student.noteSet[i].id == this.note.id) {
+        //     this.student.noteSet[i] = this.note;
+        //     break;
+        //   }
+        // }
         break;
       case 'Delete':
         for (let i=0; i<this.student.noteSet.length; i++){
@@ -103,11 +105,35 @@ export class NoteDetailsFormComponent implements OnInit {
         console.error('this.crudMode is invalid. this.crudMode: ' + this.crudMode);
     }
 
-    this.studentService.updateStudentNotes(this.student)
+    // this.studentService.updateStudentNotes(this.student)
+    //   .subscribe({
+    //       next: student => {
+    //         this.sessionDataService.student = student;
+    //         console.log('from subscribe 1 student: ', student);
+    //       },
+    //       error: error => {
+    //         console.error(error);
+    //         this.messageService.clear();
+    //         this.messageService.error(error);
+    //       },
+    //       complete: () => {
+    //         this.router.navigate(['noteTable']);
+    //       }
+    //   });
+    // console.log('after saveNote()');
+    //this.router.navigate(['noteTable']);
+    this.studentService.updateNote(noteRequestVo)
       .subscribe({
-          next: student => {
-            this.sessionDataService.student = student;
-            console.log('from subscribe 1 student: ', student);
+          next: note => {
+            for (let i=0; i<this.student.noteSet.length; i++){
+              if (this.student.noteSet[i].id == note.id) {
+                this.student.noteSet[i] = note;
+                this.note = note;
+                break;
+              }
+            }
+            this.sessionDataService.student = this.student;
+            console.log('from subscribe 1 student: ', this.student);
           },
           error: error => {
             console.error(error);
@@ -118,7 +144,7 @@ export class NoteDetailsFormComponent implements OnInit {
             this.router.navigate(['noteTable']);
           }
       });
-    console.log('after saveNote()');
+    console.log('after updateNote()');
     //this.router.navigate(['noteTable']);
   }
   

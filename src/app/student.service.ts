@@ -23,6 +23,7 @@ import { ConfigService } from './config/config.service';
 import { ApplicationProperties } from './config/application.properties';
 import { SaveRemoveStudentsToFromSchoolYearVO2 } from 'app/vo/SaveRemoveStudentsToFromSchoolYearVO2';
 import { PrintRequestVO } from 'app/vo/PrintRequestVO';
+import { NoteRequestVo } from 'app/vo/NoteRequestVO';
 
 @Injectable()
 export class StudentService {
@@ -142,6 +143,14 @@ export class StudentService {
 
   //   return Observable.concat(saveStudentObservable$, getStudentByIdObservable$);
   // }
+  updateNote(noteRequestVo: NoteRequestVo): Observable<Note> {
+    
+        console.log('in updateNote, noteRequestVo: ', noteRequestVo);
+        return this.http
+          .post(this.serviceUrl+"/updateNote", JSON.stringify(noteRequestVo), {headers: this.httpHeaders()})
+          .map(response => response.json() as Note)
+          .catch(this.handleError);
+      }
 
   saveNote (student: Student): Observable<Student> {
     

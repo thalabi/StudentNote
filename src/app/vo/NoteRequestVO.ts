@@ -1,6 +1,6 @@
 import { Note } from "app/domain/Note";
 
-export class NoteRequestVO {
+export class NoteRequestVo {
     operation: string;
     studentId: number;
     studentVersion: number;
