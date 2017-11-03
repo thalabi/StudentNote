@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Constants } from '../constants';
 import { MessageService } from './../error/message.service';
+import { NoteRequestVO } from 'app/vo/NoteRequestVO';
 
 @Component({
   selector: 'app-note-details-form',
@@ -76,6 +77,12 @@ export class NoteDetailsFormComponent implements OnInit {
         this.student.noteSet[this.student.noteSet.length] = this.note;
         break;
       case 'Modify':
+        let noteReuestVo: NoteRequestVO = new NoteRequestVO;
+        noteReuestVo.operation = 'UPDATE';
+        noteReuestVo.studentId = this.student.id;
+        noteReuestVo.studentVersion = this.student.version;
+        noteReuestVo.noteUiDto = this.note;
+        console.log('noteReuestVo', noteReuestVo);
         for (let i=0; i<this.student.noteSet.length; i++){
           if (this.student.noteSet[i].id == this.note.id) {
             this.student.noteSet[i] = this.note;
