@@ -147,7 +147,7 @@ export class StudentService {
     
         console.log('in updateNote, noteRequestVo: ', noteRequestVo);
         return this.http
-          .post(this.serviceUrl+"/updateNote", JSON.stringify(noteRequestVo), {headers: this.httpHeaders()})
+          .post(this.serviceUrl+"/noteResource/updateNote", JSON.stringify(noteRequestVo), {headers: this.httpHeaders()})
           .map(response => response.json() as Note)
           .catch(this.handleError);
       }

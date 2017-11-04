@@ -128,7 +128,6 @@ export class NoteDetailsFormComponent implements OnInit {
             for (let i=0; i<this.student.noteSet.length; i++){
               if (this.student.noteSet[i].id == note.id) {
                 this.student.noteSet[i] = note;
-                this.note = note;
                 break;
               }
             }
