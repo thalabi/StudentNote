@@ -143,14 +143,29 @@ export class StudentService {
 
   //   return Observable.concat(saveStudentObservable$, getStudentByIdObservable$);
   // }
-  updateNote(noteRequestVo: NoteRequestVo): Observable<Note> {
-    
-        console.log('in updateNote, noteRequestVo: ', noteRequestVo);
-        return this.http
-          .post(this.serviceUrl+"/noteResource/updateNote", JSON.stringify(noteRequestVo), {headers: this.httpHeaders()})
-          .map(response => response.json() as Note)
-          .catch(this.handleError);
-      }
+  addNote(noteRequestVo: NoteRequestVo): Observable<NoteRequestVo> {
+    console.log('in updateNote, noteRequestVo: ', noteRequestVo);
+    return this.http
+      .post(this.serviceUrl+"/noteResource/addNote", JSON.stringify(noteRequestVo), {headers: this.httpHeaders()})
+      .map(response => response.json() as NoteRequestVo)
+      .catch(this.handleError);
+  }
+
+  updateNote(noteRequestVo: NoteRequestVo): Observable<NoteRequestVo> {
+    console.log('in updateNote, noteRequestVo: ', noteRequestVo);
+    return this.http
+      .post(this.serviceUrl+"/noteResource/updateNote", JSON.stringify(noteRequestVo), {headers: this.httpHeaders()})
+      .map(response => response.json() as NoteRequestVo)
+      .catch(this.handleError);
+  }
+
+  deleteNote(noteRequestVo: NoteRequestVo): Observable<NoteRequestVo> {
+    console.log('in updateNote, noteRequestVo: ', noteRequestVo);
+    return this.http
+      .post(this.serviceUrl+"/noteResource/deleteNote", JSON.stringify(noteRequestVo), {headers: this.httpHeaders()})
+      .map(response => response.json() as NoteRequestVo)
+      .catch(this.handleError);
+  }
 
   saveNote (student: Student): Observable<Student> {
     

@@ -3,6 +3,7 @@ import { Student } from '../domain/Student';
 import { StudentService } from '../student.service';
 import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'app/error/message.service';
 
 @Component({
   selector: 'app-note-table',
@@ -18,12 +19,15 @@ export class NoteTableComponent implements OnInit {
   constructor(
     private studentService: StudentService,
     private sessionDataService: SessionDataService,    
-    private router: Router) {
+    private router: Router,
+    private messageService: MessageService) {
 
     console.log('NoteTableComponent constructor ...');
   }
 
   ngOnInit() {
+    this.messageService.clear();
+    
     console.log('NoteTableComponent ngOnInit() begin ...');
     this.student = this.sessionDataService.student;
     console.log('this.student: ', this.student);

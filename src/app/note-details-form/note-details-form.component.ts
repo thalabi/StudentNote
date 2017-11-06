@@ -32,6 +32,7 @@ export class NoteDetailsFormComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit() {
+    this.messageService.clear();
     this.crudMode = this.sessionDataService.crudMode;
     this.student = this.sessionDataService.student;
     if (this.crudMode == 'Add') {
@@ -71,35 +72,72 @@ export class NoteDetailsFormComponent implements OnInit {
   onSubmit() {
     this.note.timestamp = new Date(this.noteForm.get('timestamp').value);
     this.note.text = this.noteForm.get('text').value;
-    //this.student.schoolYearSet = [this.sessionDataService.userPreference.schoolYear];
     let noteRequestVo: NoteRequestVo = new NoteRequestVo;
+    noteRequestVo.studentId = this.student.id;
+    noteRequestVo.studentVersion = this.student.version;
+    noteRequestVo.noteUiDto = this.note;
+    console.log('noteReuestVo', noteRequestVo);
     switch (this.crudMode) {
       case 'Add':
-        this.student.noteSet[this.student.noteSet.length] = this.note;
+        this.studentService.addNote(noteRequestVo)
+        .subscribe({
+            next: noteRequestVo => {
+              this.student.noteSet.push(noteRequestVo.noteUiDto);
+              sortNoteSet(this.student.noteSet);
+              this.student.version = noteRequestVo.studentVersion;
+              this.sessionDataService.student = this.student;
+              console.log('from subscribe 1 student: ', this.student);
+            },
+            error: error => {
+              console.error(error);
+              this.messageService.error(error);
+            },
+            complete: () => {
+              this.router.navigate(['noteTable']);
+            }
+        });
+        console.log('after addNote()');
+          
         break;
       case 'Modify':
-        
-        noteRequestVo.operation = 'UPDATE';
-        noteRequestVo.studentId = this.student.id;
-        noteRequestVo.studentVersion = this.student.version;
-        noteRequestVo.noteUiDto = this.note;
-        console.log('noteReuestVo', noteRequestVo);
-
-        // for (let i=0; i<this.student.noteSet.length; i++){
-        //   if (this.student.noteSet[i].id == this.note.id) {
-        //     this.student.noteSet[i] = this.note;
-        //     break;
-        //   }
-        // }
+        this.studentService.updateNote(noteRequestVo)
+        .subscribe({
+            next: noteRequestVo => {
+              let note = noteRequestVo.noteUiDto;
+              this.student.noteSet[this.sessionDataService.noteListIndex] = note;
+              sortNoteSet(this.student.noteSet);
+              this.sessionDataService.student = this.student;
+              console.log('from subscribe 1 student: ', this.student);
+            },
+            error: error => {
+              console.error(error);
+              this.messageService.error(error);
+            },
+            complete: () => {
+              this.router.navigate(['noteTable']);
+            }
+        });
+        console.log('after updateNote()');
+          
         break;
       case 'Delete':
-        for (let i=0; i<this.student.noteSet.length; i++){
-          if (this.student.noteSet[i].id == this.note.id) {
-            console.log("deleteStudent(), i: " + i + ", this.studentArray.length: " + this.student.noteSet.length);
-            this.student.noteSet.splice(i, 1);
-            console.log("deleteStudent(), after splice, this.studentArray.length: " + this.student.noteSet.length);
-          }
-        }
+        this.studentService.deleteNote(noteRequestVo)
+          .subscribe({
+              next: noteRequestVo => {
+                this.student.version = noteRequestVo.studentVersion;
+                this.sessionDataService.student = this.student;
+                this.student.noteSet.splice(this.sessionDataService.noteListIndex, 1);
+                console.log('from subscribe 1 student: ', this.student);
+              },
+              error: error => {
+                console.error(error);
+                this.messageService.error(error);
+              },
+              complete: () => {
+                this.router.navigate(['noteTable']);
+              }
+          });
+        console.log('after deleteNote()');
         break;
       default:
         console.error('this.crudMode is invalid. this.crudMode: ' + this.crudMode);
@@ -122,28 +160,28 @@ export class NoteDetailsFormComponent implements OnInit {
     //   });
     // console.log('after saveNote()');
     //this.router.navigate(['noteTable']);
-    this.studentService.updateNote(noteRequestVo)
-      .subscribe({
-          next: note => {
-            for (let i=0; i<this.student.noteSet.length; i++){
-              if (this.student.noteSet[i].id == note.id) {
-                this.student.noteSet[i] = note;
-                break;
-              }
-            }
-            this.sessionDataService.student = this.student;
-            console.log('from subscribe 1 student: ', this.student);
-          },
-          error: error => {
-            console.error(error);
-            this.messageService.clear();
-            this.messageService.error(error);
-          },
-          complete: () => {
-            this.router.navigate(['noteTable']);
-          }
-      });
-    console.log('after updateNote()');
+    // this.studentService.updateNote(noteRequestVo)
+    //   .subscribe({
+    //       next: note => {
+    //         for (let i=0; i<this.student.noteSet.length; i++){
+    //           if (this.student.noteSet[i].id == note.id) {
+    //             this.student.noteSet[i] = note;
+    //             break;
+    //           }
+    //         }
+    //         this.sessionDataService.student = this.student;
+    //         console.log('from subscribe 1 student: ', this.student);
+    //       },
+    //       error: error => {
+    //         console.error(error);
+    //         this.messageService.clear();
+    //         this.messageService.error(error);
+    //       },
+    //       complete: () => {
+    //         this.router.navigate(['noteTable']);
+    //       }
+    //   });
+    // console.log('after updateNote()');
     //this.router.navigate(['noteTable']);
   }
   
@@ -152,6 +190,14 @@ export class NoteDetailsFormComponent implements OnInit {
   }
 
 }
+function sortNoteSet(noteSet: Note[]): void {
+  noteSet.sort((leftSide, rightSide): number => {
+    if (leftSide.timestamp < rightSide.timestamp) return -1;
+    if (leftSide.timestamp > rightSide.timestamp) return 1;
+    return 0;
+  });
+}
+
 function dateValidator(control: FormControl): {[key: string]: any} {
   const timestamp = control.value;
   const patternValid = Constants.TIMESTAMP_PATTERN.test(timestamp);
