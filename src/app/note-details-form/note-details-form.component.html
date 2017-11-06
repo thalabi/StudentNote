@@ -1,7 +1,12 @@
 <div style="margin-top: 0.5rem;">{{student.firstName}} {{student.lastName}}, {{student.gradeUiDto.grade}}</div>
 <h4>{{crudMode}} Note</h4>
 
+
+<p-calendar [(ngModel)]="timestamp2" [defaultDate]="timestamp2" showTime="showTime" hourFormat="12" dateFormat="M d, yy"></p-calendar>
+
 <form [formGroup]="noteForm" (ngSubmit)="onSubmit()" novalidate>
+
+  <!-- <p-calendar formControlName="timestamp2" dateFormat="dd.mm.yy"></p-calendar> -->
 
 <div class="table">
   <div class="form-group">

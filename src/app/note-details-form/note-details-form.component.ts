@@ -24,6 +24,9 @@ export class NoteDetailsFormComponent implements OnInit {
   datePipe: DatePipe = new DatePipe('en-US');
   timestampBlur: boolean;
 
+  // test
+  timestamp2: Date;
+
   constructor(
     private formBuilder: FormBuilder,
     private studentService: StudentService,
@@ -35,15 +38,22 @@ export class NoteDetailsFormComponent implements OnInit {
     this.messageService.clear();
     this.crudMode = this.sessionDataService.crudMode;
     this.student = this.sessionDataService.student;
+
     if (this.crudMode == 'Add') {
       this.note = new Note();
       this.note.timestamp = new Date();
+
+      // test
+      this.timestamp2 = new Date();
+
     } else {
       let noteListIndex: number = this.sessionDataService.noteListIndex;
       this.note = Object.assign({}, this.student.noteSet[noteListIndex]);
     }
 
     this.noteForm = this.formBuilder.group({
+      // test
+      //'timestamp2' : [{value: timestamp2}],
       'timestamp' : [{value: this.datePipe.transform(this.note.timestamp, 'MMM dd, yyyy hh:mm a'), disabled: this.crudMode == 'Delete'},
                       dateValidator],
       'text' : [{value: this.note.text, disabled: this.crudMode == 'Delete'}]
