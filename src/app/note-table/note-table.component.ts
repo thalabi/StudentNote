@@ -4,6 +4,7 @@ import { StudentService } from '../student.service';
 import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'app/error/message.service';
+import { Note } from 'app/domain/Note';
 
 @Component({
   selector: 'app-note-table',
@@ -14,6 +15,7 @@ export class NoteTableComponent implements OnInit {
 
   student: Student;
   selectedRowIndex : number;
+  selectedNote: Note;
   modifyAndDeleteButtonsDisable : boolean = true;
 
   constructor(
@@ -34,14 +36,20 @@ export class NoteTableComponent implements OnInit {
     console.log('NoteTableComponent ngOnInit() end ...');
   }
 
-  rowOnClick (selectedRowIndex: number) {
-    if (selectedRowIndex != this.selectedRowIndex) {
-      this.selectedRowIndex = selectedRowIndex;
-      this.modifyAndDeleteButtonsDisable = false;
-    } else {
-      this.selectedRowIndex = -1;
-      this.modifyAndDeleteButtonsDisable = true;
-    }
+
+  onRowSelect(event) {
+    console.log(this.selectedNote);
+    this.modifyAndDeleteButtonsDisable = false;
+    console.log(this.modifyAndDeleteButtonsDisable);
+
+    this.selectedRowIndex = this.student.noteSet.indexOf(this.selectedNote);
+    console.log('this.selectedRowIndex', this.selectedRowIndex);
+  }
+
+  onRowUnselect(event) {
+    console.log(this.selectedNote);
+    this.modifyAndDeleteButtonsDisable = true;
+    console.log(this.modifyAndDeleteButtonsDisable);
   }
 
   onAddNote () {

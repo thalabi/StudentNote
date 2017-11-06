@@ -1,21 +1,23 @@
 <!--<div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">{{student.firstName}} {{student.lastName}}, {{student.grade}}</div>-->
 <h4>{{student.firstName}} {{student.lastName}}, {{student.gradeUiDto.grade}}</h4>
-<table class="hoverTable">
-  <thead>
-  <tr>
-    <td>Date&nbsp;&amp;&nbsp;Time</td>
-    <td>Notes</td>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let note of student.noteSet; let i = index" (click)="rowOnClick(i)" [class.selected]="i == selectedRowIndex">
-    <td style="white-space: nowrap">{{note.timestamp | date: 'MMM dd, yyyy hh:mm a'}}</td>
-    <td>{{note.text}}</td>
-  </tr>
-  </tbody>
-</table>
-<div style="margin-top: 0.5rem;">
-<button pButton type="button" (click)="onAddNote()" label="Add Note"></button>
-<button pButton type="button" (click)="onModifyNote()" label="Modify Note" [disabled]="modifyAndDeleteButtonsDisable"></button>
-<button pButton type="button" (click)="onDeleteNote()" label="Delete Note" [disabled]="modifyAndDeleteButtonsDisable"></button>
-</div>
+
+<p-dataTable [value]="student.noteSet"
+  selectionMode="single" [(selection)]="selectedNote" dataKey="id" 
+  (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+  <p-column field="timestamp" header="Date and Time" [style]="{width: '12em'}">
+    <ng-template let-column let-note="rowData" pTemplate="body">
+      <span>{{note[column.field] | date: 'MMM dd, yyyy hh:mm a'}}</span>
+    </ng-template>
+  </p-column>
+  <p-column field="text" header="Notes"></p-column>
+  <p-footer>
+    <div class="ui-helper-clearfix" style="width:100%">
+        <button pButton type="button" (click)="onAddNote()" label="Add Note"
+          icon="fa-plus" style="float:left"></button>
+        <button pButton type="button" (click)="onModifyNote()" label="Modify Note"
+          icon="fa-edit" style="float:left" [disabled]="modifyAndDeleteButtonsDisable" ></button>
+        <button pButton type="button" (click)="onDeleteNote()" label="Delete Note"
+          icon="fa-remove" style="float:left" [disabled]="modifyAndDeleteButtonsDisable"></button>
+    </div>
+  </p-footer>
+</p-dataTable>
