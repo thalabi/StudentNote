@@ -1,30 +1,20 @@
 <div style="margin-top: 0.5rem;">{{student.firstName}} {{student.lastName}}, {{student.gradeUiDto.grade}}</div>
 <h4>{{crudMode}} Note</h4>
 
-
-<p-calendar [(ngModel)]="timestamp2" [defaultDate]="timestamp2" showTime="showTime" hourFormat="12" dateFormat="M d, yy"></p-calendar>
-
-<form [formGroup]="noteForm" (ngSubmit)="onSubmit()" novalidate>
-
-  <!-- <p-calendar formControlName="timestamp2" dateFormat="dd.mm.yy"></p-calendar> -->
-
-<div class="table">
-  <div class="form-group">
-    <label for="timestamp">Date and Time:</label>
-    <input type="text" class="form-control form-control-sm" formControlName="timestamp" (blur)="timestampBlur = true" (focus)="timestampBlur = false" id="timestamp">
-    <span *ngIf="noteForm.controls.timestamp.invalid && noteForm.controls.timestamp.dirty && timestampBlur">Invalid date and time</span>
+<div class="ui-g">
+  <div class="ui-g-1"><label for="schoolYear">Date & time</label></div>
+  <div class="ui-g-11">
+    <p-calendar [(ngModel)]="note.timestamp" [defaultDate]="timestamp2" showTime="showTime" hourFormat="12" dateFormat="M d, yy"
+      [minDate]="schoolYearStartDate" [maxDate]="schoolYearEndDate" readonlyInput="true" [disabled]="crudMode == 'Delete'"></p-calendar>
   </div>
-  <div class="form-group">
-    <label for="note">Note:</label>
-    <textarea class="form-control form-control-sm" formControlName="text" rows="10" cols="50" for="note"></textarea>
+  <div class="ui-g-1"><label for="schoolYear">Note</label></div>
+  <textarea pInputTextarea [(ngModel)]="note.text" [rows]="10" autoResize="autoResize" style="width: 100%;"
+  [disabled]="crudMode == 'Delete'"></textarea>
+    <div class="ui-g-11">
   </div>
 </div>
 
 <div style="margin-top: 0.5rem;">
-<button pButton type="submit" label="Submit" [disabled]="!noteForm.valid && crudMode != 'Delete'"></button>
+<button pButton type="submit" (click)="onSubmit()" label="Submit"></button>
 <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
 </div>
-
-</form>
-
-

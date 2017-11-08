@@ -102,4 +102,31 @@ export class SchoolYearStudentsComponent implements OnInit {
   onCancel(){
 
   }
+
+  onMoveToSource(){
+    this.sortStudents(this.availableStudents);
+  }
+
+  onMoveAllToSource(){
+    this.onMoveToSource();
+  }
+
+  
+  onMoveToTarget(){
+    this.sortStudents(this.schoolYearStudents);
+  }
+
+  onMoveAllToTarget(){
+    this.onMoveToTarget();
+  }
+
+  sortStudents(students: Student[]): void {
+    students.sort((leftSide, rightSide): number => {
+      if (leftSide.firstName < rightSide.firstName) return -1;
+      if (leftSide.firstName > rightSide.firstName) return 1;
+      if (leftSide.lastName < rightSide.lastName) return -1;
+      if (leftSide.lastName > rightSide.lastName) return 1;
+      return 0;
+    });
+  }
 }
