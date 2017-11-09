@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { MessageService } from './../error/message.service';
 import { Grade } from 'app/domain/Grade';
 import { SchoolYear } from 'app/domain/SchoolYear';
+import { ConfirmationService } from 'primeng/primeng';
 
 @Component({
   selector: 'app-student-details-form',
@@ -25,7 +26,8 @@ export class StudentDetailsFormComponent implements OnInit {
     private studentService: StudentService,
     private sessionDataService: SessionDataService,    
     private router: Router,
-    private messageService: MessageService) {}
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService) {}
 
   ngOnInit() {
     this.messageService.clear();
@@ -98,17 +100,22 @@ export class StudentDetailsFormComponent implements OnInit {
           });
         break;
       case 'Delete':
-        this.studentService.deleteStudent(this.student)
-          .subscribe({
-            error: error => {
-              console.error(error);
-              this.messageService.error(error);
-            },
-            complete: () => {
-                  //console.log('student: ', student);
-                  this.router.navigate(['studentTable']);
-            }
-          });
+        this.confirmationService.confirm({
+          message: null, // message is defined in the confirmation tag
+          accept: () => {
+            this.studentService.deleteStudent(this.student)
+              .subscribe({
+                error: error => {
+                  console.error(error);
+                  this.messageService.error(error);
+                },
+                complete: () => {
+                      //console.log('student: ', student);
+                      this.router.navigate(['studentTable']);
+                }
+            });
+          }
+        });      
         break;
       default:
         console.error('this.crudMode is invalid. this.crudMode: ' + this.crudMode);
@@ -166,6 +173,14 @@ export class StudentDetailsFormComponent implements OnInit {
     }
   };
 
+  confirm() {
+    this.confirmationService.confirm({
+        message: 'Do you want to delete this record?',
+        accept: () => {
+            //Actual logic to perform a confirmation
+        }
+    });
+}
 
 }
 function nameNotNullValidator({value}: FormGroup): {[key: string]: any} {

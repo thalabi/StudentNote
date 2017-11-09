@@ -34,7 +34,7 @@ import { ExceptionComponent } from './error/error.component';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
 
 import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule,
-  CalendarModule, DropdownModule, PickListModule, InputTextareaModule, SharedModule } from 'primeng/primeng';
+  CalendarModule, DropdownModule, PickListModule, InputTextareaModule, ConfirmDialogModule, ConfirmationService, SharedModule } from 'primeng/primeng';
 import { SchoolYearCrudComponent } from './school-year-crud/school-year-crud.component';
 import { SchoolYearSelectComponent } from './school-year-select/school-year-select.component';
 import { SchoolYearStudentsComponent } from './school-year-students/school-year-students.component';
@@ -67,7 +67,7 @@ import { SchoolYearStudentsComponent } from './school-year-students/school-year-
     AppRouting,
     NgbModule.forRoot(),
     InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule,
-      CalendarModule, DropdownModule, PickListModule, InputTextareaModule, SharedModule
+      CalendarModule, DropdownModule, PickListModule, InputTextareaModule, ConfirmDialogModule, SharedModule
   ],
   providers: [
     StudentService,
@@ -78,7 +78,8 @@ import { SchoolYearStudentsComponent } from './school-year-students/school-year-
     MessageService, // added
     { provide: ErrorHandler, useClass: CustomErrorHandler }, // overrride default error handler
     ConfigService,
-    { provide: APP_INITIALIZER, useFactory: configServiceLoadConfig, deps: [ConfigService], multi: true }
+    { provide: APP_INITIALIZER, useFactory: configServiceLoadConfig, deps: [ConfigService], multi: true },
+    ConfirmationService
     ],
   bootstrap: [AppComponent]
 })
