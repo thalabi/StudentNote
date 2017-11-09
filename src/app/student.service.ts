@@ -203,7 +203,7 @@ export class StudentService {
   }
 
   downloadStudentsByStudentIdsPdf(printRequestVO: PrintRequestVO): any {
-    return this.http.post(this.serviceUrl+'/pdfStudentsByStudentIds', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+    return this.http.post(this.serviceUrl+'/PrintResource/pdfStudentsByStudentIds', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
