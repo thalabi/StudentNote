@@ -185,7 +185,7 @@ export class StudentService {
   }
 
   downloadAllPdf(printRequestVO: PrintRequestVO): any {
-    return this.http.post(this.serviceUrl+'/pdfAll', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+    return this.http.post(this.serviceUrl+'/PrintResource/pdfAll', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
@@ -194,7 +194,7 @@ export class StudentService {
   }
 
   downloadStudentsByTimestampRangePdf(printRequestVO: PrintRequestVO): any {
-    return this.http.post(this.serviceUrl+'/pdfStudentsByTimestampRange', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+    return this.http.post(this.serviceUrl+'/PrintResource/pdfStudentsByTimestampRange', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
       .map(
         (response: Response) => {
             return new Blob([response.blob()], { type: 'application/pdf' })
