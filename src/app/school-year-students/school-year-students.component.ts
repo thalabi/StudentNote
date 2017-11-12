@@ -6,8 +6,7 @@ import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
 import { MessageService } from './../error/message.service';
 import { StudentService } from '../student.service';
-import { SaveRemoveStudentsToFromSchoolYearVO } from '../vo/SaveRemoveStudentsToFromSchoolYearVO';
-import { SaveRemoveStudentsToFromSchoolYearVO2 } from 'app/vo/SaveRemoveStudentsToFromSchoolYearVO2';
+import { SaveRemoveStudentsToFromSchoolYearVo } from 'app/vo/SaveRemoveStudentsToFromSchoolYearVo';
 
 @Component({
   selector: 'app-school-year-students',
@@ -76,7 +75,7 @@ export class SchoolYearStudentsComponent implements OnInit {
     // saveRemoveStudentsToFromSchoolYearVO.oldSchoolYearStudents = this.oldSchoolYearStudents;
     // saveRemoveStudentsToFromSchoolYearVO.newSchoolYearStudents = this.schoolYearStudents;
 
-    let saveRemoveStudentsToFromSchoolYearVO2: SaveRemoveStudentsToFromSchoolYearVO2 = new SaveRemoveStudentsToFromSchoolYearVO2();
+    let saveRemoveStudentsToFromSchoolYearVO2: SaveRemoveStudentsToFromSchoolYearVo = new SaveRemoveStudentsToFromSchoolYearVo();
     saveRemoveStudentsToFromSchoolYearVO2.schoolYearId = this.schoolYearId;
     saveRemoveStudentsToFromSchoolYearVO2.oldSchoolYearStudentIds = oldStudentIds;
     saveRemoveStudentsToFromSchoolYearVO2.newSchoolYearStudentIds = studentIds;

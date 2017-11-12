@@ -1,7 +1,5 @@
-import { Student } from '../domain/Student';
-
-export class SaveRemoveStudentsToFromSchoolYearVO {
+export class SaveRemoveStudentsToFromSchoolYearVo {
     schoolYearId: number;
-    oldSchoolYearStudents: Student[];
-    newSchoolYearStudents: Student[];
+    oldSchoolYearStudentIds: number[];
+    newSchoolYearStudentIds: number[];
 }

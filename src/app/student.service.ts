@@ -3,7 +3,6 @@ import { Student } from './domain/Student';
 import { Note } from './domain/Note';
 import { SchoolYear } from './domain/SchoolYear';
 import { UserPreference } from './domain/UserPreference';
-import { SaveRemoveStudentsToFromSchoolYearVO } from './vo/SaveRemoveStudentsToFromSchoolYearVO';
 
 import { Http, Headers, Response, ResponseContentType } from '@angular/http';
 
@@ -21,7 +20,7 @@ import { SessionDataService } from './session-data.service';
 import { TimestampRange } from './TimestampRange';
 import { ConfigService } from './config/config.service';
 import { ApplicationProperties } from './config/application.properties';
-import { SaveRemoveStudentsToFromSchoolYearVO2 } from 'app/vo/SaveRemoveStudentsToFromSchoolYearVO2';
+import { SaveRemoveStudentsToFromSchoolYearVo } from 'app/vo/SaveRemoveStudentsToFromSchoolYearVo';
 import { PrintRequestVO } from 'app/vo/PrintRequestVO';
 import { NoteRequestVo } from 'app/vo/NoteRequestVO';
 
@@ -333,12 +332,12 @@ export class StudentService {
               .catch(this.handleError);    
   }
   
-  saveRemoveStudentsToFromSchoolYear(saveRemoveStudentsToFromSchoolYearVO: SaveRemoveStudentsToFromSchoolYearVO) {
-    return this.http.post(this.serviceUrl+"/saveRemoveStudentsToFromSchoolYear", JSON.stringify(saveRemoveStudentsToFromSchoolYearVO), {headers: this.httpHeaders()})
-      .catch(this.handleError);    
-  }
+  // saveRemoveStudentsToFromSchoolYear(saveRemoveStudentsToFromSchoolYearVO: SaveRemoveStudentsToFromSchoolYearVO) {
+  //   return this.http.post(this.serviceUrl+"/saveRemoveStudentsToFromSchoolYear", JSON.stringify(saveRemoveStudentsToFromSchoolYearVO), {headers: this.httpHeaders()})
+  //     .catch(this.handleError);    
+  // }
   
-  saveRemoveStudentsToFromSchoolYear2(saveRemoveStudentsToFromSchoolYearVO2: SaveRemoveStudentsToFromSchoolYearVO2) {
+  saveRemoveStudentsToFromSchoolYear2(saveRemoveStudentsToFromSchoolYearVO2: SaveRemoveStudentsToFromSchoolYearVo) {
     return this.http.post(this.serviceUrl+"/schoolYear/saveRemoveStudentsToFromSchoolYear", JSON.stringify(saveRemoveStudentsToFromSchoolYearVO2), {headers: this.httpHeaders()})
       .catch(this.handleError);    
   }
