@@ -15,6 +15,6 @@
 </div>
 
 <div style="margin-top: 0.5rem;">
-<button pButton type="submit" (click)="onSubmit()" label="Submit"></button>
+<button pButton type="submit" (click)="onSubmit()" label="Submit" [disabled]="note.text == null"></button>
 <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
 </div>
