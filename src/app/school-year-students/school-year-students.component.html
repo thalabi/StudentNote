@@ -2,13 +2,14 @@
     sourceHeader="Available Students" targetHeader="{{userPreference.schoolYear.schoolYear}} Students"
     (onMoveAllToTarget)="onMoveAllToTarget()" (onMoveToTarget)="onMoveToTarget()"
     (onMoveAllToSource)="onMoveAllToSource()" (onMoveToSource)="onMoveToSource()"
-    [showSourceControls]="false" [showTargetControls]="false">
-<ng-template let-student pTemplate="item">
-    <div class="ui-helper-clearfix">
-        <div style="font-size:14px;float:left;margin:0 0 0 0">
-          {{student.firstName}} - {{student.lastName}}</div>
-    </div>
-</ng-template>
+    [showSourceControls]="false" [showTargetControls]="false"
+    [sourceStyle]="{'height':'20em'}" [targetStyle]="{'height':'20em'}">
+    <ng-template let-student pTemplate="item">
+        <div class="ui-helper-clearfix">
+            <div style="font-size:14px;float:left;margin:0 0 0 0">
+            {{student.firstName}} - {{student.lastName}}</div>
+        </div>
+    </ng-template>
 </p-pickList>
 
 <div style="margin-top: 0.5rem;">
