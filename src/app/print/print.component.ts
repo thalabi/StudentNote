@@ -6,7 +6,7 @@ import { MessageService } from './../error/message.service';
 import { PrintRequestVO } from 'app/vo/PrintRequestVO';
 import { SessionDataService } from 'app/session-data.service';
 import { Router } from '@angular/router';
-import DateUtils from 'app/util/DateUtils';
+import { DateUtils } from 'app/util/DateUtils';
 
 @Component({
   selector: 'app-print',

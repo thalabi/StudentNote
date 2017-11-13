@@ -1,4 +1,4 @@
-export default class DateUtils {
+export class DateUtils {
     static endOfDay(inputDate: Date): Date {
         let result: Date = new Date(inputDate);
         result.setHours(23, 59, 59, 999);

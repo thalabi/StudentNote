@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { Constants } from '../constants';
 import { MessageService } from './../error/message.service';
 import { NoteRequestVo } from 'app/vo/NoteRequestVo';
-import DateUtils from 'app/util/DateUtils';
+import { DateUtils } from 'app/util/DateUtils';
 
 @Component({
   selector: 'app-note-details-form',
