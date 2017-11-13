@@ -5,6 +5,8 @@ import { Student } from '../domain/Student';
 import { MessageService } from './../error/message.service';
 import { PrintRequestVO } from 'app/vo/PrintRequestVO';
 import { SessionDataService } from 'app/session-data.service';
+import { Router } from '@angular/router';
+import { endOfDay, startOfDay } from 'app/util/DateUtils';
 
 @Component({
   selector: 'app-print',
@@ -19,14 +21,21 @@ export class PrintComponent implements OnInit {
   timestampRange: TimestampRange = new TimestampRange();
   studentArray: Student[];
 
+  schoolYearStartDate: Date;
+  schoolYearEndDate: Date;
+
   constructor(
     private studentService: StudentService,
     private sessionDataService: SessionDataService,
+    private router: Router,
     private messageService: MessageService
   ) { }
 
   ngOnInit() {
     this.messageService.clear();
+
+    this.schoolYearStartDate = new Date(this.sessionDataService.userPreference.schoolYear.startDate);
+    this.schoolYearEndDate = new Date(this.sessionDataService.userPreference.schoolYear.endDate);
 
     //this.studentService.getAllStudentsWithoutNotesList().subscribe(
     this.studentService.getStudents().subscribe(
@@ -34,8 +43,6 @@ export class PrintComponent implements OnInit {
         this.studentArray = students;
         console.log('studentArray[]: ', this.studentArray);
       });
-
-      this.toTimestamp = new Date();
   }
 
   onTabChange(event) {
@@ -45,11 +52,14 @@ export class PrintComponent implements OnInit {
       case 0:
         break;
       case 1:
-        // this.fromTimestamp = undefined;
-        // let today = new Date();
-        // this.toTimestamp = {year: today.getFullYear(), month: today.getMonth() + 1, day: today.getDate()};
-        this.fromTimestamp = undefined;
-        this.toTimestamp = new Date();      
+        let now: Date = new Date();
+        if (now >= this.schoolYearStartDate && now <= endOfDay(this.schoolYearEndDate)) {
+          this.fromTimestamp = startOfDay(now);
+          this.toTimestamp = endOfDay(now);      
+        } else {
+          this.fromTimestamp = this.schoolYearStartDate;
+          this.toTimestamp = endOfDay(this.schoolYearEndDate);
+        }
         break;
       case 2:
         this.selectedStudents = [];
@@ -104,5 +114,9 @@ export class PrintComponent implements OnInit {
         window.open(pdfUrl);
         }
     );
+  }
+
+  onCancel() {
+    this.router.navigate(['/studentTable']);
   }
 }

@@ -80,5 +80,9 @@ export class SchoolYearSelectComponent implements OnInit {
           this.router.navigate(['studentTable']);
         }
     });
-}    
+  }
+
+  onCancel() {
+    this.router.navigate(['/studentTable']);
+  }
 }

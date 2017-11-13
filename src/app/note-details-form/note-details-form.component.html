@@ -4,7 +4,7 @@
 <div class="ui-g">
   <div class="ui-g-1"><label for="schoolYear">Date & time</label></div>
   <div class="ui-g-11">
-    <p-calendar [(ngModel)]="note.timestamp" [defaultDate]="timestamp2" showTime="showTime" hourFormat="12" dateFormat="M d, yy"
+    <p-calendar [(ngModel)]="note.timestamp" showTime="showTime" hourFormat="12" dateFormat="M d, yy"
       [minDate]="schoolYearStartDate" [maxDate]="schoolYearEndDate" readonlyInput="true" [disabled]="crudMode == 'Delete'"></p-calendar>
   </div>
   <div class="ui-g-1"><label for="schoolYear">Note</label></div>
