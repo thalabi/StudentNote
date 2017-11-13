@@ -188,7 +188,7 @@ export class StudentService {
   saveUserPreference(userPreference: UserPreference): Observable<UserPreference> {
     console.log('in saveUserPreference, userPreference: ', userPreference);
     return this.http
-      .post(this.serviceUrl + "/userPreference/saveUserPreferenceDto", JSON.stringify(userPreference),
+      .post(this.serviceUrl + "/userPreference/saveUserPreferenceUiDto", JSON.stringify(userPreference),
       { headers: this.httpHeaders() })
       .map((response: Response) => {
         userPreference = response.json() as UserPreference;
