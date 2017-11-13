@@ -1,6 +1,6 @@
 import { Note } from './Note';
-import { Grade } from 'app/domain/Grade';
-import { SchoolYear } from 'app/domain/SchoolYear';
+import { Grade } from 'app/dto/Grade';
+import { SchoolYear } from 'app/dto/SchoolYear';
 
 export class Student {
     id: number;

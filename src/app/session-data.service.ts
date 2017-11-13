@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Student } from './domain/Student';
+import { Student } from './dto/Student';
 import { User } from './security/user';
-import { UserPreference } from './domain/UserPreference';
+import { UserPreference } from './dto/UserPreference';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()

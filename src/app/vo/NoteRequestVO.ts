@@ -1,4 +1,4 @@
-import { Note } from "app/domain/Note";
+import { Note } from "app/dto/Note";
 
 export class NoteRequestVo {
     studentId: number;

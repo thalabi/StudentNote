@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SchoolYear } from '../domain/SchoolYear';
+import { SchoolYear } from '../dto/SchoolYear';
 import { StudentService } from './../student.service';
 import { DatePipe } from '@angular/common';
 import { Constants } from '../constants';

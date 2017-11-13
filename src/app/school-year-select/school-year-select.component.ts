@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { SchoolYear } from '../domain/SchoolYear';
+import { SchoolYear } from '../dto/SchoolYear';
 import { StudentService } from './../student.service';
 import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
 import { MessageService } from './../error/message.service';
 import {SelectItem} from 'primeng/primeng';
-import { UserPreference } from '../domain/UserPreference';
+import { UserPreference } from '../dto/UserPreference';
 
 @Component({
   selector: 'app-school-year-select',

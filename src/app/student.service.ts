@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Student } from './domain/Student';
-import { Note } from './domain/Note';
-import { SchoolYear } from './domain/SchoolYear';
-import { UserPreference } from './domain/UserPreference';
+import { Student } from './dto/Student';
+import { Note } from './dto/Note';
+import { SchoolYear } from './dto/SchoolYear';
+import { UserPreference } from './dto/UserPreference';
 
 import { Http, Headers, Response, ResponseContentType } from '@angular/http';
 
@@ -49,65 +49,32 @@ export class StudentService {
   private httpHeaders(): Headers {
     return new Headers({
       'Authorization': 'Bearer ' + this.sessionDataService.user.token,
-      'Content-Type': 'application/json'});
+      'Content-Type': 'application/json'
+    });
   }
 
   getStudents(): Observable<Student[]> {
-
-    console.log('in getStudents()');
-    console.log('this.httpHeaders(): ', this.httpHeaders());
-    console.log('this.sessionDataService.user.token: ', this.sessionDataService.user.token);
-
     let username: string = this.sessionDataService.user.username;
     let schoolYearId: number = this.sessionDataService.userPreference.schoolYear.id;
-    //return this.http.get(this.serviceUrl+"/getStudentsByUsername/" + username, {headers: this.httpHeaders()})
-    return this.http.get(this.serviceUrl+"/getStudentGraphBySchoolYear/" + schoolYearId, {headers: this.httpHeaders()})
+    return this.http.get(this.serviceUrl + "/getStudentGraphBySchoolYear/" + schoolYearId, { headers: this.httpHeaders() })
       .map(response => {
         return response.json() as Student[];
       })
-      .catch(this.handleError);    
-
-    // return this.http.get(this.serviceUrl+"/getStudentDtosBySchoolYearFromUserPreference/" + username, {headers: this.httpHeaders()})
-    //           .map(response => {
-    //             let schoolYear = response.json() as SchoolYear;
-    //             return schoolYear.studentSet;
-    //           })
-    //           .catch(this.handleError);    
-
-
-    // return this.http.get(this.serviceUrl+"/schoolYear/getStudentsBySchoolYearId/1", {headers: this.httpHeaders()})
-    //           .map(response => {
-    //             let schoolYear = response.json() as SchoolYear;
-    //             return schoolYear.studentSet;
-    //           })
-    //           .catch(this.handleError);    
-
-    // return this.http.get(this.serviceUrl+"/getAllStudents", {headers: this.httpHeaders()})
-    //           .map(response => response.json() as Student[])
-    //           .catch(this.handleError);
-  }
-  
-  getAllStudentsWithoutNotesList(): Observable<Student[]> {
-
-    return this.http.get(this.serviceUrl+"/getAllStudentsWithoutNotesList", {headers: this.httpHeaders()})
-              .map(response => response.json() as Student[])
-              .catch(this.handleError);
+      .catch(this.handleError);
   }
 
   addStudentDetails(student: Student): Observable<Student> {
 
-    console.log('in addStudentDetails, student: ', student);
     return this.http
-      .post(this.serviceUrl+"/addStudentDetails", JSON.stringify(student), {headers: this.httpHeaders()})
+      .post(this.serviceUrl + "/addStudentDetails", JSON.stringify(student), { headers: this.httpHeaders() })
       .map(response => response.json() as Student)
       .catch(this.handleError);
   }
 
   updateStudentDetails(student: Student): Observable<Student> {
 
-    console.log('in updateStudentDetails, student: ', student);
     return this.http
-      .post(this.serviceUrl+"/updateStudentDetails", JSON.stringify(student), {headers: this.httpHeaders()})
+      .post(this.serviceUrl + "/updateStudentDetails", JSON.stringify(student), { headers: this.httpHeaders() })
       .map(response => response.json() as Student)
       .catch(this.handleError);
   }
@@ -115,188 +82,114 @@ export class StudentService {
   deleteStudent(student: Student) {
 
     return this.http
-      .delete(this.serviceUrl+"/deleteStudentById/"+student.id, {headers: this.httpHeaders()})
+      .delete(this.serviceUrl + "/deleteStudentById/" + student.id, { headers: this.httpHeaders() })
       .catch(this.handleError);
   }
 
-  updateStudentNotes(student: Student): Observable<Student> {
-    
-        console.log('in updateStudentNotes, student: ', student);
-        return this.http
-          .post(this.serviceUrl+"/updateStudentNotes", JSON.stringify(student), {headers: this.httpHeaders()})
-          .map(response => response.json() as Student)
-          .catch(this.handleError);
-      }
-    
-  // saveNoteOld (student: Student): Observable<Student> {
-
-  //   let saveStudentObservable$: Observable<Student> =
-  //     this.http.post(this.serviceUrl+"/saveStudentDto", JSON.stringify(student), {headers: this.httpHeaders()})
-  //     //.map(response => response.json() as Student)
-  //     .catch(this.handleError);
-  //   // getStudentById so that the notes are ordered chronlogically
-  //   let getStudentByIdObservable$: Observable<Student> =
-  //     this.http.get(this.serviceUrl+"/getStudentDtoById/"+student.id, {headers: this.httpHeaders()})
-  //     .map(response => response.json() as Student)
-  //     .catch(this.handleError);
-
-  //   return Observable.concat(saveStudentObservable$, getStudentByIdObservable$);
-  // }
   addNote(noteRequestVo: NoteRequestVo): Observable<NoteRequestVo> {
-    console.log('in updateNote, noteRequestVo: ', noteRequestVo);
     return this.http
-      .post(this.serviceUrl+"/noteResource/addNote", JSON.stringify(noteRequestVo), {headers: this.httpHeaders()})
+      .post(this.serviceUrl + "/noteResource/addNote", JSON.stringify(noteRequestVo), { headers: this.httpHeaders() })
       .map(response => response.json() as NoteRequestVo)
       .catch(this.handleError);
   }
 
   updateNote(noteRequestVo: NoteRequestVo): Observable<NoteRequestVo> {
-    console.log('in updateNote, noteRequestVo: ', noteRequestVo);
     return this.http
-      .post(this.serviceUrl+"/noteResource/updateNote", JSON.stringify(noteRequestVo), {headers: this.httpHeaders()})
+      .post(this.serviceUrl + "/noteResource/updateNote", JSON.stringify(noteRequestVo), { headers: this.httpHeaders() })
       .map(response => response.json() as NoteRequestVo)
       .catch(this.handleError);
   }
 
   deleteNote(noteRequestVo: NoteRequestVo): Observable<NoteRequestVo> {
-    console.log('in updateNote, noteRequestVo: ', noteRequestVo);
     return this.http
-      .post(this.serviceUrl+"/noteResource/deleteNote", JSON.stringify(noteRequestVo), {headers: this.httpHeaders()})
+      .post(this.serviceUrl + "/noteResource/deleteNote", JSON.stringify(noteRequestVo), { headers: this.httpHeaders() })
       .map(response => response.json() as NoteRequestVo)
       .catch(this.handleError);
   }
 
-  saveNote (student: Student): Observable<Student> {
-    
-      return this.http.post(this.serviceUrl+"/saveStudentUiDto", JSON.stringify(student), {headers: this.httpHeaders()})
-        .map(response => response.json() as Student)
-        .catch(this.handleError);
-    }
-      
-
-  getLatestActiveStudents(): Observable<Student[]> {
-
-    console.log('in getLatestActiveStudents()');
-    let username: string = this.sessionDataService.user.username;
-    return this.http.get(this.serviceUrl+"/getLatestActiveStudentDtos/"+username+"/"+this.activeStudentsLimit, {headers: this.httpHeaders()})
-              .map(response => response.json() as Student[])
-              .catch(this.handleError);
-  }
-
   downloadAllPdf(printRequestVO: PrintRequestVO): any {
-    return this.http.post(this.serviceUrl+'/PrintResource/pdfAll', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+    return this.http.post(this.serviceUrl + '/PrintResource/pdfAll', JSON.stringify(printRequestVO), { headers: this.httpHeaders(), responseType: ResponseContentType.Blob })
       .map(
-        (response: Response) => {
-            return new Blob([response.blob()], { type: 'application/pdf' })
-        }
-    );
+      (response: Response) => {
+        return new Blob([response.blob()], { type: 'application/pdf' })
+      }
+      );
   }
 
   downloadStudentsByTimestampRangePdf(printRequestVO: PrintRequestVO): any {
-    return this.http.post(this.serviceUrl+'/PrintResource/pdfStudentsByTimestampRange', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+    return this.http.post(this.serviceUrl + '/PrintResource/pdfStudentsByTimestampRange', JSON.stringify(printRequestVO), { headers: this.httpHeaders(), responseType: ResponseContentType.Blob })
       .map(
-        (response: Response) => {
-            return new Blob([response.blob()], { type: 'application/pdf' })
-        }
-    );
+      (response: Response) => {
+        return new Blob([response.blob()], { type: 'application/pdf' })
+      }
+      );
   }
 
   downloadStudentsByStudentIdsPdf(printRequestVO: PrintRequestVO): any {
-    return this.http.post(this.serviceUrl+'/PrintResource/pdfStudentsByStudentIds', JSON.stringify(printRequestVO), {headers: this.httpHeaders(), responseType: ResponseContentType.Blob})
+    return this.http.post(this.serviceUrl + '/PrintResource/pdfStudentsByStudentIds', JSON.stringify(printRequestVO), { headers: this.httpHeaders(), responseType: ResponseContentType.Blob })
       .map(
-        (response: Response) => {
-            return new Blob([response.blob()], { type: 'application/pdf' })
-        }
-    );
+      (response: Response) => {
+        return new Blob([response.blob()], { type: 'application/pdf' })
+      }
+      );
   }
 
   getVersion(): Observable<string> {
-
-    return this.http.get(this.serviceUrl+"/getVersion")
-              .map(response => response.text())
-              .catch(this.handleError);
+    return this.http.get(this.serviceUrl + "/getVersion")
+      .map(response => response.text())
+      .catch(this.handleError);
   }
 
-  getUserPreference() {
-
-    console.log('in getUserPreference()');
-
-//TODO
-
-    let username: string = 'JohnDoe';                        //this.sessionDataService.user.username;
-    console.log('username: ', username);
-    console.log('url used: ', this.serviceUrl+"/userPreference");
-    //this.http.get(this.serviceUrl+"/userPreference").subscribe();
-    console.log('after http call');
-    this.http.get(this.serviceUrl+"/userPreference/getByUsername/"+username, {headers: this.httpHeaders()})
-              .map((response: Response) => {
-                let userPreference = response.json() as UserPreference;
-                console.log('userPreference = ', userPreference);
-                this.sessionDataService.userPreferenceSubject.next(userPreference);
-              })
-              .catch(this.handleError)
-              .subscribe();
-  }
-
-  getUserPreference2(): Observable<UserPreference> {
-    console.log('in getUserPreference2()');
-
-    console.log('in getUserPreference2() this.sessionDataService.user: ', this.sessionDataService.user);
-    console.log('in getUserPreference2() this.sessionDataService.user.username: ', this.sessionDataService.user.username);
+  getUserPreference(): Observable<UserPreference> {
     let username: string = this.sessionDataService.user.username;
     console.log('in getUserPreference2() username: ', username);
-    return this.http.get(this.serviceUrl+"/userPreference/getUiDtoByUsername/"+username, {headers: this.httpHeaders()})
-    .map((response: Response) => {
-      let userPreference = response.json() as UserPreference;
-      console.log('userPreference = ', userPreference);
-      this.sessionDataService.userPreferenceSubject.next(userPreference);
-      this.sessionDataService.userPreference = userPreference;
-      return userPreference;
-    })
-    .catch(this.handleError);
-
-
+    return this.http.get(this.serviceUrl + "/userPreference/getUiDtoByUsername/" + username, { headers: this.httpHeaders() })
+      .map((response: Response) => {
+        let userPreference = response.json() as UserPreference;
+        console.log('userPreference = ', userPreference);
+        this.sessionDataService.userPreferenceSubject.next(userPreference);
+        this.sessionDataService.userPreference = userPreference;
+        return userPreference;
+      })
+      .catch(this.handleError);
   }
 
   getAllSchoolYears(): Observable<SchoolYear[]> {
-    return this.http.get(this.serviceUrl+"/schoolYear/getAllSchoolYearDtos",
-                          {headers: this.httpHeaders()})
-          .map(response => {
-            let schoolYears = response.json() as SchoolYear[];
-            schoolYears.forEach(schoolYear => {
-              schoolYear.startDate = new Date(schoolYear.startDate);
-              schoolYear.endDate = new Date(schoolYear.endDate);
-            });
-            return schoolYears;
-          })
-          .catch(this.handleError);
+    return this.http.get(this.serviceUrl + "/schoolYear/getAllSchoolYearDtos",
+      { headers: this.httpHeaders() })
+      .map(response => {
+        let schoolYears = response.json() as SchoolYear[];
+        schoolYears.forEach(schoolYear => {
+          schoolYear.startDate = new Date(schoolYear.startDate);
+          schoolYear.endDate = new Date(schoolYear.endDate);
+        });
+        return schoolYears;
+      })
+      .catch(this.handleError);
   }
 
   saveSchoolYear(schoolYear: SchoolYear): Observable<SchoolYear> {
-    
     console.log('in saveSchoolYear, schoolYear: ', schoolYear);
     return this.http
-      .post(this.serviceUrl+"/schoolYear/saveSchoolYearDto", JSON.stringify(schoolYear),
-              {headers: this.httpHeaders()})
+      .post(this.serviceUrl + "/schoolYear/saveSchoolYearDto", JSON.stringify(schoolYear),
+      { headers: this.httpHeaders() })
       .map(response => {
         return response.json() as SchoolYear;
       })
       .catch(this.handleError);
   }
-    
-  deleteSchoolYear(schoolYear: SchoolYear) {
 
+  deleteSchoolYear(schoolYear: SchoolYear) {
     return this.http
-      .delete(this.serviceUrl+"/schoolYear/deleteSchoolYearById/"+schoolYear.id, {headers: this.httpHeaders()})
+      .delete(this.serviceUrl + "/schoolYear/deleteSchoolYearById/" + schoolYear.id, { headers: this.httpHeaders() })
       .catch(this.handleError);
   }
 
   saveUserPreference(userPreference: UserPreference): Observable<UserPreference> {
-    
     console.log('in saveUserPreference, userPreference: ', userPreference);
     return this.http
-      .post(this.serviceUrl+"/userPreference/saveUserPreferenceDto", JSON.stringify(userPreference),
-              {headers: this.httpHeaders()})
+      .post(this.serviceUrl + "/userPreference/saveUserPreferenceDto", JSON.stringify(userPreference),
+      { headers: this.httpHeaders() })
       .map((response: Response) => {
         userPreference = response.json() as UserPreference;
         console.log('userPreference = ', userPreference);
@@ -304,60 +197,46 @@ export class StudentService {
       })
       .catch(this.handleError);
   }
-    
-  // getAllStudents(): Observable<Student[]> {
-  //       return this.http.get(this.serviceUrl+"/getAllStudentDtos", {headers: this.httpHeaders()})
-  //                 .map(response => {
-  //                   let students = response.json() as Student[];
-  //                   return students;
-  //                 })
-  //                 .catch(this.handleError);    
-  // }
 
   getStudentsNotInSchoolYear(schoolYearId: number): Observable<Student[]> {
-    return this.http.get(this.serviceUrl+"/getStudentsNotInSchoolYear/"+schoolYearId, {headers: this.httpHeaders()})
-              .map(response => {
-                let students = response.json() as Student[];
-                return students;
-              })
-              .catch(this.handleError);    
+    return this.http.get(this.serviceUrl + "/getStudentsNotInSchoolYear/" + schoolYearId, { headers: this.httpHeaders() })
+      .map(response => {
+        let students = response.json() as Student[];
+        return students;
+      })
+      .catch(this.handleError);
   }
 
   getStudentsInSchoolYear(schoolYearId: number): Observable<Student[]> {
-    return this.http.get(this.serviceUrl+"/getStudentsInSchoolYear/"+schoolYearId, {headers: this.httpHeaders()})
-              .map(response => {
-                let students = response.json() as Student[];
-                return students;
-              })
-              .catch(this.handleError);    
-  }
-  
-  // saveRemoveStudentsToFromSchoolYear(saveRemoveStudentsToFromSchoolYearVO: SaveRemoveStudentsToFromSchoolYearVO) {
-  //   return this.http.post(this.serviceUrl+"/saveRemoveStudentsToFromSchoolYear", JSON.stringify(saveRemoveStudentsToFromSchoolYearVO), {headers: this.httpHeaders()})
-  //     .catch(this.handleError);    
-  // }
-  
-  saveRemoveStudentsToFromSchoolYear2(saveRemoveStudentsToFromSchoolYearVO2: SaveRemoveStudentsToFromSchoolYearVo) {
-    return this.http.post(this.serviceUrl+"/schoolYear/saveRemoveStudentsToFromSchoolYear", JSON.stringify(saveRemoveStudentsToFromSchoolYearVO2), {headers: this.httpHeaders()})
-      .catch(this.handleError);    
+    return this.http.get(this.serviceUrl + "/getStudentsInSchoolYear/" + schoolYearId, { headers: this.httpHeaders() })
+      .map(response => {
+        let students = response.json() as Student[];
+        return students;
+      })
+      .catch(this.handleError);
   }
 
-  private handleError (response: Response | any) {
-      console.log(response);
-      let errorMessage: string;
-      if (response instanceof Response) {
-        let serverErrorMessage: string;
-        try {
-          const bodyJson = response.json();
-          serverErrorMessage = bodyJson.errorMessage || JSON.stringify(bodyJson);
-        } catch (error) {
-          serverErrorMessage = response.text();
-        } 
-        console.error(serverErrorMessage);
-         errorMessage = `HTTP: ${response.status} - ${response.statusText || ''}. Server error message: ${serverErrorMessage}`;
-      } else {
-          errorMessage = response.message ? response.message : response.toString();
+  saveRemoveStudentsToFromSchoolYear2(saveRemoveStudentsToFromSchoolYearVO2: SaveRemoveStudentsToFromSchoolYearVo) {
+    return this.http.post(this.serviceUrl + "/schoolYear/saveRemoveStudentsToFromSchoolYear", JSON.stringify(saveRemoveStudentsToFromSchoolYearVO2), { headers: this.httpHeaders() })
+      .catch(this.handleError);
+  }
+
+  private handleError(response: Response | any) {
+    console.log(response);
+    let errorMessage: string;
+    if (response instanceof Response) {
+      let serverErrorMessage: string;
+      try {
+        const bodyJson = response.json();
+        serverErrorMessage = bodyJson.errorMessage || JSON.stringify(bodyJson);
+      } catch (error) {
+        serverErrorMessage = response.text();
       }
-      return Observable.throw(errorMessage);
+      console.error(serverErrorMessage);
+      errorMessage = `HTTP: ${response.status} - ${response.statusText || ''}. Server error message: ${serverErrorMessage}`;
+    } else {
+      errorMessage = response.message ? response.message : response.toString();
+    }
+    return Observable.throw(errorMessage);
   }
 }

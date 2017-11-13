@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../security/user';
-import { UserPreference } from '../domain/UserPreference';
+import { UserPreference } from '../dto/UserPreference';
 
 // import { AuthenticationService } from '../security/authentication.service';
 // import { StudentService } from '../student.service';

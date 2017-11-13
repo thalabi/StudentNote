@@ -6,7 +6,7 @@ import { StudentService } from '../../student.service';
 import { MessageService } from './../../error/message.service';
 import { SessionDataService } from '../../session-data.service';
 import { Observable } from "rxjs/Observable";
-import { UserPreference } from '../../domain/UserPreference';
+import { UserPreference } from '../../dto/UserPreference';
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/merge';
@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
       user=>{
         this.sessionDataService.user = user;
         this.sessionDataService.userSubject.next(user);
-        return this.studentService.getUserPreference2();
+        return this.studentService.getUserPreference();
       }
     )
     //Observable.concat(obs1$, obs2$)

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SchoolYear } from '../domain/SchoolYear';
-import { Student } from '../domain/Student';
-import { UserPreference } from '../domain/UserPreference';
+import { SchoolYear } from '../dto/SchoolYear';
+import { Student } from '../dto/Student';
+import { UserPreference } from '../dto/UserPreference';
 import { SessionDataService } from '../session-data.service';
 import { Router } from '@angular/router';
 import { MessageService } from './../error/message.service';
@@ -98,8 +98,9 @@ export class SchoolYearStudentsComponent implements OnInit {
     });
 
   }
-  onCancel(){
 
+  onCancel() {
+    this.router.navigate(['/studentTable']);
   }
 
   onMoveToSource(){

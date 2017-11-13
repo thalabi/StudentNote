@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student.service';
 import { TimestampRange } from '../TimestampRange';
-import { Student } from '../domain/Student';
+import { Student } from '../dto/Student';
 import { MessageService } from './../error/message.service';
 import { PrintRequestVO } from 'app/vo/PrintRequestVO';
 import { SessionDataService } from 'app/session-data.service';

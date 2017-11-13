@@ -15,7 +15,6 @@ import { StudentDetailsFormComponent } from './student-details-form/student-deta
 import { NoteDetailsFormComponent } from './note-details-form/note-details-form.component';
 import { AboutComponent } from './about/about.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { StudentDashboardComponent } from './student-dashboard/student-dashboard.component'
 
 import { AuthGuard } from './security/auth.guard';
 import { LoginComponent } from './security/login/login.component'
@@ -49,7 +48,6 @@ import { SchoolYearStudentsComponent } from './school-year-students/school-year-
     NoteDetailsFormComponent,
     AboutComponent,
     ContactUsComponent,
-    StudentDashboardComponent,
     LoginComponent,
     MenuComponent,
     PrintComponent,
