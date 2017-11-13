@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { Constants } from '../constants';
 import { MessageService } from './../error/message.service';
 import { NoteRequestVo } from 'app/vo/NoteRequestVo';
-import { endOfDay } from 'app/util/DateUtils';
+import DateUtils from 'app/util/DateUtils';
 
 @Component({
   selector: 'app-note-details-form',
@@ -43,7 +43,7 @@ export class NoteDetailsFormComponent implements OnInit {
     if (this.crudMode == 'Add') {
       this.note = new Note();
       let now: Date = new Date();
-      if (now >= this.schoolYearStartDate && now <= endOfDay(this.schoolYearEndDate)) {
+      if (now >= this.schoolYearStartDate && now <= DateUtils.endOfDay(this.schoolYearEndDate)) {
         this.note.timestamp = now;
       } else {
         this.note.timestamp = this.schoolYearStartDate;

@@ -6,7 +6,7 @@ import { MessageService } from './../error/message.service';
 import { PrintRequestVO } from 'app/vo/PrintRequestVO';
 import { SessionDataService } from 'app/session-data.service';
 import { Router } from '@angular/router';
-import { endOfDay, startOfDay } from 'app/util/DateUtils';
+import DateUtils from 'app/util/DateUtils';
 
 @Component({
   selector: 'app-print',
@@ -53,12 +53,12 @@ export class PrintComponent implements OnInit {
         break;
       case 1:
         let now: Date = new Date();
-        if (now >= this.schoolYearStartDate && now <= endOfDay(this.schoolYearEndDate)) {
-          this.fromTimestamp = startOfDay(now);
-          this.toTimestamp = endOfDay(now);      
+        if (now >= this.schoolYearStartDate && now <= DateUtils.endOfDay(this.schoolYearEndDate)) {
+          this.fromTimestamp = DateUtils.startOfDay(now);
+          this.toTimestamp = DateUtils.endOfDay(now);      
         } else {
           this.fromTimestamp = this.schoolYearStartDate;
-          this.toTimestamp = endOfDay(this.schoolYearEndDate);
+          this.toTimestamp = DateUtils.endOfDay(this.schoolYearEndDate);
         }
         break;
       case 2:
