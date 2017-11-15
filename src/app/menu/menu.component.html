@@ -12,7 +12,20 @@
     <li *ngIf="user != null" class="nav-item">
       <a class="nav-link" routerLink="/print" routerLinkActive="active">Print</a>
     </li>
-    <li *ngIf="user != null" class="nav-item">
+
+    <li *ngIf="user != null" class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        School Year
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" routerLink="/schoolYearSelect" routerLinkActive="active">Switch</a>
+        <a class="dropdown-item" href="#">Students</a>
+        <a class="dropdown-item" href="#">Maintenance</a>
+      </div>
+  </li>
+
+    
+    <!-- <li *ngIf="user != null" class="nav-item">
       <a class="nav-link" routerLink="/schoolYearSelect" routerLinkActive="active">Change School Year</a>
     </li>
     <li *ngIf="user != null" class="nav-item">
@@ -20,7 +33,7 @@
     </li>
     <li *ngIf="user != null" class="nav-item">
       <a class="nav-link" routerLink="/schoolYearCrud" routerLinkActive="active">School Year Maint</a>
-    </li>
+    </li> -->
     <li class="nav-item">
       <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
     </li>
@@ -33,3 +46,38 @@
   </ul>
 </nav>
 </div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <button  class="dropdown-item" href="#">Action</button >
+          <button  class="dropdown-item" href="#">Another action</button >
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
