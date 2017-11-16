@@ -95,6 +95,7 @@ export class SchoolYearCrudComponent implements OnInit {
           }
       });
     }
+      this.modifyAndDeleteButtonsDisable = true;
       this.displayDialog = false;
   }
 
