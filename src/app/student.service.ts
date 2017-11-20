@@ -17,7 +17,6 @@ import 'rxjs/add/operator/map';
 import { Constants } from './constants';
 
 import { SessionDataService } from './session-data.service';
-import { TimestampRange } from './TimestampRange';
 import { ConfigService } from './config/config.service';
 import { ApplicationProperties } from './config/application.properties';
 import { SaveRemoveStudentsToFromSchoolYearVo } from 'app/vo/SaveRemoveStudentsToFromSchoolYearVo';

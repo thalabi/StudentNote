@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from '../student.service';
-import { TimestampRange } from '../TimestampRange';
 import { Student } from '../dto/Student';
 import { MessageService } from './../error/message.service';
 import { PrintRequestVO } from 'app/vo/PrintRequestVO';
@@ -18,7 +17,6 @@ export class PrintComponent implements OnInit {
   fromTimestamp: Date;
   toTimestamp: Date;
   selectedStudents: Student[] = [];
-  timestampRange: TimestampRange = new TimestampRange();
   studentArray: Student[];
 
   schoolYearStartDate: Date;
@@ -89,7 +87,6 @@ export class PrintComponent implements OnInit {
     printRequestVO.fromTimestamp = this.fromTimestamp;
     printRequestVO.toTimestamp = new Date(this.toTimestamp.getFullYear(), this.toTimestamp.getMonth(), this.toTimestamp.getDate(), 23, 59, 59, 999);
 
-    console.log('this.timestampRange: ', this.timestampRange);
     this.studentService.downloadStudentsByTimestampRangePdf(printRequestVO).subscribe(
         (response) => {
         var pdfUrl = URL.createObjectURL(response);
