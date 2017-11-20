@@ -8,6 +8,8 @@ import { SessionDataService } from '../../session-data.service';
 import { Observable } from "rxjs/Observable";
 import { UserPreference } from '../../dto/UserPreference';
 
+import { PasswordModule } from 'primeng/primeng';
+
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/operator/concatMap'; 
