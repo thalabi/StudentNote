@@ -28,3 +28,10 @@ li a.active {
     background-color: lightblue;
 }
 */
+
+/* test */
+
+/* Used by menu bar text to the left */
+/* :host(.ui-menubar) {
+    color: red;
+} */

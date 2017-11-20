@@ -33,7 +33,8 @@ import { ExceptionComponent } from './error/error.component';
 import { ConfigService, configServiceLoadConfig } from './config/config.service';
 
 import { InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule,
-  CalendarModule, DropdownModule, PickListModule, InputTextareaModule, ConfirmDialogModule, ConfirmationService, SharedModule } from 'primeng/primeng';
+  CalendarModule, DropdownModule, PickListModule, InputTextareaModule, ConfirmDialogModule, ConfirmationService,
+  MenubarModule, SharedModule } from 'primeng/primeng';
 import { SchoolYearCrudComponent } from './school-year-crud/school-year-crud.component';
 import { SchoolYearSelectComponent } from './school-year-select/school-year-select.component';
 import { SchoolYearStudentsComponent } from './school-year-students/school-year-students.component';
@@ -65,7 +66,8 @@ import { SchoolYearStudentsComponent } from './school-year-students/school-year-
     AppRouting,
     NgbModule.forRoot(),
     InputTextModule, DataTableModule, ButtonModule, DialogModule, TabViewModule, CheckboxModule,
-      CalendarModule, DropdownModule, PickListModule, InputTextareaModule, ConfirmDialogModule, SharedModule
+      CalendarModule, DropdownModule, PickListModule, InputTextareaModule, ConfirmDialogModule,
+      MenubarModule, SharedModule
   ],
   providers: [
     StudentService,
