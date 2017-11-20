@@ -1,37 +1,25 @@
-/*
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    border: 1px solid #e7e7e7;
-    background-color: #f3f3f3;
+:host ::ng-deep .ui-menuitem .ui-menuitem-link {
+    color: #555555;
+    border: none;
+    background: none;
 }
-
-li {
-    float: left;
+:host ::ng-deep .ui-menuitem .ui-menuitem-link:hover {
+    color: black;
+    font-weight: 500;
+    border: none;
+    background: none;
 }
-li a {
-    display: block;
-    color: #666;
-    text-align: center;
-    padding: 0.3rem;
-    text-decoration: none;
+:host ::ng-deep .ui-menu.ui-widget {
+    border: none;
+    background: none;
 }
-
-li a:hover:not(.active) {
-    background-color: #ffff99;
-}
-
-li a.active {
-    color: white;
-    background-color: lightblue;
-}
-*/
-
-/* test */
-
 /* Used by menu bar text to the left */
-/* :host(.ui-menubar) {
-    color: red;
-} */
+:host ::ng-deep .ui-menuitem.ui-menuitem-custom {
+    color: black;
+    float: left;
+    margin-top: .125em;
+    margin-left: 1em;
+    margin-right: 1em;
+    font-size: 1.2em;
+}
+

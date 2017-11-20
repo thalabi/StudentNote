@@ -47,26 +47,3 @@ button:hover {
 }
 
 /* textarea { font-family: inherit; font-size: inherit; } */
-
-/* .ui-menuitem-link.ui-corner-all.ui-state-active {
-    background: none;
-} */
-
-/* .ui-menu .ui-state-active {
-    color: #186ba0 !important;
-    background: none !important;
-} */
-.ui-menu.ui-widget {
-    /* color: blue !important; */
-    border: none;
-    background: none;
-}
-/* Used by menu bar text to the left */
-.ui-menubar .ui-menuitem.ui-menuitem-custom {
-    color: black;
-    float: left !important;
-    margin-top: .125em !important;
-    margin-left: 1em;
-    margin-right: 1em;
-    font-size: 1.2em;
-}

@@ -1,38 +1,3 @@
-
-<!-- <div class="container-fluid pl-0 pr-0">
-  <nav class="navbar navbar-default navbar-expand-md navbar-light bg-faded">
-  
-  <a class="navbar-brand">Student Notes<span *ngIf="userPreference != null"> ({{userPreference.schoolYear.schoolYear}})</span></a>
-  
-    <ul class="nav navbar-nav">
-      <li *ngIf="user != null" class="nav-item">
-        <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-      </li>
-      <li *ngIf="user != null" class="nav-item">
-        <a class="nav-link" routerLink="/print" routerLinkActive="active">Print</a>
-      </li>
-      <li *ngIf="user != null" class="nav-item">
-        <a class="nav-link" routerLink="/schoolYearSelect" routerLinkActive="active">Change School Year</a>
-      </li>
-      <li *ngIf="user != null" class="nav-item">
-        <a class="nav-link" routerLink="/schoolYearStudents" routerLinkActive="active">School Year Students</a>
-      </li>
-      <li *ngIf="user != null" class="nav-item">
-        <a class="nav-link" routerLink="/schoolYearCrud" routerLinkActive="active">School Year Maint</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/about" routerLinkActive="active">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/contact-us" routerLinkActive="active">Contact Us</a>
-      </li>
-      <li *ngIf="user != null" class="nav-item">
-        <a class="nav-link navbar-right" routerLink="/login" routerLinkActive="active">Logout</a>
-      </li>
-    </ul>
-  </nav>
-  </div> -->
-
 <p-menubar [model]="menuModel">
   Student Notes<span *ngIf="userPreference != null"> ({{userPreference.schoolYear.schoolYear}})</span>
 </p-menubar>
