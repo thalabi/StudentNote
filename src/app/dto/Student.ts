@@ -6,7 +6,7 @@ export class Student {
     id: number;
     firstName: string;
     lastName: string;
-    gradeUiDto: Grade;
+    grade: Grade;
     noteSet: Note[];
     schoolYear: SchoolYear;
     version: number;

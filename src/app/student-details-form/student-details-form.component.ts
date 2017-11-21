@@ -35,8 +35,8 @@ export class StudentDetailsFormComponent implements OnInit {
     this.crudMode = this.sessionDataService.crudMode;
     if (this.crudMode == 'Add') {
       this.student = new Student();
-      this.student.gradeUiDto = new Grade();
-      this.student.gradeUiDto.grade='Other';
+      this.student.grade = new Grade();
+      this.student.grade.grade='Other';
       this.student.schoolYear = this.sessionDataService.userPreference.schoolYear;
     } else {
       this.student = Object.assign({}, this.sessionDataService.student);
@@ -48,7 +48,7 @@ export class StudentDetailsFormComponent implements OnInit {
         'firstName' : [{value: this.student.firstName, disabled: this.crudMode == 'Delete'}],
         'lastName': [{value: this.student.lastName, disabled: this.crudMode == 'Delete'}]
       }, {validator: nameNotNullValidator}),
-      'grade' : [{value: this.student.gradeUiDto.grade, disabled: this.crudMode == 'Delete'}]
+      'grade' : [{value: this.student.grade.grade, disabled: this.crudMode == 'Delete'}]
     })
 
 
@@ -64,7 +64,7 @@ export class StudentDetailsFormComponent implements OnInit {
     console.log("onSubmit(), this.studentForm.get(\'firstName\').value: ", this.studentForm.get('nameGroup.firstName').value);
     this.student.firstName = this.studentForm.get('nameGroup.firstName').value;
     this.student.lastName = this.studentForm.get('nameGroup.lastName').value;
-    this.student.gradeUiDto.grade = this.studentForm.get('grade').value;
+    this.student.grade.grade = this.studentForm.get('grade').value;
     // let grade : Grade = new Grade();
     // grade.grade = this.studentForm.get('grade').value;
     // console.log('this.student.gradeSet[0]',this.student.gradeSet[0]);

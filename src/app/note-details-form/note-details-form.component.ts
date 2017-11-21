@@ -60,14 +60,14 @@ export class NoteDetailsFormComponent implements OnInit {
     let noteRequestVo: NoteRequestVo = new NoteRequestVo;
     noteRequestVo.studentId = this.student.id;
     noteRequestVo.studentVersion = this.student.version;
-    noteRequestVo.noteUiDto = this.note;
+    noteRequestVo.noteDto = this.note;
     console.log('noteReuestVo', noteRequestVo);
     switch (this.crudMode) {
       case 'Add':
         this.studentService.addNote(noteRequestVo)
         .subscribe({
             next: noteRequestVo => {
-              this.student.noteSet.push(noteRequestVo.noteUiDto);
+              this.student.noteSet.push(noteRequestVo.noteDto);
               this.sortNoteSet(this.student.noteSet);
               this.student.version = noteRequestVo.studentVersion;
               this.sessionDataService.student = this.student;
@@ -88,7 +88,7 @@ export class NoteDetailsFormComponent implements OnInit {
         this.studentService.updateNote(noteRequestVo)
         .subscribe({
             next: noteRequestVo => {
-              let note = noteRequestVo.noteUiDto;
+              let note = noteRequestVo.noteDto;
               this.student.noteSet[this.sessionDataService.noteListIndex] = note;
               this.sortNoteSet(this.student.noteSet);
               this.sessionDataService.student = this.student;

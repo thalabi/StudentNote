@@ -154,7 +154,7 @@ export class StudentService {
   }
 
   getAllSchoolYears(): Observable<SchoolYear[]> {
-    return this.http.get(this.serviceUrl + "/schoolYear/getAllSchoolYearDtos",
+    return this.http.get(this.serviceUrl + "/schoolYear/getAllSchoolYearUiDtos",
       { headers: this.httpHeaders() })
       .map(response => {
         let schoolYears = response.json() as SchoolYear[];
@@ -170,7 +170,7 @@ export class StudentService {
   saveSchoolYear(schoolYear: SchoolYear): Observable<SchoolYear> {
     console.log('in saveSchoolYear, schoolYear: ', schoolYear);
     return this.http
-      .post(this.serviceUrl + "/schoolYear/saveSchoolYearDto", JSON.stringify(schoolYear),
+      .post(this.serviceUrl + "/schoolYear/saveSchoolYearUiDto", JSON.stringify(schoolYear),
       { headers: this.httpHeaders() })
       .map(response => {
         return response.json() as SchoolYear;
