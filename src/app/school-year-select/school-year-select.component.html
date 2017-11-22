@@ -1,14 +1,12 @@
 <div class="ui-g">
-  <div class="ui-g-12">
-    <p-dropdown [options]="schoolYearSelectItems" [(ngModel)]="selectedSchoolYear"
-      placeholder="Select school year" [style]="{'width':'12em'}"></p-dropdown>
-  </div>
+    <div class="ui-g-12">
+        <p-dropdown [options]="schoolYearSelectItems" [(ngModel)]="selectedSchoolYear" placeholder="Select school year" [style]="{'width':'12em'}"></p-dropdown>
+    </div>
 
-  <div class="ui-g-12">
-    <!-- TODO add disabled -->
-    <button pButton type="submit" (click)="onSubmit()" label="Submit"
-      [disabled]="selectedSchoolYear == null"></button>
-    <button pButton type="button" (click)="onCancel()" label="Cancel"></button>    
-  </div>
+    <div class="ui-g-12">
+        <!-- TODO add disabled -->
+        <button pButton type="submit" (click)="onSubmit()" label="Submit" [disabled]="selectedSchoolYear == null"></button>
+        <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
+    </div>
 
 </div>

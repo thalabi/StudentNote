@@ -1,4 +1,4 @@
 export class ApplicationProperties {
-  serviceUrl: string;
-  activeStudentsLimit: number;
+    serviceUrl: string;
+    activeStudentsLimit: number;
 }

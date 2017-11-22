@@ -1,57 +1,50 @@
 <p-tabView (onChange)="onTabChange($event)">
-  <p-tabPanel header="All" [selected]="true">
+    <p-tabPanel header="All" [selected]="true">
 
-    <!--print all tab-->
+        <!--print all tab-->
 
-    <button pButton type="button" (click)="onDownloadAllPdf()" label="Print"></button>    
-    <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
-  
-  </p-tabPanel>
-  <p-tabPanel header="Date Range">
-  
-    <!--print by date range tab-->
-    
-    <div class="ui-g ui-fluid"> 
+        <button pButton type="button" (click)="onDownloadAllPdf()" label="Print"></button>
+        <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
 
-      <div class="ui-g-12 ui-md-2">
-        <label for="fromTimestampId">From: </label>
-        <p-calendar [(ngModel)]="fromTimestamp" [monthNavigator]="true" [yearNavigator]="true"
-          yearRange="2015:2030" dateFormat="M d, yy" [showIcon]="true" readonlyInput="readonlyInput"
-          id="fromTimestampId"
-          [minDate]="schoolYearStartDate" [maxDate]="schoolYearEndDate"></p-calendar>
-      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Date Range">
 
-      <div class="ui-g-12 ui-md-2">
-        <label for="toTimestampId">To: </label>
-        <p-calendar [(ngModel)]="toTimestamp" [monthNavigator]="true" [yearNavigator]="true"
-          yearRange="2015:2030" dateFormat="M d, yy" [showIcon]="true" readonlyInput="readonlyInput"
-          id="toTimestampId"
-          [minDate]="schoolYearStartDate" [maxDate]="schoolYearEndDate"></p-calendar>
-      </div>
+        <!--print by date range tab-->
 
-    </div>
+        <div class="ui-g ui-fluid">
 
-    <button pButton type="button" (click)="onDownloadDateRangePdf()" label="Print"
-      [disabled]="fromTimestamp == null || toTimestamp == null || 
+            <div class="ui-g-12 ui-md-2">
+                <label for="fromTimestampId">From: </label>
+                <p-calendar [(ngModel)]="fromTimestamp" [monthNavigator]="true" [yearNavigator]="true" yearRange="2015:2030" dateFormat="M d, yy"
+                    [showIcon]="true" readonlyInput="readonlyInput" id="fromTimestampId" [minDate]="schoolYearStartDate" [maxDate]="schoolYearEndDate"></p-calendar>
+            </div>
+
+            <div class="ui-g-12 ui-md-2">
+                <label for="toTimestampId">To: </label>
+                <p-calendar [(ngModel)]="toTimestamp" [monthNavigator]="true" [yearNavigator]="true" yearRange="2015:2030" dateFormat="M d, yy"
+                    [showIcon]="true" readonlyInput="readonlyInput" id="toTimestampId" [minDate]="schoolYearStartDate" [maxDate]="schoolYearEndDate"></p-calendar>
+            </div>
+
+        </div>
+
+        <button pButton type="button" (click)="onDownloadDateRangePdf()" label="Print" [disabled]="fromTimestamp == null || toTimestamp == null || 
         fromTimestamp > toTimestamp" style="margin-left: 0.5em;"></button>
-    <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
-      
-  </p-tabPanel>
-  <p-tabPanel header="Student Select">
+        <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
 
-    <!--print by student selection-->
-    
-    <p-dataTable [value]="studentArray"
-      scrollable="true" scrollHeight="300px"
-      [(selection)]="selectedStudents" dataKey="id">
-      <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
-      <p-column field="firstName" header="First Name"></p-column>
-      <p-column field="lastName" header="Last Name"></p-column>
-      <p-column field="grade.grade" header="Grade"></p-column>
-    </p-dataTable>
-    <button pButton type="button" (click)="onDownloadStudentSelectPdf()"
-      [disabled]="selectedStudents.length == 0" label="Print" style="margin-top: 0.5em;"></button>
-    <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
-        
-  </p-tabPanel>
+    </p-tabPanel>
+    <p-tabPanel header="Student Select">
+
+        <!--print by student selection-->
+
+        <p-dataTable [value]="studentArray" scrollable="true" scrollHeight="300px" [(selection)]="selectedStudents" dataKey="id">
+            <p-column [style]="{'width':'38px'}" selectionMode="multiple"></p-column>
+            <p-column field="firstName" header="First Name"></p-column>
+            <p-column field="lastName" header="Last Name"></p-column>
+            <p-column field="grade.grade" header="Grade"></p-column>
+        </p-dataTable>
+        <button pButton type="button" (click)="onDownloadStudentSelectPdf()" [disabled]="selectedStudents.length == 0" label="Print"
+            style="margin-top: 0.5em;"></button>
+        <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
+
+    </p-tabPanel>
 </p-tabView>

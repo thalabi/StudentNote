@@ -1,13 +1,10 @@
-<p-pickList [source]="availableStudents" [target]="schoolYearStudents"
-    sourceHeader="Available Students" targetHeader="{{userPreference.schoolYear.schoolYear}} Students"
-    (onMoveAllToTarget)="onMoveAllToTarget()" (onMoveToTarget)="onMoveToTarget()"
-    (onMoveAllToSource)="onMoveAllToSource()" (onMoveToSource)="onMoveToSource()"
-    [showSourceControls]="false" [showTargetControls]="false"
-    [sourceStyle]="{'height':'20em'}" [targetStyle]="{'height':'20em'}">
+<p-pickList [source]="availableStudents" [target]="schoolYearStudents" sourceHeader="Available Students" targetHeader="{{userPreference.schoolYear.schoolYear}} Students"
+    (onMoveAllToTarget)="onMoveAllToTarget()" (onMoveToTarget)="onMoveToTarget()" (onMoveAllToSource)="onMoveAllToSource()" (onMoveToSource)="onMoveToSource()"
+    [showSourceControls]="false" [showTargetControls]="false" [sourceStyle]="{'height':'20em'}" [targetStyle]="{'height':'20em'}">
     <ng-template let-student pTemplate="item">
         <div class="ui-helper-clearfix">
             <div style="font-size:14px;float:left;margin:0 0 0 0">
-            {{student.firstName}} - {{student.lastName}}</div>
+                {{student.firstName}} - {{student.lastName}}</div>
         </div>
     </ng-template>
 </p-pickList>

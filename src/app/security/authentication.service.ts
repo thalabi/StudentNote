@@ -12,7 +12,7 @@ import { MessageService } from './../error/message.service';
 import { ConfigService } from './../config/config.service';
 import { ApplicationProperties } from './../config/application.properties';
 import { SessionDataService } from '../session-data.service';
- 
+
 @Injectable()
 export class AuthenticationService {
 
@@ -20,24 +20,24 @@ export class AuthenticationService {
     // userSubject: Subject<User>;// = Subject.from([null]);
     isAuthenticated: boolean = false;
 
-    private jsonHeaders = new Headers({'Content-Type': 'application/json'});
+    private jsonHeaders = new Headers({ 'Content-Type': 'application/json' });
 
     serviceUrl: string;
 
     constructor(
-      private http: Http,
-      private nessageService: MessageService,
-      private configService: ConfigService,
-      private sessionDataService: SessionDataService        
+        private http: Http,
+        private nessageService: MessageService,
+        private configService: ConfigService,
+        private sessionDataService: SessionDataService
     ) {
-    //   this.userSubject = new Subject<User>();
-    //   this.userSubject.next(new User());
+        //   this.userSubject = new Subject<User>();
+        //   this.userSubject.next(new User());
 
-      const applicationProperties: ApplicationProperties = this.configService.getApplicationProperties();
-      this.serviceUrl = applicationProperties.serviceUrl;
-      console.log(this.serviceUrl);
+        const applicationProperties: ApplicationProperties = this.configService.getApplicationProperties();
+        this.serviceUrl = applicationProperties.serviceUrl;
+        console.log(this.serviceUrl);
     }
- 
+
     // login(username: string, password: string): Observable<any> {
     //     return this.http.post(this.serviceUrl+'/Security/authenticate', JSON.stringify({ username: username, password: password }), {headers: this.jsonHeaders})
     //         .map((response: Response) => {
@@ -68,9 +68,9 @@ export class AuthenticationService {
     //         // .map(this.processResponse)
     //         .catch(this.handleError);
     // }
- 
+
     login(username: string, password: string): Observable<User> {
-        return this.http.post(this.serviceUrl+'/Security/authenticate', JSON.stringify({ username: username, password: password }), {headers: this.jsonHeaders})
+        return this.http.post(this.serviceUrl + '/Security/authenticate', JSON.stringify({ username: username, password: password }), { headers: this.jsonHeaders })
             .map((response: Response) => {
                 console.log('response: ', response);
                 // login successful if there's a jwt token in the response
@@ -89,11 +89,11 @@ export class AuthenticationService {
                     //throw('Something went wrong on our end (test)')
                 } else {
                     // TODO should indicate an exception
-                    throw('Something went wrong on our end');
-                //     //this.userObservable = Observable.from([null]);
-                //     this.isAuthenticated = false;
-                //     this.sessionDataService.user = null;
-                //     throw ('Login invalid');
+                    throw ('Something went wrong on our end');
+                    //     //this.userObservable = Observable.from([null]);
+                    //     this.isAuthenticated = false;
+                    //     this.sessionDataService.user = null;
+                    //     throw ('Login invalid');
                 }
             }
             )
@@ -110,9 +110,9 @@ export class AuthenticationService {
         //this.sessionDataService.user = null;
     }
 
-    private processResponse (response: Response) {
+    private processResponse(response: Response) {
     }
-    private handleError (response: Response | any) {
+    private handleError(response: Response | any) {
         console.log(response);
         let errorMessage: string;
         if (response instanceof Response) {

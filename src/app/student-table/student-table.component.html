@@ -1,24 +1,18 @@
 <div style="margin-top: 0.5rem;">
 
-  <p-dataTable [value]="studentArray"
-    scrollable="true" scrollHeight="300px"
-    selectionMode="single" [(selection)]="selectedStudent" dataKey="id"
-    (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
-    <p-column field="firstName" header="First Name"></p-column>
-    <p-column field="lastName" header="Last Name"></p-column>
-    <p-column field="grade.grade" header="Grade"></p-column>
-    <p-footer>
-      <div class="ui-helper-clearfix" style="width:100%">
-          <button pButton type="button" (click)="onAddStudent()" label="Add Student"
-            icon="fa-plus" style="float:left"></button>
-          <button pButton type="button" (click)="onModifyStudent()" label="Modify Student"
-            icon="fa-edit" style="float:left" [disabled]="modifyAndDeleteButtonsDisable" ></button>
-          <button pButton type="button" (click)="onDeleteStudent()" label="Delete Student"
-            icon="fa-remove" style="float:left" [disabled]="modifyAndDeleteButtonsDisable"></button>
-          <button pButton type="button" (click)="onManageNotes()" label="Manage Notes"
-            icon="fa-edit" style="float:left" [disabled]="modifyAndDeleteButtonsDisable"></button>
-      </div>
-    </p-footer>
+    <p-dataTable [value]="studentArray" scrollable="true" scrollHeight="300px" selectionMode="single" [(selection)]="selectedStudent"
+        dataKey="id" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)">
+        <p-column field="firstName" header="First Name"></p-column>
+        <p-column field="lastName" header="Last Name"></p-column>
+        <p-column field="grade.grade" header="Grade"></p-column>
+        <p-footer>
+            <div class="ui-helper-clearfix" style="width:100%">
+                <button pButton type="button" (click)="onAddStudent()" label="Add Student" icon="fa-plus" style="float:left"></button>
+                <button pButton type="button" (click)="onModifyStudent()" label="Modify Student" icon="fa-edit" style="float:left" [disabled]="modifyAndDeleteButtonsDisable"></button>
+                <button pButton type="button" (click)="onDeleteStudent()" label="Delete Student" icon="fa-remove" style="float:left" [disabled]="modifyAndDeleteButtonsDisable"></button>
+                <button pButton type="button" (click)="onManageNotes()" label="Manage Notes" icon="fa-edit" style="float:left" [disabled]="modifyAndDeleteButtonsDisable"></button>
+            </div>
+        </p-footer>
     </p-dataTable>
 
 </div>

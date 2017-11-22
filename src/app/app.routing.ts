@@ -16,19 +16,19 @@ import { AuthGuard } from './security/auth.guard';
 import { _404Component } from './404.component';
 
 const routes: Routes = [
-    {path: '',              component: StudentTableComponent, canActivate: [AuthGuard]},
-    {path: 'studentTable',  component: StudentTableComponent, canActivate: [AuthGuard]},
-    {path: 'print',  component: PrintComponent, canActivate: [AuthGuard]},
-    {path: 'about',  component: AboutComponent},
-    {path: 'contact-us',  component: ContactUsComponent},
-    {path: 'studentDetailsForm',  component: StudentDetailsFormComponent, canActivate: [AuthGuard]},
-    {path: 'noteTable', component: NoteTableComponent, canActivate: [AuthGuard]},
-    {path: 'noteDetailsForm',  component: NoteDetailsFormComponent, canActivate: [AuthGuard]},
-    {path: 'schoolYearCrud',  component: SchoolYearCrudComponent, canActivate: [AuthGuard]},
-    {path: 'schoolYearSelect',  component: SchoolYearSelectComponent, canActivate: [AuthGuard]},
-    {path: 'schoolYearStudents',  component: SchoolYearStudentsComponent, canActivate: [AuthGuard]},
-    {path: 'login',  component: LoginComponent},
-    {path: '**',            component: _404Component}
+    { path: '', component: StudentTableComponent, canActivate: [AuthGuard] },
+    { path: 'studentTable', component: StudentTableComponent, canActivate: [AuthGuard] },
+    { path: 'print', component: PrintComponent, canActivate: [AuthGuard] },
+    { path: 'about', component: AboutComponent },
+    { path: 'contact-us', component: ContactUsComponent },
+    { path: 'studentDetailsForm', component: StudentDetailsFormComponent, canActivate: [AuthGuard] },
+    { path: 'noteTable', component: NoteTableComponent, canActivate: [AuthGuard] },
+    { path: 'noteDetailsForm', component: NoteDetailsFormComponent, canActivate: [AuthGuard] },
+    { path: 'schoolYearCrud', component: SchoolYearCrudComponent, canActivate: [AuthGuard] },
+    { path: 'schoolYearSelect', component: SchoolYearSelectComponent, canActivate: [AuthGuard] },
+    { path: 'schoolYearStudents', component: SchoolYearStudentsComponent, canActivate: [AuthGuard] },
+    { path: 'login', component: LoginComponent },
+    { path: '**', component: _404Component }
 ]
 
 export const AppRouting = RouterModule.forRoot(routes);

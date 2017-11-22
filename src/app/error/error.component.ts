@@ -12,7 +12,7 @@ import { Message } from './message';
         </p>
     `
 })
-export class ExceptionComponent{
+export class ExceptionComponent {
     constructor(private notification: MessageService) {
     }
 
