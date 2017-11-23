@@ -21,7 +21,7 @@ import { ConfigService } from './config/config.service';
 import { ApplicationProperties } from './config/application.properties';
 import { SaveRemoveStudentsToFromSchoolYearVo } from 'app/vo/SaveRemoveStudentsToFromSchoolYearVo';
 import { PrintRequestVO } from 'app/vo/PrintRequestVO';
-import { NoteRequestVo } from 'app/vo/NoteRequestVO';
+import { NoteRequestVo } from 'app/vo/NoteRequestVo';
 
 @Injectable()
 export class StudentService {
