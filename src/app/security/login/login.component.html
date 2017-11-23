@@ -1,25 +1,27 @@
 <div class="container">
-    <h4>Login</h4>
-    <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+    <form name="form" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+        <h4>Login</h4>
         <div class="ui-g">
             <div class="ui-g-1">
                 <label for="username">Username</label>
             </div>
             <div class="ui-g-11">
-                <input type="text" pInputText name="username" [(ngModel)]="model.username" #username="ngModel" required id="username">
-                <div *ngIf="f.submitted && !username.valid">Username is required</div>
+                <input type="text" pInputText name="username" [(ngModel)]="model.username" #username="ngModel"
+                    required id="username" #spy>
+                <br>TODO: remove this: {{spy.className}}
+                <div [hidden]="username.valid || username.pristine">Username is required</div>
             </div>
             <div class="ui-g-1">
                 <label for="password">Password</label>
             </div>
             <div class="ui-g-11">
-                <input type="password" pPassword name="password" [(ngModel)]="model.password" #password="ngModel" required id="password"
-                />
-                <div *ngIf="f.submitted && !password.valid">Password is required</div>
+                <input type="password" pPassword name="password" [(ngModel)]="model.password" #password="ngModel"
+                    required id="password"/>
+                <div [hidden]="password.valid || password.pristine">Password is required</div>
             </div>
         </div>
         <div class="ui-g">
-            <button pButton type="submit" label="Login" [disabled]="loading"></button>
+            <button pButton type="submit" label="Login" [disabled]="!loginForm.form.valid"></button>
         </div>
     </form>
 </div>
