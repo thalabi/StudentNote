@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    
+
     <h4>{{crudMode}} User</h4>
 
     <p-confirmDialog header="Delete Confirmation" message="Are you sure you want to delete this student?" icon="fa fa-trash"
@@ -11,13 +11,13 @@
             <div formGroupName="nameGroup">
                 <div class="form-group">
                     <label for="firstName">First name</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="firstName" id="firstName">
+                    <input type="text" class="form-control form-control-sm" formControlName="firstName" id="firstName" class="form-control">
                     <div *ngIf="studentForm.controls.nameGroup.invalid && studentForm.controls.nameGroup.dirty">First name and last name must not be blank</div>
                 </div>
 
                 <div class="form-group">
                     <label for="lastName">Last name</label>
-                    <input type="text" class="form-control form-control-sm" formControlName="lastName" id="lastName">
+                    <input type="text" class="form-control form-control-sm" formControlName="lastName" id="lastName" class="form-control">
                     <div *ngIf="studentForm.controls.nameGroup.invalid && studentForm.controls.nameGroup.dirty">First name and last name must not be blank</div>
                 </div>
             </div>
@@ -25,9 +25,9 @@
 
             <div class="form-group">
                 <label for="grade" class="cell">Grade</label>
-                <select class="form-control form-control-sm" formControlName="grade" id="grade">
-            <option *ngFor="let gradeOption of gradeOptionArray" [value]="gradeOption">{{gradeOption}}</option>
-        </select>
+                <select class="form-control form-control-sm" formControlName="grade" id="grade" class="form-control">
+                    <option *ngFor="let gradeOption of gradeOptionArray" [value]="gradeOption">{{gradeOption}}</option>
+                </select>
             </div>
 
 

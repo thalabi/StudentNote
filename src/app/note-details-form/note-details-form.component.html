@@ -1,23 +1,21 @@
-<div style="margin-top: 0.5rem;">{{student.firstName}} {{student.lastName}}, {{student.grade.grade}}</div>
-<h4>{{crudMode}} Note</h4>
+<div class="container-fluid">
 
-<div class="ui-g">
-    <div class="ui-g-1">
-        <label for="schoolYear">Date & time</label>
-    </div>
-    <div class="ui-g-11">
+    <h4>{{crudMode}} Note</h4>
+
+    <h6>{{student.firstName}} {{student.lastName}}, {{student.grade.grade}}</h6>
+
+    <div class="form-group">
+        <label for="timestamp">Date & time</label>
         <p-calendar [(ngModel)]="note.timestamp" showTime="showTime" hourFormat="12" dateFormat="M d, yy" [minDate]="schoolYearStartDate"
-            [maxDate]="schoolYearEndDate" readonlyInput="true" [disabled]="crudMode == 'Delete'"></p-calendar>
+            [maxDate]="schoolYearEndDate" readonlyInput="true" [disabled]="crudMode == 'Delete'" id="timestamp" class="form-control"></p-calendar>
     </div>
-    <div class="ui-g-1">
-        <label for="schoolYear">Note</label>
+    <div class="form-group">
+        <label for="text">Note</label>
+        <textarea pInputTextarea [(ngModel)]="note.text" [rows]="10" autoResize="autoResize" style="width: 100%;" [disabled]="crudMode == 'Delete'"
+            id="text" class="form-control"></textarea>
     </div>
-    <textarea pInputTextarea [(ngModel)]="note.text" [rows]="10" autoResize="autoResize" style="width: 100%;" [disabled]="crudMode == 'Delete'"></textarea>
-    <div class="ui-g-11">
-    </div>
-</div>
 
-<div style="margin-top: 0.5rem;">
     <button pButton type="submit" (click)="onSubmit()" label="Submit" [disabled]="note.text == null"></button>
     <button pButton type="button" (click)="onCancel()" label="Cancel"></button>
+
 </div>
