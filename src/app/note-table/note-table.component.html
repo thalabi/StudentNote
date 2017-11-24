@@ -3,7 +3,8 @@
     <h4>{{student.firstName}} {{student.lastName}}, {{student.grade.grade}}</h4>
 
     <p-dataTable [value]="student.noteSet" selectionMode="single" [(selection)]="selectedNote" dataKey="id" (onRowSelect)="onRowSelect($event)"
-        (onRowUnselect)="onRowUnselect($event)">
+        (onRowUnselect)="onRowUnselect($event)"
+        emptyMessage="No notes found">
         <p-column field="timestamp" header="Date and Time" [style]="{width: '12em'}">
             <ng-template let-column let-note="rowData" pTemplate="body">
                 <span>{{note[column.field] | date: 'MMM dd, yyyy hh:mm a'}}</span>
