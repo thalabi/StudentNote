@@ -1,25 +1,29 @@
-<p-dataTable [value]="schoolYears" selectionMode="single" scrollable="true" scrollHeight="200px" [(selection)]="selectedSchoolYear"
-    dataKey="id" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [responsive]="true">
-    <p-header>School Year Maintenance</p-header>
-    <p-column field="schoolYear" header="Label"></p-column>
-    <p-column field="startDate" header="Start">
-        <ng-template let-student="rowData" pTemplate="body">
-            <span>{{student.startDate|date:'mediumDate'}}</span>
-        </ng-template>
-    </p-column>
-    <p-column field="endDate" header="End">
-        <ng-template let-student="rowData" pTemplate="body">
-            <span>{{student.endDate|date:'mediumDate'}}</span>
-        </ng-template>
-    </p-column>
-    <p-footer>
-        <div class="ui-helper-clearfix" style="width:100%">
-            <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialog('Add')" label="Add"></button>
-            <button type="button" pButton icon="fa-edit" style="float:left" (click)="showDialog('Modify')" label="Modify" [disabled]="modifyAndDeleteButtonsDisable"></button>
-            <button type="button" pButton icon="fa-remove" style="float:left" (click)="showDialog('Delete')" label="Delete" [disabled]="modifyAndDeleteButtonsDisable"></button>
-        </div>
-    </p-footer>
-</p-dataTable>
+<div class="container-fluid">
+
+    <p-dataTable [value]="schoolYears" selectionMode="single" scrollable="true" scrollHeight="200px" [(selection)]="selectedSchoolYear"
+        dataKey="id" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)" [responsive]="true">
+        <p-header>School Year Maintenance</p-header>
+        <p-column field="schoolYear" header="Label"></p-column>
+        <p-column field="startDate" header="Start">
+            <ng-template let-student="rowData" pTemplate="body">
+                <span>{{student.startDate|date:'mediumDate'}}</span>
+            </ng-template>
+        </p-column>
+        <p-column field="endDate" header="End">
+            <ng-template let-student="rowData" pTemplate="body">
+                <span>{{student.endDate|date:'mediumDate'}}</span>
+            </ng-template>
+        </p-column>
+        <p-footer>
+            <div class="ui-helper-clearfix" style="width:100%">
+                <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialog('Add')" label="Add"></button>
+                <button type="button" pButton icon="fa-edit" style="float:left" (click)="showDialog('Modify')" label="Modify" [disabled]="modifyAndDeleteButtonsDisable"></button>
+                <button type="button" pButton icon="fa-remove" style="float:left" (click)="showDialog('Delete')" label="Delete" [disabled]="modifyAndDeleteButtonsDisable"></button>
+            </div>
+        </p-footer>
+        </p-dataTable>
+
+</div>
 
 <p-dialog header="School Year {{crudMode}}" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
     <!-- TODO set the width on the p-dialog not on the div -->
