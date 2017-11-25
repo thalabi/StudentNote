@@ -48,66 +48,6 @@ export class LoginComponent implements OnInit {
         this.messageService.clear();
     }
 
-    // login() {
-    //     this.loading = true;
-    //     this.authenticationService.login(this.model.username, this.model.password)
-    //       .subscribe({
-    //             next: user => {
-    //                 console.log('user: ', user);
-    //                 // store user details in SessionDataService
-    //                 this.sessionDataService.user = user;
-    //                 this.sessionDataService.userSubject.next(user);
-    //                 this.router.navigate([this.returnUrl]);
-    //                 console.log('before calll getUserPrefernce');
-    //                 this.studentService.getUserPreference();
-    //                 console.log('after calll getUserPrefernce');
-    //                 this.messageService.clear();
-    //             },
-    //             error: error => {
-
-    //                 console.log(error);
-    //                 this.messageService.clear();
-    //                 // test
-    //                 // this.messageService.success(error);
-    //                 // this.messageService.info(error);
-    //                 // this.messageService.warning(error);
-    //                 this.messageService.error(error);
-    //                 this.loading = false;
-    //             }
-    //       });
-
-    // }
-
-    // login() {
-    //     this.loading = true;
-    //     let obs1$: Observable<any> = this.authenticationService.login(this.model.username, this.model.password);
-    //     console.log('before getUserPreference');
-    //     let obs2$: Observable<UserPreference> = this.studentService.getUserPreference2();
-    //     console.log('after getUserPreference');
-    //     Observable.concat(obs1$, obs2$)
-    //       .subscribe({
-    //             next: user => {
-    //                 console.log('user: ', user);
-    //                 // this.sessionDataService.user = user;
-    //                 // this.sessionDataService.userSubject.next(user);
-    //                 this.router.navigate([this.returnUrl]);
-    //                 this.messageService.clear();
-    //             },
-    //             error: error => {
-
-    //                 console.log(error);
-    //                 this.messageService.clear();
-    //                 // test
-    //                 // this.messageService.success(error);
-    //                 // this.messageService.info(error);
-    //                 // this.messageService.warning(error);
-    //                 this.messageService.error(error);
-    //                 this.loading = false;
-    //             }
-    //       });
-
-    // }
-
     login() {
         this.loading = true;
         let obs1$: Observable<any> = this.authenticationService.login(this.model.username, this.model.password);

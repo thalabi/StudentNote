@@ -3,13 +3,14 @@
     <form name="form" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
         <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" pInputText name="username" [(ngModel)]="model.username" #username="ngModel" required id="username" class="form-control">
+            <input type="text" pInputText name="username" id="username" [(ngModel)]="model.username" #username="ngModel"
+                class="form-control" required>
             <div [hidden]="username.valid || username.pristine">Username is required</div>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" pPassword name="password" [(ngModel)]="model.password" #password="ngModel" required id="password"
-                class="form-control" />
+            <input type="password" pPassword name="password" id="password" [(ngModel)]="model.password" #password="ngModel"
+                class="form-control" required/>
             <div [hidden]="password.valid || password.pristine">Password is required</div>
         </div>
         <button pButton type="submit" label="Login" [disabled]="!loginForm.form.valid"></button>
