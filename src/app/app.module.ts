@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -63,7 +63,6 @@ import { SchoolYearStudentsComponent } from './school-year-students/school-year-
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
-        ReactiveFormsModule,
         HttpModule,
         AppRouting,
         NgbModule.forRoot(),

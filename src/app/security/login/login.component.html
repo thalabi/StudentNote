@@ -5,13 +5,13 @@
             <label for="username">Username</label>
             <input type="text" pInputText name="username" id="username" [(ngModel)]="model.username" #username="ngModel"
                 class="form-control" required>
-            <div [hidden]="username.valid || username.pristine">Username is required</div>
+            <div [hidden]="username.valid || username.pristine" class="alert alert-danger">Username is required</div>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" pPassword name="password" id="password" [(ngModel)]="model.password" #password="ngModel"
                 class="form-control" required/>
-            <div [hidden]="password.valid || password.pristine">Password is required</div>
+            <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required</div>
         </div>
         <button pButton type="submit" label="Login" [disabled]="!loginForm.form.valid"></button>
     </form>

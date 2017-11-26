@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Student } from '../dto/Student';
 import { Note } from '../dto/Note';
 import { StudentService } from '../student.service';
@@ -26,7 +25,6 @@ export class NoteDetailsFormComponent implements OnInit {
     schoolYearEndDate: Date;
 
     constructor(
-        private formBuilder: FormBuilder,
         private studentService: StudentService,
         private sessionDataService: SessionDataService,
         private router: Router,
