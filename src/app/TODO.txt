@@ -1,1 +1,1 @@
-Done - Show last name in dashboard
+Update student table after crud or stundet or note instead of requesting from server.
