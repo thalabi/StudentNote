@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <h4>Login</h4>
-    <form name="form" (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+    <form (ngSubmit)="login()" #loginForm="ngForm">
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" pInputText name="username" id="username" [(ngModel)]="model.username" #username="ngModel"
