@@ -9,4 +9,4 @@ Copy to target dir
 - jar
 - copy all files from dist dir to target dir
 - if there were changes to application.properties file migrate them. Do a diff.
-    (add crossOriginResourceSharingFilter.crosUrlsToAllow=http://127.0.0.1:4200,http://127.0.0.1:8081,http://kerneldc.com:7999)
+    (add crossOriginResourceSharingFilter.crosUrlsToAllow=http://127.0.0.1:4200,http://127.0.0.1:8081,http://kerneldc.com:7999) 
