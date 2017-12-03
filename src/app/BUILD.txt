@@ -1,4 +1,4 @@
-Use 'ng build --prod --base-href /StudentNotes/' to build. Don't forget trailing /.
+Use 'ng build --prod' to build.
 Target dir C:\Users\Tarif Halabi\StudentNotes
 Delete everything from target dir except db files and application.properties file
 Copy to target dir
