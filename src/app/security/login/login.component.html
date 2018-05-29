@@ -10,7 +10,7 @@
         <div class="form-group">
             <label for="password">Password</label>
             <input type="password" pPassword name="password" id="password" [(ngModel)]="model.password" #password="ngModel"
-                class="form-control" required/>
+                class="form-control" required [feedback]="false"/>
             <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password is required</div>
         </div>
         <button pButton type="submit" label="Login"></button>
